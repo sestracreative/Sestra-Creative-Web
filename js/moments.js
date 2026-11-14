@@ -96,12 +96,14 @@
   function drawChapters() {
     if (!live) return;
     var r = sec.getBoundingClientRect(), total = sec.offsetHeight - W.innerHeight;
-    var p = clamp(-r.top / Math.max(1, total)), n = pics.length, seg = 1 / n, k = 0;
+    // avance continuo: cada foto se descubre a lo largo de todo su tramo, sin pausas;
+    // al terminar de descubrirse la última, la sección se suelta y la página sigue
+    var p = clamp(-r.top / Math.max(1, total)), n = pics.length, steps = n - 1, k = 0;
     pics.forEach(function (pic, i) {
-      var u = i === 0 ? 1 : clamp((p - (i - 0.25) * seg) / (0.45 * seg));
-      var e = easeOut(u);
+      var u = i === 0 ? 1 : clamp(p * steps - (i - 1));
+      var e = 1 - Math.pow(1 - u, 2);
       pic.style.setProperty("--c", ((1 - e) * 100).toFixed(2) + "%");
-      pic.style.setProperty("--z", (1.06 - 0.06 * e).toFixed(4));
+      pic.style.setProperty("--z", (1.05 - 0.05 * e).toFixed(4));
       if (u >= 0.5) k = i;
     });
     show(k);
@@ -114,7 +116,7 @@
     if (want) {
       var top = D.querySelector("header.top");
       sec.style.setProperty("--navh", (top ? top.offsetHeight : 64) + "px");
-      sec.style.setProperty("--hold", pics.length <= 3 ? 2 : 3);
+      sec.style.setProperty("--hold", ((pics.length - 1) * 0.7).toFixed(2));
       drawChapters();
     } else {
       pics.forEach(function (p) { p.style.removeProperty("--c"); p.style.removeProperty("--z"); });
@@ -128,11 +130,30 @@
     if (svcs.children.length) buildChapters();
   }
 
+  /* ---------- 3. la marca del pie ocupa justo el ancho de la página ---------- */
+  var fw = D.querySelector(".ft-word");
+  function fitWord() {
+    if (!fw) return;
+    var spans = fw.querySelectorAll("span"); if (!spans.length) return;
+    fw.style.fontSize = "100px";
+    var stacked = W.matchMedia("(max-width:700px)").matches, wdt;
+    if (stacked) wdt = Math.max.apply(null, [].map.call(spans, function (x) { return x.getBoundingClientRect().width; }));
+    else wdt = spans[spans.length - 1].getBoundingClientRect().right - spans[0].getBoundingClientRect().left;
+    wdt -= 20; // espacio de letra que queda después de la última letra (.2em)
+    var target = fw.clientWidth;
+    if (wdt > 0 && target > 0) fw.style.fontSize = (100 * target / wdt).toFixed(2) + "px";
+  }
+  if (fw) {
+    if (D.fonts && D.fonts.ready) D.fonts.ready.then(fitWord);
+    fitWord();
+    W.addEventListener("load", fitWord);
+  }
+
   /* ---------- un solo bucle de scroll ---------- */
   var ticking = false;
   function frame() { ticking = false; drawWords(); drawChapters(); }
   W.addEventListener("scroll", function () { if (!ticking) { ticking = true; W.requestAnimationFrame(frame); } }, { passive: true });
   var rt = 0;
-  W.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { sync(); frame(); }, 120); });
+  W.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { sync(); frame(); fitWord(); }, 120); });
   W.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", function () { sync(); frame(); });
 })();

@@ -695,3 +695,60 @@ body>footer .lock .t small{font-size:.68rem;line-height:1.5}
 @media (max-width:980px){.hero #ph-hero{width:100vw!important;max-width:100vw!important;margin-inline:calc(50% - 50vw)!important}}
 /* la portada cabe en una pantalla con la tipografía real (Montserrat es ancha) */
 .hero h1{font-size:clamp(2.3rem,4.5vw,4.3rem)!important;max-width:17ch}
+
+/* ===== Ajustes 14 nov (tarde) ===== */
+/* staging = muebles: teca; retoque y estilo revista = edición: mauve */
+#extras .xrow[data-k=staging]{--ac:#A07E5C;--ac-bg:#F1E7DA}
+/* pie: una sola línea divisoria, menos vacío entre contacto y pie */
+.contact{padding-bottom:clamp(40px,6vw,72px)!important}
+body>footer{border-top:0!important;padding-top:clamp(8px,2vw,24px)!important}
+.ft-word{white-space:nowrap;overflow:visible;margin:0 0 clamp(24px,4vw,48px);padding:clamp(28px,4vw,56px) 0 clamp(28px,4vw,56px);border-bottom:1px solid #5E5A56;line-height:.9;max-width:none}
+@media (max-width:700px){.ft-word{white-space:normal;line-height:1.05}}
+
+/* ===== Portada a pantalla completa con video (traída del artifact v3, 14 nov) ===== */
+.hero.hx{position:relative;isolation:isolate;padding:0!important;min-height:calc(100svh - 64px);display:flex;align-items:flex-end;overflow:hidden;color:#FAF8F5}
+.hero.hx>.wrap{width:100%;position:relative;z-index:1;padding-block:clamp(96px,16vh,180px) clamp(28px,5vh,56px)}
+.hero.hx .grid{display:block}
+.hero.hx #ph-hero{position:absolute!important;inset:0;width:100%!important;max-width:none!important;max-height:none!important;height:100%;aspect-ratio:auto!important;margin:0!important;border-radius:0!important;z-index:-1;order:0}
+.hero.hx #ph-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,18,17,.55) 0%,rgba(20,18,17,.25) 45%,rgba(20,18,17,0) 75%),linear-gradient(180deg,rgba(20,18,17,.3) 0%,rgba(20,18,17,.1) 30%,rgba(20,18,17,.3) 55%,rgba(20,18,17,.82) 100%);pointer-events:none;z-index:1}
+.hero.hx #ph-hero img,.hero.hx #ph-hero video{object-position:50% 55%}
+.hero.hx .copy{gap:clamp(16px,2.2vw,26px);max-width:min(1180px,100%)}
+.hero.hx h1{color:#FAF8F5;font-weight:300;font-size:clamp(2.35rem,5.6vw,5.8rem)!important;line-height:1.0;letter-spacing:-.035em;max-width:16ch;text-wrap:balance}
+.hero.hx .lead{color:rgba(250,248,245,.88);max-width:46ch}
+.hero.hx .btn.ghost{color:#FAF8F5;border-color:rgba(250,248,245,.8);background:transparent}
+.hero.hx .btn.ghost:hover{background:#FAF8F5;color:#2F2B29;border-color:#FAF8F5}
+.hero.hx .facts{border-top-color:rgba(250,248,245,.3);max-width:760px}
+.hero.hx .facts b{color:#FAF8F5;font-size:clamp(1rem,1.3vw,1.2rem)}
+.hero.hx .facts span{color:rgba(250,248,245,.78)}
+.hero.hx .hero-proof{color:rgba(250,248,245,.72)}
+.hero.hx .hero-proof a{color:#FAF8F5}
+.hero.hx :focus-visible{outline-color:#FAF8F5}
+@media (max-width:860px){
+  .hero.hx{min-height:calc(100svh - 104px)}
+  .hero.hx>.wrap{padding-block:72px 28px}
+  .hero.hx #ph-hero{margin-inline:0!important}
+  .hero.hx .facts{grid-template-columns:repeat(3,1fr);gap:10px}
+}
+@media (max-width:520px){
+  .hero.hx h1{font-size:clamp(2.2rem,10.4vw,2.8rem)!important}
+  .hero.hx .lead{font-size:1rem}
+  .hero.hx .acts .btn{flex:1 1 100%}
+  .hero.hx .facts span{font-size:.78rem}
+}
+/* entrada de la portada (una sola vez al cargar) */
+@media (prefers-reduced-motion:no-preference){
+  .hero.hx #ph-hero{animation:hx-img 1.5s var(--ease-out) both}
+  .hero.hx .copy>*{animation:hx-rise .9s var(--ease-out) both}
+  .hero.hx .copy>*:nth-child(1){animation-delay:.25s}
+  .hero.hx .copy>*:nth-child(2){animation-delay:.35s}
+  .hero.hx .copy>*:nth-child(3){animation-delay:.47s}
+  .hero.hx .copy>*:nth-child(4){animation-delay:.57s}
+  .hero.hx .copy>*:nth-child(5){animation-delay:.67s}
+  .hero.hx .copy>*:nth-child(6){animation-delay:.75s}
+}
+@keyframes hx-img{from{clip-path:inset(6% 4% 0 4%);transform:scale(1.08)}to{clip-path:inset(0 0 0 0);transform:none}}
+@media (prefers-reduced-motion:reduce){.hero.hx #ph-hero,.hero.hx .copy>*{animation:none!important}}
+@media (max-width:700px){.ft-word span{display:table}}
+.dc-ic svg{width:22px!important;height:22px!important;stroke-width:1.4}
+#extras .xrow[data-k=staging]{--ac:#B4843F;--ac-bg:#F6EAD6}
+.ft-word{min-width:0!important;max-width:100%!important;width:100%}
