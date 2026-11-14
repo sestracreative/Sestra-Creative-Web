@@ -108,20 +108,36 @@
     chapters.forEach(function (c, i) { c.classList.toggle("is-on", i === k); });
     if (count) count.textContent = ("0" + (k + 1)).slice(-2) + " / " + ("0" + chapters.length).slice(-2);
   }
-  function drawChapters() {
-    if (!live) return;
-    var r = sec.getBoundingClientRect(), total = sec.offsetHeight - W.innerHeight;
-    // avance continuo: cada foto se descubre a lo largo de todo su tramo, sin pausas;
-    // al terminar de descubrirse la última, la sección se suelta y la página sigue
-    var p = clamp(-r.top / Math.max(1, total)), n = pics.length, steps = n - 1, k = 0;
+  // línea de tiempo: pausa, cambio, pausa, cambio... cada foto se ve completa un momento
+  var HOLD = 0.45, TAIL = 0.15, pShown = 0, pTarget = 0, raf = 0;
+  var smooth = function (t) { return t * t * (3 - 2 * t); };
+  function timeline(n) { return HOLD + (n - 1) * 1 + (n - 2) * HOLD + TAIL; }
+  function paint(p) {
+    var n = pics.length, T = timeline(n), x = p * T, k = 0;
     pics.forEach(function (pic, i) {
-      var u = i === 0 ? 1 : clamp(p * steps - (i - 1));
-      var e = 1 - Math.pow(1 - u, 2);
+      var u = 1;
+      if (i > 0) { var st = HOLD + (i - 1) * (1 + HOLD); u = clamp((x - st) / 1); }
+      var e = smooth(u);
       pic.style.setProperty("--c", ((1 - e) * 100).toFixed(2) + "%");
-      pic.style.setProperty("--z", (1.05 - 0.05 * e).toFixed(4));
+      pic.style.setProperty("--z", (1.04 - 0.04 * e).toFixed(4));
       if (u >= 0.5) k = i;
     });
     show(k);
+  }
+  function step() {
+    raf = 0;
+    var d = pTarget - pShown;
+    pShown = Math.abs(d) < 0.0005 ? pTarget : pShown + d * 0.16;
+    paint(pShown);
+    if (pShown !== pTarget) raf = requestAnimationFrame(step);
+  }
+  function drawChapters(now) {
+    if (!live) return;
+    var r = sec.getBoundingClientRect(), total = sec.offsetHeight - W.innerHeight;
+    pTarget = clamp(-r.top / Math.max(1, total));
+    // lejos de la sección o en un salto grande, sin arrastre
+    if (now || r.bottom < 0 || r.top > W.innerHeight || Math.abs(pTarget - pShown) > 0.5) { pShown = pTarget; paint(pShown); return; }
+    if (!raf) raf = requestAnimationFrame(step);
   }
   function sync() {
     if (!pc) return;
@@ -131,8 +147,8 @@
     if (want) {
       var top = D.querySelector("header.top");
       sec.style.setProperty("--navh", (top ? top.offsetHeight : 64) + "px");
-      sec.style.setProperty("--hold", ((pics.length - 1) * 0.7).toFixed(2));
-      drawChapters();
+      sec.style.setProperty("--hold", (timeline(pics.length) * 0.6).toFixed(2));
+      drawChapters(true);
     } else {
       pics.forEach(function (p) { p.style.removeProperty("--c"); p.style.removeProperty("--z"); });
       chapters.forEach(function (c) { c.classList.add("is-on"); });
@@ -175,26 +191,41 @@
   setHdr();
 
   /* ---------- 6. saltos del menú: el contenido de la sección queda justo bajo la barra ---------- */
+  // qué tiene que quedar a la vista al saltar a cada sección: del título hasta este bloque
+  var VIEW = { portafolio: ".gal", paquetes: "#pkgs", operadores: ".plans", planes: ".plans", faq: ".faq" };
+  var docTop = function (el) { return el.getBoundingClientRect().top + W.scrollY; };
   function targetY(id) {
-    var s = D.getElementById(id); if (!s) return null;
-    var hdr = parseFloat(getComputedStyle(D.documentElement).getPropertyValue("--hdr")) || 0;
-    var gap = hdr ? 28 : 16;
+    var s = D.getElementById(id); if (!s || !s.offsetHeight) return null;
     if (id === "inicio") return 0;
-    if (s.classList.contains("pc-live")) return Math.max(0, s.getBoundingClientRect().top + W.scrollY - hdr);
-    var c = s.querySelector(".sec-head, h2, .wrap > *") || s;
-    return Math.max(0, c.getBoundingClientRect().top + W.scrollY - hdr - gap);
+    var max = D.documentElement.scrollHeight - W.innerHeight;
+    // Servicios se fija en pantalla: se llega justo al inicio, con la primera foto completa
+    if (s.classList.contains("pc-live")) return Math.min(max, Math.round(docTop(s)) + 2);
+    var hdr = parseFloat(getComputedStyle(D.documentElement).getPropertyValue("--hdr")) || 0;
+    var vh = W.innerHeight, avail = vh - hdr, gap = hdr ? 24 : 16;
+    var wrap = s.querySelector(".wrap") || s;
+    // el título de Preguntas es fijo (sticky): se mide desde el contenedor, que no se mueve
+    var first = wrap.firstElementChild, sticky = first && getComputedStyle(first).position === "sticky";
+    var top = sticky || !first ? docTop(wrap) : docTop(first);
+    var endEl = VIEW[id] && s.querySelector(VIEW[id]);
+    var bottom = endEl ? docTop(endEl) + endEl.offsetHeight : top + Math.min(wrap.offsetHeight, avail);
+    var h = bottom - top, y;
+    if (h <= avail - 2 * gap) y = top - hdr - (avail - h) / 2;   // cabe: queda centrado
+    else y = top - hdr - gap;                                       // no cabe: título arriba, con aire
+    return Math.max(0, Math.min(max, Math.round(y)));
   }
+  var jumpRun = 0;
   function jumpTo(id) {
     var y = targetY(id); if (y === null) return false;
-    var smooth = !reduced();
-    W.scrollTo({ top: y, behavior: smooth ? "smooth" : "auto" });
-    // el diseño de arriba puede cambiar mientras se baja (imágenes, secciones fijas): al terminar, se reajusta
+    var run = ++jumpRun;
+    if (Math.abs(y - W.scrollY) > 2) W.scrollTo({ top: y, behavior: reduced() ? "auto" : "smooth" });
+    // si algo cambia de alto mientras baja (fotos que cargan), al terminar se reajusta
     var last = -1, still = 0, fixes = 0;
     (function watch() {
+      if (run !== jumpRun) return;
       var cur = W.scrollY; still = Math.abs(cur - last) < 0.5 ? still + 1 : 0; last = cur;
       if (still >= 6) {
         var t = targetY(id);
-        if (t !== null && Math.abs(t - cur) > 2 && fixes < 3) { fixes++; still = 0; W.scrollTo({ top: t, behavior: "auto" }); }
+        if (t !== null && Math.abs(t - cur) > 2 && fixes < 2) { fixes++; still = 0; W.scrollTo({ top: t, behavior: "auto" }); }
         else { if (!parseFloat(getComputedStyle(D.documentElement).getPropertyValue("--hdr")) && id !== "inicio" && topBar) topBar.classList.add("hide"); return; }
       }
       requestAnimationFrame(watch);

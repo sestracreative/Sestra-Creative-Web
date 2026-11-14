@@ -775,3 +775,7 @@ section[id]{scroll-margin-top:0!important}
 
 .stepper .qin{width:56px;min-width:0;height:44px;border:0;background:transparent;text-align:center;font:600 1rem var(--display);font-variant-numeric:tabular-nums;color:var(--fg);border-radius:var(--r);padding:0;-moz-appearance:textfield}
 .stepper .qin:focus{outline:2px solid var(--btn);outline-offset:-2px;background:var(--surface)}
+/* Servicios fijo: título en dos líneas para que la foto tenga más alto */
+#servicios.pc-live .sec-head.split{grid-template-columns:minmax(0,1.7fr) minmax(0,.8fr)!important;align-items:end}
+#servicios.pc-live .sec-head h2{font-size:clamp(1.9rem,3.3vw,3.4rem)!important;max-width:none}
+#servicios.pc-live>.wrap{padding-top:calc(var(--navh,64px) + clamp(16px,3vh,32px))!important;padding-bottom:clamp(12px,2.4vh,28px)!important;gap:clamp(14px,2.4vh,28px)!important}
