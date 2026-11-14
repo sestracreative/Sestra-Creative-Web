@@ -780,3 +780,4 @@ section[id]{scroll-margin-top:0!important}
 #servicios.pc-live .sec-head h2{font-size:clamp(1.9rem,3.3vw,3.4rem)!important;max-width:none}
 #servicios.pc-live>.wrap{padding-top:calc(var(--navh,64px) + clamp(16px,3vh,32px))!important;padding-bottom:clamp(12px,2.4vh,28px)!important;gap:clamp(14px,2.4vh,28px)!important}
 .contact{padding-top:clamp(48px,6vw,88px)!important;padding-bottom:clamp(48px,6vw,88px)!important}
+.needs{padding-top:clamp(40px,6vw,80px)!important}

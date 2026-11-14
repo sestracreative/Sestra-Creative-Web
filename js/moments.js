@@ -192,7 +192,7 @@
 
   /* ---------- 6. saltos del menú: el contenido de la sección queda justo bajo la barra ---------- */
   // qué tiene que quedar a la vista al saltar a cada sección: del título hasta este bloque
-  var VIEW = { portafolio: ".gal", paquetes: "#pkgs", operadores: ".plans", planes: ".plans", faq: ".faq" };
+  var VIEW = { portafolio: ".gal", paquetes: "#pkgs", faq: ".faq" };
   var docTop = function (el) { return el.getBoundingClientRect().top + W.scrollY; };
   function targetY(id) {
     var s = D.getElementById(id); if (!s || !s.offsetHeight) return null;
