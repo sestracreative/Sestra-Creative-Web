@@ -772,3 +772,6 @@ section[id]{scroll-margin-top:0!important}
 @media (max-width:860px){#s3>.daycard{grid-column:1/-1;grid-row:auto}}
 #testimonios .mo-wh .mo-w{color:color-mix(in oklab,#443F3D 30%,#E5D9CF)}
 #testimonios .mo-wh .mo-w.is-on{color:#443F3D}
+
+.stepper .qin{width:56px;min-width:0;height:44px;border:0;background:transparent;text-align:center;font:600 1rem var(--display);font-variant-numeric:tabular-nums;color:var(--fg);border-radius:var(--r);padding:0;-moz-appearance:textfield}
+.stepper .qin:focus{outline:2px solid var(--btn);outline-offset:-2px;background:var(--surface)}

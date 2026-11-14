@@ -40,8 +40,15 @@
     var vh = W.innerHeight, red = reduced();
     WH.forEach(function (o) {
       if (red) { o.words.forEach(function (w) { w.classList.add("is-on"); }); return; }
-      var r = o.el.getBoundingClientRect(), start = vh * 0.85, end = vh * 0.45;
-      var t = clamp((start - r.top) / Math.max(1, (start - end) + r.height));
+      // se completa cuando la sección queda centrada en pantalla (o toda a la vista)
+      var r = o.el.getBoundingClientRect();
+      if (!o.sec) o.sec = o.el.closest("section") || o.el.parentElement;
+      var sr = o.sec.getBoundingClientRect();
+      var cy = r.top + r.height / 2, off = (r.top + r.height / 2) - (sr.top + sr.height / 2);
+      var lim = Math.max(0, vh / 2 - r.height / 2 - 24);
+      off = Math.max(-lim, Math.min(lim, off));
+      var endY = vh / 2 + off, startY = vh * 0.92;
+      var t = clamp((startY - cy) / Math.max(1, startY - endY));
       var k = Math.round(t * o.words.length);
       o.words.forEach(function (w, i) { w.classList.toggle("is-on", i < k); });
     });
@@ -166,6 +173,40 @@
     D.documentElement.style.setProperty("--hdr", (hides ? 0 : topBar.offsetHeight) + "px");
   }
   setHdr();
+
+  /* ---------- 6. saltos del menú: el contenido de la sección queda justo bajo la barra ---------- */
+  function targetY(id) {
+    var s = D.getElementById(id); if (!s) return null;
+    var hdr = parseFloat(getComputedStyle(D.documentElement).getPropertyValue("--hdr")) || 0;
+    var gap = hdr ? 28 : 16;
+    if (id === "inicio") return 0;
+    if (s.classList.contains("pc-live")) return Math.max(0, s.getBoundingClientRect().top + W.scrollY - hdr);
+    var c = s.querySelector(".sec-head, h2, .wrap > *") || s;
+    return Math.max(0, c.getBoundingClientRect().top + W.scrollY - hdr - gap);
+  }
+  function jumpTo(id) {
+    var y = targetY(id); if (y === null) return false;
+    var smooth = !reduced();
+    W.scrollTo({ top: y, behavior: smooth ? "smooth" : "auto" });
+    // el diseño de arriba puede cambiar mientras se baja (imágenes, secciones fijas): al terminar, se reajusta
+    var last = -1, still = 0, fixes = 0;
+    (function watch() {
+      var cur = W.scrollY; still = Math.abs(cur - last) < 0.5 ? still + 1 : 0; last = cur;
+      if (still >= 6) {
+        var t = targetY(id);
+        if (t !== null && Math.abs(t - cur) > 2 && fixes < 3) { fixes++; still = 0; W.scrollTo({ top: t, behavior: "auto" }); }
+        else { if (!parseFloat(getComputedStyle(D.documentElement).getPropertyValue("--hdr")) && id !== "inicio" && topBar) topBar.classList.add("hide"); return; }
+      }
+      requestAnimationFrame(watch);
+    })();
+    return true;
+  }
+  D.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey) return;
+    var id = a.getAttribute("href").slice(1);
+    if (id && jumpTo(id)) { e.preventDefault(); try { history.pushState(null, "", "#" + id); } catch (_) {} }
+  });
 
   /* ---------- 5. tarjeta del día elegido, junto al calendario ---------- */
   var dc = D.getElementById("daycard");

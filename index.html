@@ -491,7 +491,7 @@ h2{color:var(--olive-ink)}
 </style>
 <link rel="preload" as="image" href="assets/hero-dron2-poster.webp" media="(min-width: 861px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/hero-dron2-cel-poster.webp" media="(max-width: 860px)" fetchpriority="high">
-<link rel="stylesheet" href="css/site2.css?v=1114f">
+<link rel="stylesheet" href="css/site2.css?v=1114h">
 </head>
 <body>
 
@@ -759,8 +759,8 @@ h2{color:var(--olive-ink)}
   <span>WhatsApp</span>
 </a>
 <div class="toast" id="toast" role="status" hidden></div>
-<script src="js/site2.js?v=1114f" defer></script>
-<script src="js/moments.js?v=1114f" defer></script>
+<script src="js/site2.js?v=1114h" defer></script>
+<script src="js/moments.js?v=1114h" defer></script>
 <dialog class="lb" id="lb"><button class="lb-x" id="lb-x" type="button">&times;</button><button class="lb-p" id="lb-p" type="button">&lsaquo;</button><img id="lb-img" alt=""><p id="lb-cap"></p><button class="lb-n" id="lb-n" type="button">&rsaquo;</button></dialog>
 <script>
 /* ============ CONFIGURACIÓN (lo único que hay que tocar para publicar) ============ */
@@ -1237,10 +1237,16 @@ var DATA = {
       row.innerHTML = '<span class="x-ic">' + XI[key] + '</span><div class="t"><b>' + e.t + "</b><span>" + e.d + '</span></div><div class="pz">' + fmt(pz) + EX() + '</div><label class="check" style="align-items:center"><input type="checkbox" id="x-' + key + '"' + (S[key] ? " checked" : "") + '><span class="small">' + (lang === "es" ? "Agregar" : "Add") + "</span></label>";
       row.querySelector("input").addEventListener("change", function (ev) { S[key] = ev.target.checked; renderSum(); });
     } else {
-      row.innerHTML = '<span class="x-ic">' + XI[key] + '</span><div class="t"><b>' + e.t + "</b><span>" + e.d + '</span></div><div class="pz">' + fmt(pz) + EX() + '</div><div class="stepper" role="group" aria-label="' + e.t + '"><button type="button" data-d="-1" aria-label="-">&minus;</button><output id="q-' + key + '">' + S[key] + '</output><button type="button" data-d="1" aria-label="+">+</button></div>';
+      row.innerHTML = '<span class="x-ic">' + XI[key] + '</span><div class="t"><b>' + e.t + "</b><span>" + e.d + '</span></div><div class="pz">' + fmt(pz) + EX() + '</div><div class="stepper" role="group" aria-label="' + e.t + '"><button type="button" data-d="-1" aria-label="-">&minus;</button><input id="q-' + key + '" class="qin" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" aria-label="' + e.t + '" value="' + S[key] + '"><button type="button" data-d="1" aria-label="+">+</button></div>';
+      var qi = row.querySelector("input");
+      function setQ(v) { S[key] = Math.max(0, Math.min(500, v | 0)); qi.value = S[key]; renderSum(); }
       Array.prototype.forEach.call(row.querySelectorAll("button"), function (b) {
-        b.addEventListener("click", function () { S[key] = Math.max(0, Math.min(40, S[key] + (+b.dataset.d))); row.querySelector("output").textContent = S[key]; renderSum(); });
+        b.addEventListener("click", function () { setQ(S[key] + (+b.dataset.d)); });
       });
+      qi.addEventListener("input", function () { qi.value = qi.value.replace(/\D/g, ""); if (qi.value !== "") { S[key] = Math.min(500, +qi.value); renderSum(); } });
+      qi.addEventListener("focus", function () { qi.select(); });
+      qi.addEventListener("blur", function () { setQ(qi.value === "" ? 0 : +qi.value); });
+      qi.addEventListener("keydown", function (ev) { if (ev.key === "Enter") qi.blur(); });
     }
     return row;
   }
