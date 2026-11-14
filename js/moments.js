@@ -10,39 +10,47 @@
   var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
   var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
 
-  /* ---------- 1. word-highlight ---------- */
-  var mf = D.getElementById("mf-t"), words = [], busy = false;
-  function splitWords() {
-    if (!mf || busy) return;
-    busy = true;
-    var walker = D.createTreeWalker(mf, NodeFilter.SHOW_TEXT), nodes = [], n;
+  /* ---------- 1. word-highlight: frases que se entintan con el scroll ----------
+     Solo en las frases que se leen como declaración: "Cómo trabajamos" y las citas de clientes. */
+  var WH = [], busy = false;
+  function splitOne(el) {
+    var walker = D.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [], n;
     while ((n = walker.nextNode())) if (n.nodeValue.trim() && !(n.parentElement && n.parentElement.classList.contains("mo-w"))) nodes.push(n);
     nodes.forEach(function (tn) {
       var frag = D.createDocumentFragment();
       tn.nodeValue.split(/(\s+)/).forEach(function (part) {
         if (!part) return;
         if (/^\s+$/.test(part)) { frag.appendChild(D.createTextNode(part)); return; }
-        var s = D.createElement("span"); s.className = "mo-w"; s.textContent = part; frag.appendChild(s);
+        var sp = D.createElement("span"); sp.className = "mo-w"; sp.textContent = part; frag.appendChild(sp);
       });
       tn.parentNode.replaceChild(frag, tn);
     });
-    words = [].slice.call(mf.querySelectorAll(".mo-w"));
-    mf.classList.add("mo-wh");
+    el.classList.add("mo-wh");
+    return { el: el, words: [].slice.call(el.querySelectorAll(".mo-w")) };
+  }
+  function collect() {
+    if (busy) return;
+    busy = true;
+    var els = [].slice.call(D.querySelectorAll("#mf-t, #testimonios .quote p"));
+    WH = els.map(function (el) { return el.querySelector(".mo-w") ? { el: el, words: [].slice.call(el.querySelectorAll(".mo-w")) } : splitOne(el); });
     busy = false;
     drawWords();
   }
   function drawWords() {
-    if (!words.length) return;
-    if (reduced()) { words.forEach(function (w) { w.classList.add("is-on"); }); return; }
-    var r = mf.getBoundingClientRect(), vh = W.innerHeight, start = vh * 0.85, end = vh * 0.45;
-    var t = clamp((start - r.top) / Math.max(1, (start - end) + r.height));
-    var k = Math.round(t * words.length);
-    words.forEach(function (w, i) { w.classList.toggle("is-on", i < k); });
+    var vh = W.innerHeight, red = reduced();
+    WH.forEach(function (o) {
+      if (red) { o.words.forEach(function (w) { w.classList.add("is-on"); }); return; }
+      var r = o.el.getBoundingClientRect(), start = vh * 0.85, end = vh * 0.45;
+      var t = clamp((start - r.top) / Math.max(1, (start - end) + r.height));
+      var k = Math.round(t * o.words.length);
+      o.words.forEach(function (w, i) { w.classList.toggle("is-on", i < k); });
+    });
   }
-  if (mf) {
-    splitWords();
-    new MutationObserver(function () { if (!busy && !mf.querySelector(".mo-w")) splitWords(); }).observe(mf, { childList: true, characterData: true, subtree: true });
-  }
+  collect();
+  ["mf-t", "testimonios"].forEach(function (id) {
+    var el = D.getElementById(id); if (!el) return;
+    new MutationObserver(function () { if (!busy) { clearTimeout(el._t); el._t = setTimeout(collect, 30); } }).observe(el, { childList: true, subtree: true });
+  });
 
   /* ---------- 2. photo-chapters en Servicios ---------- */
   var PICS = [
@@ -149,11 +157,61 @@
     W.addEventListener("load", fitWord);
   }
 
+  /* ---------- 4. el menú lleva cada sección justo debajo de la barra ---------- */
+  var topBar = D.querySelector("header.top");
+  function setHdr() {
+    if (!topBar) return;
+    // en celular la barra se esconde al bajar, así que el salto no deja espacio para ella
+    var hides = W.matchMedia("(max-width:860px)").matches;
+    D.documentElement.style.setProperty("--hdr", (hides ? 0 : topBar.offsetHeight) + "px");
+  }
+  setHdr();
+
+  /* ---------- 5. tarjeta del día elegido, junto al calendario ---------- */
+  var dc = D.getElementById("daycard");
+  // hora del atardecer en Tamarindo (10.30 N, 85.84 O, UTC-6), fórmula de la NOAA
+  function sunset(date) {
+    var rad = Math.PI / 180, lat = 10.30, lng = -85.84;
+    var start = Date.UTC(date.getFullYear(), 0, 0), n = Math.floor((Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - start) / 864e5);
+    var g = 2 * Math.PI / 365 * (n - 1 + 0.5);
+    var eq = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+    var dec = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+    var ha = Math.acos(Math.cos(90.833 * rad) / (Math.cos(lat * rad) * Math.cos(dec)) - Math.tan(lat * rad) * Math.tan(dec)) / rad;
+    var mins = 720 - 4 * (lng - ha) - eq + (-6) * 60;
+    var h = Math.floor(mins / 60), m = Math.round(mins % 60); if (m === 60) { h++; m = 0; }
+    return { h: h, m: m };
+  }
+  function drawDay() {
+    if (!dc) return;
+    var en = lang() === "en";
+    var sel = D.querySelector("#cal .day.sel"), iso = sel && sel.dataset.iso;
+    var slotEl = D.querySelector("#slot label.on"), slot = slotEl ? slotEl.textContent.trim().replace(/\s*\(.*\)\s*$/, "") : "";
+    var html = '<p class="dk-k">' + (en ? "Your session" : "Tu sesión") + "</p>";
+    if (iso) {
+      var p = iso.split("-"), d = new Date(+p[0], +p[1] - 1, +p[2]);
+      var day = d.toLocaleDateString(en ? "en-US" : "es-CR", { weekday: "long", day: "numeric", month: "long" });
+      var ss = sunset(d), hh = ss.h > 12 ? ss.h - 12 : ss.h, mm = ("0" + ss.m).slice(-2);
+      html += '<p class="dk-d">' + day.charAt(0).toUpperCase() + day.slice(1) + "</p>" +
+        '<dl class="dk-l"><div><dt>' + (en ? "Time slot" : "Franja") + "</dt><dd>" + slot + "</dd></div>" +
+        "<div><dt>" + (en ? "Sunset in Tamarindo" : "Atardecer en Tamarindo") + "</dt><dd>" + hh + ":" + mm + (en ? " p.m." : " p. m.") + "</dd></div></dl>" +
+        '<p class="dk-n">' + (en ? "We confirm the exact time by WhatsApp." : "La hora exacta la confirmamos por WhatsApp.") + "</p>";
+    } else {
+      html += '<p class="dk-d dk-empty">' + (en ? "Pick a day on the calendar" : "Elige un día en el calendario") + "</p>" +
+        '<p class="dk-n">' + (en ? "Green days are open. For drone and exteriors, the last light of the afternoon works best." : "Los días en verde están libres. Para drone y exteriores, la última luz de la tarde es la que mejor funciona.") + "</p>";
+    }
+    dc.innerHTML = html;
+  }
+  if (dc) {
+    drawDay();
+    ["cal", "slot"].forEach(function (id) { var el = D.getElementById(id); if (el) new MutationObserver(function () { drawDay(); }).observe(el, { subtree: true, attributes: true, attributeFilter: ["class"], childList: true }); });
+    new MutationObserver(drawDay).observe(D.documentElement, { attributes: true, attributeFilter: ["lang"] });
+  }
+
   /* ---------- un solo bucle de scroll ---------- */
   var ticking = false;
   function frame() { ticking = false; drawWords(); drawChapters(); }
   W.addEventListener("scroll", function () { if (!ticking) { ticking = true; W.requestAnimationFrame(frame); } }, { passive: true });
   var rt = 0;
-  W.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { sync(); frame(); fitWord(); }, 120); });
+  W.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { setHdr(); sync(); frame(); fitWord(); }, 120); });
   W.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", function () { sync(); frame(); });
 })();

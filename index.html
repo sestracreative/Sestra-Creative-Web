@@ -489,9 +489,9 @@ h2{color:var(--olive-ink)}
 #proceso .steps4 li::before{color:#E3D3C4}
 #proceso :focus-visible{outline-color:#FAF8F5}
 </style>
-<link rel="preload" as="image" href="assets/hero-dron-poster.webp" media="(min-width: 861px)" fetchpriority="high">
-<link rel="preload" as="image" href="assets/hero-dron-cel-poster.webp" media="(max-width: 860px)" fetchpriority="high">
-<link rel="stylesheet" href="css/site2.css?v=1114e">
+<link rel="preload" as="image" href="assets/hero-dron2-poster.webp" media="(min-width: 861px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/hero-dron2-cel-poster.webp" media="(max-width: 860px)" fetchpriority="high">
+<link rel="stylesheet" href="css/site2.css?v=1114f">
 </head>
 <body>
 
@@ -648,6 +648,7 @@ h2{color:var(--olive-ink)}
             <span class="lbl" id="lbl-slot" data-i18n="s3.slot"></span>
             <div class="seg" id="slot" role="radiogroup" aria-labelledby="lbl-slot"></div>
           </div>
+          <div class="daycard" id="daycard" aria-live="polite"></div>
         </div>
 
         <div class="step" id="s4">
@@ -758,8 +759,8 @@ h2{color:var(--olive-ink)}
   <span>WhatsApp</span>
 </a>
 <div class="toast" id="toast" role="status" hidden></div>
-<script src="js/site2.js?v=1114e" defer></script>
-<script src="js/moments.js?v=1114e" defer></script>
+<script src="js/site2.js?v=1114f" defer></script>
+<script src="js/moments.js?v=1114f" defer></script>
 <dialog class="lb" id="lb"><button class="lb-x" id="lb-x" type="button">&times;</button><button class="lb-p" id="lb-p" type="button">&lsaquo;</button><img id="lb-img" alt=""><p id="lb-cap"></p><button class="lb-n" id="lb-n" type="button">&rsaquo;</button></dialog>
 <script>
 /* ============ CONFIGURACIÓN (lo único que hay que tocar para publicar) ============ */
@@ -773,10 +774,10 @@ var CONFIG = {
   minLeadDays: 2,             // días mínimos entre hoy y la sesión
   horizonDays: 120,           // hasta cuántos días adelante se puede reservar
   maxProps: 50,
-  heroVideo: "assets/hero-dron-1080p60.mp4",          // drone DJI_0502, 4.5-18.8 s, 1920x1080 60 fps, bucle con fundido de 1 s
-  heroVideoMobile: "assets/hero-dron-cel.mp4",       // recorte vertical 720x1280 30 fps
-  heroPoster: "assets/hero-dron-poster.webp",
-  heroPosterMobile: "assets/hero-dron-cel-poster.webp",
+  heroVideo: "assets/hero-dron2-1080p60.mp4",          // drone DJI_0502, 4.5-18.3 s, giro del drone suavizado (estabilización con trayectoria suavizada), 1920x1080 60 fps, bucle con fundido de 1 s
+  heroVideoMobile: "assets/hero-dron2-cel.mp4",       // recorte vertical 720x1280 30 fps
+  heroPoster: "assets/hero-dron2-poster.webp",
+  heroPosterMobile: "assets/hero-dron2-cel-poster.webp",
   usdCrc: 450                 // tipo de cambio de referencia para la calculadora de noches (colones por dólar). Actualizarlo de vez en cuando.
 };
 
