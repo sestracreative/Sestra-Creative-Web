@@ -68,7 +68,7 @@
     items.forEach(function (it, i) {
       var p = PICS[i % PICS.length];
       var fig = D.createElement("figure"); fig.className = "pc-pic";
-      var img = D.createElement("img"); img.src = p.src; img.alt = p[lang()]; img.loading = "lazy"; img.decoding = "async"; img.width = 2000; img.height = 1334;
+      var img = D.createElement("img"); img.setAttribute("data-src", p.src); img.alt = p[lang()]; img.decoding = "async"; img.width = 2000; img.height = 1334;
       fig.appendChild(img); stage.appendChild(fig); pics.push(fig);
       var li = D.createElement("li"); li.className = "pc-ch";
       var h = it.querySelector("h3"), d = it.querySelector("p");
@@ -81,6 +81,11 @@
     pc.appendChild(stage);
     svcs.parentNode.insertBefore(pc, svcs.nextSibling);
     sec.classList.add("pc-ready");
+    var load = function () { pics.forEach(function (f) { var im = f.firstChild; if (im && !im.src) im.src = im.getAttribute("data-src"); }); };
+    if ("IntersectionObserver" in W) {
+      var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { load(); io.disconnect(); } }, { rootMargin: "1500px 0px" });
+      io.observe(sec);
+    } else load();
     on = -1; sync();
   }
   function show(k) {
