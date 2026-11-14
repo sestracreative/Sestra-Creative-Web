@@ -489,7 +489,7 @@ h2{color:var(--olive-ink)}
 #proceso .steps4 li::before{color:#E3D3C4}
 #proceso :focus-visible{outline-color:#FAF8F5}
 </style>
-<link rel="stylesheet" href="css/site2.css?v=1114d">
+<link rel="stylesheet" href="css/site2.css?v=1114e">
 </head>
 <body>
 
@@ -756,8 +756,8 @@ h2{color:var(--olive-ink)}
   <span>WhatsApp</span>
 </a>
 <div class="toast" id="toast" role="status" hidden></div>
-<script src="js/site2.js?v=1114d" defer></script>
-<script src="js/moments.js?v=1114d" defer></script>
+<script src="js/site2.js?v=1114e" defer></script>
+<script src="js/moments.js?v=1114e" defer></script>
 <dialog class="lb" id="lb"><button class="lb-x" id="lb-x" type="button">&times;</button><button class="lb-p" id="lb-p" type="button">&lsaquo;</button><img id="lb-img" alt=""><p id="lb-cap"></p><button class="lb-n" id="lb-n" type="button">&rsaquo;</button></dialog>
 <script>
 /* ============ CONFIGURACIÓN (lo único que hay que tocar para publicar) ============ */
@@ -771,8 +771,10 @@ var CONFIG = {
   minLeadDays: 2,             // días mínimos entre hoy y la sesión
   horizonDays: 120,           // hasta cuántos días adelante se puede reservar
   maxProps: 50,
-  heroVideo: "assets/90130ea641.mp4",              // opcional: clip corto de drone en bucle (MP4 H.264, 8-15 s, sin sonido, ~1920 px, menos de 4 MB). Vacío = solo foto.
-  heroVideoMobile: "assets/078534f415.mp4",        // opcional: versión liviana para celular (~720 px, menos de 1,5 MB). Vacío = en celular se ve solo la foto.
+  heroVideo: "assets/hero-dron-1080p60.mp4",          // drone DJI_0502, 4.5-18.8 s, 1920x1080 60 fps, bucle con fundido de 1 s
+  heroVideoMobile: "assets/hero-dron-cel.mp4",       // recorte vertical 720x1280 30 fps
+  heroPoster: "assets/hero-dron-poster.webp",
+  heroPosterMobile: "assets/hero-dron-cel-poster.webp",
   usdCrc: 450                 // tipo de cambio de referencia para la calculadora de noches (colones por dólar). Actualizarlo de vez en cuando.
 };
 
@@ -1128,7 +1130,9 @@ var DATA = {
     var small = window.matchMedia("(max-width: 860px)").matches, src = small ? CONFIG.heroVideoMobile : CONFIG.heroVideo;
     if (!src || window.matchMedia("(prefers-reduced-motion: reduce)").matches || (navigator.connection && navigator.connection.saveData)) return;
     var v = document.createElement("video");
-    v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.preload = "metadata"; v.poster = poster;
+    var pst = small ? CONFIG.heroPosterMobile : CONFIG.heroPoster;
+    if (pst) { poster = pst; var im0 = el.querySelector("img"); if (im0) { im0.src = pst; im0.alt = lang === "en" ? "Drone view of the beach and homes in Guanacaste" : "Vista de drone de la playa y las casas en Guanacaste"; } }
+    v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.preload = "auto"; v.poster = poster;
     v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("aria-hidden", "true"); v.src = src;
     v.addEventListener("error", function () { v.remove(); });
     v.addEventListener("playing", function () { v.classList.add("on"); });
