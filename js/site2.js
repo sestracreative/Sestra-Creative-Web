@@ -343,9 +343,9 @@
     if (plans && head) { head.parentNode.insertBefore(plans, head.nextSibling); var soon = mk("p", "op-soon"); soon.id = "op-soon"; plans.parentNode.insertBefore(soon, plans.nextSibling); }
     var g = mk("div", "op-grid"), left = mk("div", "op-left"), fig = mk("figure", "op-pics");
     var h3 = mk("h3", "op-h3"); h3.id = "op-h3"; left.appendChild(h3);
-    /* video del drone en la marina (ida y vuelta para que el bucle no salte); se reproduce solo cuando se ve */
+    /* video del drone en la marina (DJI_0292 de 7,5 a 16,5 s, cuadros reales a 30 fps, fundido de 1 s para que el bucle no salte); se reproduce solo cuando se ve */
     fig.classList.add("op-vid");
-    fig.innerHTML = '<video class="a" muted loop playsinline preload="none" poster="assets/op-marina-poster.webp" aria-hidden="true"><source src="assets/op-marina.mp4" type="video/mp4"></video>';
+    fig.innerHTML = '<video class="a" muted loop playsinline preload="none" poster="assets/op-marina-poster.webp?v=2" aria-hidden="true"><source src="assets/op-marina.mp4?v=2" type="video/mp4"></video>';
     var v = fig.querySelector("video");
     if ("IntersectionObserver" in W && !(W.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
       new IntersectionObserver(function (en) { if (en[0].isIntersecting) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause(); }, { threshold: 0.25 }).observe(fig);
