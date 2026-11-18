@@ -484,7 +484,7 @@ h2{color:var(--olive-ink)}
 </style>
 <link rel="preload" as="image" href="assets/hero-dron2-poster.webp" media="(min-width: 861px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/hero-dron2-cel-poster.webp" media="(max-width: 860px)" fetchpriority="high">
-<link rel="stylesheet" href="css/site2.css?v=1118a">
+<link rel="stylesheet" href="css/site2.css?v=1118b">
 </head>
 <body>
 
@@ -709,7 +709,7 @@ h2{color:var(--olive-ink)}
         <div class="field"><label for="op-z" data-i18n="op.z"></label><input type="text" id="op-z" maxlength="80" data-i18n-ph="op.z.ph"></div>
       </div>
       <div class="field"><label for="op-w" data-i18n="op.need"></label>
-        <select id="op-w"><option value="photo" data-i18n="op.need.photo"></option><option value="drone" data-i18n="op.need.drone"></option><option value="social" data-i18n="op.need.social"></option><option value="all" selected data-i18n="op.need.all"></option></select></div>
+        <select id="op-w"><option value="photo" data-i18n="op.need.photo"></option><option value="drone" data-i18n="op.need.drone"></option><option value="social" data-i18n="op.need.social"></option><option value="digital" data-i18n="op.need.digital"></option><option value="all" selected data-i18n="op.need.all"></option></select></div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center"><button class="btn" type="submit" data-i18n="op.go"></button><span class="small" data-i18n="op.note"></span></div>
     </form>
   </div>
@@ -747,6 +747,11 @@ h2{color:var(--olive-ink)}
       <span class="mark" style="--w:30px" aria-hidden="true"><i class="a"></i><i class="b"></i></span>
       <div class="t">Sestra<br>Creative<small data-i18n="foot.tag"></small></div>
     </div>
+    <nav class="ft-soc" aria-label="Redes sociales">
+      <a href="https://www.instagram.com/sestracreative" target="_blank" rel="noopener" aria-label="Instagram @sestracreative"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" class="f"/></svg><span>Instagram</span></a>
+      <a href="https://www.tiktok.com/@sestra_creative" target="_blank" rel="noopener" aria-label="TikTok @sestra_creative"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3.5v11a3.6 3.6 0 1 1-3.6-3.6"/><path d="M14 3.5c.4 2.6 2.3 4.4 5 4.6"/></svg><span>TikTok</span></a>
+      <a href="#" data-wa="footer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l1.2-4A8 8 0 1 1 8.6 18.4z"/><path d="M9.2 8.6c.2-.5.6-.6.9-.5l.6 1.3c.1.3 0 .5-.2.7l-.4.4c.5 1 1.3 1.8 2.3 2.3l.4-.4c.2-.2.4-.3.7-.2l1.3.6c.2.3 0 .8-.5 1.1-.6.4-1.5.4-2.4-.1a7 7 0 0 1-3-3c-.4-.8-.4-1.7.1-2.2z" class="f"/></svg><span>WhatsApp</span></a>
+    </nav>
     <p class="small" data-i18n="foot.copy"></p>
   </div>
 </footer>
@@ -756,8 +761,8 @@ h2{color:var(--olive-ink)}
   <span>WhatsApp</span>
 </a>
 <div class="toast" id="toast" role="status" hidden></div>
-<script src="js/site2.js?v=1118a" defer></script>
-<script src="js/moments.js?v=1118a" defer></script>
+<script src="js/site2.js?v=1118b" defer></script>
+<script src="js/moments.js?v=1118b" defer></script>
 <dialog class="lb" id="lb"><button class="lb-x" id="lb-x" type="button">&times;</button><button class="lb-p" id="lb-p" type="button">&lsaquo;</button><img id="lb-img" alt=""><p id="lb-cap"></p><button class="lb-n" id="lb-n" type="button">&rsaquo;</button></dialog>
 <script>
 /* ============ CONFIGURACIÓN (lo único que hay que tocar para publicar) ============ */
@@ -837,10 +842,10 @@ var PK2 = {
   saves: "Ahorras {v} frente a pedir fotos y video por separado",
   more: "¿Más de 50 fotos o una propiedad fuera de lo común? <a href=\"#\" id=\"pk-quote\">Pide una cotización a medida</a>.",
   quoteMsg: "Hola, quiero una cotización a medida para una propiedad. Es: ",
-  none: "Sin sesión de fotos ni video. Elige en el paso 2 los servicios digitales que te interesan y Domi te escribe para coordinar.",
+  none: "Elige uno o varios servicios. No hace falta sesión: Domi te escribe para coordinar.", pick: "Elegir", picked: "Elegido",
   xv: "En la misma visita", xd: "Servicios digitales para tu alquiler",
   xdNote: "Precios de referencia por propiedad. Domi te confirma el monto final según lo que necesites.",
-  add: "Agregar", mo: "/mes", moProp: "/mes por propiedad",
+  add: "Agregar", added: "Agregado", mo: "/mes", moProp: "/mes por propiedad",
   x: {
     t360: ["Recorrido 360°", "Recorrido virtual para poner en tu web o en tu anuncio. Por propiedad."],
     plano: ["Plano 2D", "Plano de distribución con el nombre de cada espacio. Medidas aproximadas, no es un plano oficial."],
@@ -887,10 +892,10 @@ var PK2 = {
   saves: "You save {v} compared with booking photos and video separately",
   more: "More than 50 photos or an unusual property? <a href=\"#\" id=\"pk-quote\">Ask for a custom quote</a>.",
   quoteMsg: "Hi, I'd like a custom quote for a property. It is: ",
-  none: "No photo or video shoot. Pick the digital services you want in step 2 and Domi will message you to coordinate.",
+  none: "Pick one or more services. No shoot needed: Domi will message you to coordinate.", pick: "Select", picked: "Selected",
   xv: "In the same visit", xd: "Digital services for your rental",
   xdNote: "Reference prices per property. Domi confirms the final amount based on what you need.",
-  add: "Add", mo: "/mo", moProp: "/mo per property",
+  add: "Add", added: "Added", mo: "/mo", moProp: "/mo per property",
   x: {
     t360: ["360° tour", "Virtual tour to embed on your website or listing. Per property."],
     plano: ["2D floor plan", "Layout plan with the name of each space. Approximate measurements, not an official plan."],
@@ -929,7 +934,7 @@ var I18N = {
   "hero.lead": "Agencia de marketing en Tamarindo y Guanacaste: fotos, drone y contenido para alquileres vacacionales, hoteles y bienes raíces.",
   "hero.cta1": "Reservar una propiedad", "hero.cta2": "Manejo varias propiedades",
   "hero.f1b": "1 a 3 días", "hero.f1s": "hábiles de entrega",
-  "hero.f2b": "50+", "hero.f2s": "propiedades fotografiadas",
+  "hero.f2b": "100+", "hero.f2s": "propiedades fotografiadas",
   "hero.f3b": "Tamarindo", "hero.f3s": "Guanacaste y todo Costa Rica",
   "mf.k": "Cómo trabajamos", "mf.t": "Las fotos son lo primero que ve un huésped. Las hacemos para que tu propiedad <em>se vea como se siente estar ahí</em>: luz real, cada espacio en orden y los detalles que hacen que alguien reserve.", "sv.k": "Servicios", "sv.title": "Fotos, drone y contenido en un solo equipo.", "sv.lead": "Lo que necesita un hotel o un operador con varias propiedades para publicar con constancia.",
   "wk.k": "Propiedades", "wk.title": "Trabajo real en Guanacaste.", "wk.lead": "Toca una foto para verla en grande.",
@@ -973,10 +978,10 @@ var I18N = {
   "sum.empty": "Aún sin fecha", "sum.when": "Fecha: {d}, {s}",
   "iva.tbd": "Falta definir si el precio incluye IVA (13 %).", "iva.included": "IVA incluido.", "iva.extra": "Más IVA (13 %): {v}.",
   "e.name": "Escribe tu nombre.", "e.phone": "Escribe un WhatsApp o teléfono válido.", "e.email": "El correo no parece válido.", "e.prop": "Indica la propiedad o ubicación.", "e.consent": "Necesitamos tu aceptación.", "e.date": "Elige una fecha disponible en el calendario.", "e.send": "No se pudo guardar la solicitud. Envíala por WhatsApp para que no se pierda.",
-  "res.title": "Solicitud lista", "res.demo": "Modo demostración: esta solicitud no se guardó ni se envió. Para enviarla, usa el botón de WhatsApp.", "res.ok": "Recibimos tu solicitud. Te confirmamos la fecha por WhatsApp.", "res.id": "Código", "res.wa": "Enviar resumen por WhatsApp", "res.again": "Hacer otra solicitud", "res.fail": "No se guardó. Envía el resumen por WhatsApp.",
+  "res.title": "Solicitud lista", "res.demo": "Tu solicitud está lista. Envíala por WhatsApp con el botón de abajo y Domi te confirma la fecha y el total.", "res.ok": "Recibimos tu solicitud. Te confirmamos la fecha por WhatsApp.", "res.id": "Código", "res.wa": "Enviar resumen por WhatsApp", "res.again": "Hacer otra solicitud", "res.fail": "No se guardó. Envía el resumen por WhatsApp.",
   "msg.hi": "Hola, soy {n}. Quiero solicitar una reserva (código {id}).",
   "msg.prop": "Propiedad: {p}", "msg.when": "Fecha: {d} ({s})", "msg.pkg": "Paquete: {p} × {n}", "msg.drone": "Drone: {o}", "msg.extras": "Extras: {e}", "msg.zone": "Zona: {z}", "msg.total": "Total estimado: {t}{ex}", "msg.ex": " (precio de ejemplo)", "msg.plan": "Hola, me interesa el plan mensual {p}. Manejo ___ propiedades en ___.",
-  "op.k": "Varias propiedades", "op.title": "¿Administras varias propiedades?", "op.lead": "Cuéntanos cuántas propiedades manejas y qué necesitas. Te respondemos con una propuesta por volumen, no con un precio genérico.", "op.n": "Número de propiedades", "op.z": "Zonas", "op.z.ph": "Ej.: Tamarindo, Flamingo, Potrero", "op.need": "Qué necesitas", "op.need.photo": "Fotografía de interiores", "op.need.drone": "Drone y exteriores", "op.need.social": "Contenido y gestión de redes", "op.need.all": "Todo lo anterior", "op.go": "Pedir propuesta por WhatsApp", "op.note": "Se abre WhatsApp con el mensaje listo; no se guarda nada en esta página.", "op.msg": "Hola, administro {n} propiedades en {z}. Necesito: {w}. ¿Me comparten una propuesta por volumen?", "op.bad": "Indica cuántas propiedades manejas.", "ba.title": "Casa Luna, interior: la misma foto, tres acabados", "ba.pending": "Pendiente: la misma foto sin editar, estándar y estilo revista", "ba2.title": "Casa Refugio, exterior: estándar y estilo revista", "ba2.pending": "Pendiente: la misma foto en estándar y en estilo revista", "ba.l0": "Sin editar", "ba.t1": "Sin editar → Estándar", "ba.t2": "Estándar → Estilo revista", "ba.t3": "Exterior: Estándar → Estilo revista", "ba.l1": "Estándar", "ba.l2": "Estilo revista", "ba.alt": "Deslizador para comparar edición estándar y estilo revista",
+  "op.k": "Varias propiedades", "op.title": "¿Administras varias propiedades?", "op.lead": "Cuéntanos cuántas propiedades manejas y qué necesitas. Te respondemos con una propuesta por volumen, no con un precio genérico.", "op.n": "Número de propiedades", "op.z": "Zonas", "op.z.ph": "Ej.: Tamarindo, Flamingo, Potrero", "op.need": "Qué necesitas", "op.need.photo": "Fotos de todas mis propiedades", "op.need.drone": "Video, reels y drone", "op.need.social": "Gestión mensual de redes", "op.need.digital": "Servicios digitales (web, guía, chatbot, reportes)", "op.need.all": "Un poco de todo", "op.go": "Pedir propuesta por WhatsApp", "op.note": "Se abre WhatsApp con el mensaje listo; no se guarda nada en esta página.", "op.msg": "Hola, administro {n} propiedades en {z}. Necesito: {w}. ¿Me comparten una propuesta por volumen?", "op.bad": "Indica cuántas propiedades manejas.", "ba.title": "Casa Luna, interior: la misma foto, tres acabados", "ba.pending": "Pendiente: la misma foto sin editar, estándar y estilo revista", "ba2.title": "Casa Refugio, exterior: estándar y estilo revista", "ba2.pending": "Pendiente: la misma foto en estándar y en estilo revista", "ba.l0": "Sin editar", "ba.t1": "Sin editar → Estándar", "ba.t2": "Estándar → Estilo revista", "ba.t3": "Exterior: Estándar → Estilo revista", "ba.l1": "Estándar", "ba.l2": "Estilo revista", "ba.alt": "Deslizador para comparar edición estándar y estilo revista",
   "slot.m": "Mañana", "slot.t": "Mediodía y tarde", "slot.s": "Atardecer (ideal para drone y exteriores)",
   "drone.none": "Sin drone", "drone.d3": "3 aéreas", "drone.d6": "6 aéreas", "drone.d10": "10 aéreas",
   "months": "enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre",
@@ -994,7 +999,7 @@ var I18N = {
   "hero.lead": "Marketing agency in Tamarindo and Guanacaste: photos, drone and content for vacation rentals, hotels and real estate.",
   "hero.cta1": "Book one property", "hero.cta2": "I manage several properties",
   "hero.f1b": "1 to 3 days", "hero.f1s": "business-day delivery",
-  "hero.f2b": "50+", "hero.f2s": "properties photographed",
+  "hero.f2b": "100+", "hero.f2s": "properties photographed",
   "hero.f3b": "Tamarindo", "hero.f3s": "Guanacaste and all of Costa Rica",
   "mf.k": "How we work", "mf.t": "Photos are the first thing a guest sees. We make them so your property <em>looks the way it feels to be there</em>: real light, every space in order and the details that make someone book.", "sv.k": "Services", "sv.title": "Photos, drone and content from one team.", "sv.lead": "What a hotel or a multi-property operator needs to publish consistently.",
   "wk.k": "Properties", "wk.title": "Real work in Guanacaste.", "wk.lead": "Tap a photo to view it larger.",
@@ -1038,10 +1043,10 @@ var I18N = {
   "sum.empty": "No date yet", "sum.when": "Date: {d}, {s}",
   "iva.tbd": "Still to define whether prices include VAT (13%).", "iva.included": "VAT included.", "iva.extra": "Plus VAT (13%): {v}.",
   "e.name": "Enter your name.", "e.phone": "Enter a valid WhatsApp or phone number.", "e.email": "That email does not look valid.", "e.prop": "Enter the property or location.", "e.consent": "We need your consent.", "e.date": "Pick an available date on the calendar.", "e.send": "The request could not be saved. Send it on WhatsApp so it is not lost.",
-  "res.title": "Request ready", "res.demo": "Demo mode: this request was not saved or sent. To send it, use the WhatsApp button.", "res.ok": "We received your request. We will confirm the date on WhatsApp.", "res.id": "Code", "res.wa": "Send summary on WhatsApp", "res.again": "Make another request", "res.fail": "Not saved. Send the summary on WhatsApp.",
+  "res.title": "Request ready", "res.demo": "Your request is ready. Send it on WhatsApp with the button below and Domi will confirm the date and total.", "res.ok": "We received your request. We will confirm the date on WhatsApp.", "res.id": "Code", "res.wa": "Send summary on WhatsApp", "res.again": "Make another request", "res.fail": "Not saved. Send the summary on WhatsApp.",
   "msg.hi": "Hi, I'm {n}. I'd like to request a booking (code {id}).",
   "msg.prop": "Property: {p}", "msg.when": "Date: {d} ({s})", "msg.pkg": "Package: {p} × {n}", "msg.drone": "Drone: {o}", "msg.extras": "Extras: {e}", "msg.zone": "Area: {z}", "msg.total": "Estimated total: {t}{ex}", "msg.ex": " (example price)", "msg.plan": "Hi, I'm interested in the {p} monthly plan. I manage ___ properties in ___.",
-  "op.k": "Multiple properties", "op.title": "Do you manage several properties?", "op.lead": "Tell us how many properties you manage and what you need. We reply with a volume proposal, not a generic price.", "op.n": "Number of properties", "op.z": "Areas", "op.z.ph": "E.g. Tamarindo, Flamingo, Potrero", "op.need": "What you need", "op.need.photo": "Interior photography", "op.need.drone": "Drone and exteriors", "op.need.social": "Content and social management", "op.need.all": "All of the above", "op.go": "Ask for a proposal on WhatsApp", "op.note": "WhatsApp opens with the message ready; nothing is stored on this page.", "op.msg": "Hi, I manage {n} properties in {z}. I need: {w}. Could you share a volume proposal?", "op.bad": "Enter how many properties you manage.", "ba.title": "Casa Luna, interior: the same photo, three finishes", "ba.pending": "Pending: the same photo unedited, standard and magazine style", "ba2.title": "Casa Refugio, exterior: standard and magazine style", "ba2.pending": "Pending: the same photo in standard and magazine style", "ba.l0": "Unedited", "ba.t1": "Unedited → Standard", "ba.t2": "Standard → Magazine style", "ba.t3": "Exterior: Standard → Magazine style", "ba.l1": "Standard", "ba.l2": "Magazine style", "ba.alt": "Slider to compare standard and magazine-style editing",
+  "op.k": "Multiple properties", "op.title": "Do you manage several properties?", "op.lead": "Tell us how many properties you manage and what you need. We reply with a volume proposal, not a generic price.", "op.n": "Number of properties", "op.z": "Areas", "op.z.ph": "E.g. Tamarindo, Flamingo, Potrero", "op.need": "What you need", "op.need.photo": "Photos of all my properties", "op.need.drone": "Video, reels and drone", "op.need.social": "Monthly social media management", "op.need.digital": "Digital services (website, guide, chatbot, reports)", "op.need.all": "A bit of everything", "op.go": "Ask for a proposal on WhatsApp", "op.note": "WhatsApp opens with the message ready; nothing is stored on this page.", "op.msg": "Hi, I manage {n} properties in {z}. I need: {w}. Could you share a volume proposal?", "op.bad": "Enter how many properties you manage.", "ba.title": "Casa Luna, interior: the same photo, three finishes", "ba.pending": "Pending: the same photo unedited, standard and magazine style", "ba2.title": "Casa Refugio, exterior: standard and magazine style", "ba2.pending": "Pending: the same photo in standard and magazine style", "ba.l0": "Unedited", "ba.t1": "Unedited → Standard", "ba.t2": "Standard → Magazine style", "ba.t3": "Exterior: Standard → Magazine style", "ba.l1": "Standard", "ba.l2": "Magazine style", "ba.alt": "Slider to compare standard and magazine-style editing",
   "slot.m": "Morning", "slot.t": "Midday and afternoon", "slot.s": "Sunset (best for drone and exteriors)",
   "drone.none": "No drone", "drone.d3": "3 aerials", "drone.d6": "6 aerials", "drone.d10": "10 aerials",
   "months": "January,February,March,April,May,June,July,August,September,October,November,December",
@@ -1075,8 +1080,8 @@ var DATA = {
   services: [
    { i: "cam", t: "Fotografía de interiores y exteriores", d: "Luz pareja, vistas por las ventanas conservadas y encuadres rectos para listados y plataformas de alquiler." },
    { i: "drone", t: "Drone", d: "Aéreas con linderos marcados y ubicación con pin, más playas y entorno cercano." },
-   { i: "reel", t: "Contenido para redes", d: "Reels y banco de clips en bruto para que tu equipo publique sin empezar de cero." },
-   { i: "cal", t: "Gestión mensual de redes", d: "Calendario, publicaciones y reportes para quien maneja varias propiedades." }
+   { i: "reel", t: "Video y contenido para redes", d: "Reels editados de 30 a 60 segundos, tomas aéreas y un banco de clips en bruto de la propiedad, listos para anuncios, Instagram y TikTok." },
+   { i: "cal", t: "Servicios digitales y redes", d: "Sitio de reserva directa, guía digital del huésped, chatbot de WhatsApp e Instagram, reportes para dueños y gestión mensual de redes." }
   ],
   work: [
    { s: "vista", n: "Vista Infinita Villa", z: "Playa Flamingo", c: "La villa y la bahía de Flamingo desde el drone.", tags: ["Drone"], ph: "Foto pendiente: Vista Infinita" },
@@ -1122,8 +1127,8 @@ var DATA = {
   services: [
    { i: "cam", t: "Interior and exterior photography", d: "Even light, window views kept and straight compositions for listings and rental platforms." },
    { i: "drone", t: "Drone", d: "Aerials with marked property lines and a location pin, plus beaches and surroundings." },
-   { i: "reel", t: "Social content", d: "Reels and a bank of raw clips so your team can post without starting from scratch." },
-   { i: "cal", t: "Monthly social management", d: "Calendar, posts and reports for anyone managing several properties." }
+   { i: "reel", t: "Video and social content", d: "Edited 30 to 60 second reels, aerial shots and a bank of raw clips of the property, ready for ads, Instagram and TikTok." },
+   { i: "cal", t: "Digital services and social media", d: "Direct booking site, digital guest guide, WhatsApp and Instagram chatbot, owner reports and monthly social media management." }
   ],
   work: [
    { s: "vista", n: "Vista Infinita Villa", z: "Playa Flamingo", c: "The villa and Flamingo bay from the drone.", tags: ["Drone"], ph: "Photo pending: Vista Infinita" },
@@ -1283,7 +1288,7 @@ var DATA = {
     }
     buildBA("ba", "batabs", [[PHOTOS.baRaw, PHOTOS.baStd, "ba.l0", "ba.l1", "ba.t1"], [PHOTOS.baStd, PHOTOS.baEd, "ba.l1", "ba.l2", "ba.t2"]], "ba.pending", "ba.name1");
     buildBA("ba2", "batabs2", [[PHOTOS.baExStd, PHOTOS.baExEd, "ba.l1", "ba.l2", ""]], "ba2.pending", "ba.name2");
-    $("quotes").innerHTML = d.quotes.map(function (q) { return '<figure class="quote" style="margin:0"><p>“' + q.q + '”</p><cite><b>' + q.n + "</b>" + q.r + "</cite></figure>"; }).join("");
+    $("quotes").innerHTML = d.quotes.map(function (q) { return '<figure class="quote" style="margin:0"><p>“' + q.q + '”</p><cite><span class="q-av" aria-hidden="true">' + q.n.split(" ").slice(0, 2).map(function (w) { return w.charAt(0); }).join("") + "</span><span class=\"q-who\"><b>" + q.n + "</b>" + q.r + "</span></cite></figure>"; }).join("");
     $("plans").innerHTML = ["starter", "growth", "premium"].map(function (k) {
       var p = d.plans[k];
       return '<article class="plan"><h3>' + p.n + '</h3><div class="pr"><small>' + PK().planP + "</small></div><ul>" +
@@ -1353,6 +1358,15 @@ var DATA = {
       });
     });
   }
+  var DIGI = ["web", "guia", "bot", "rep"];
+  /* Ilustraciones de los servicios digitales: foto estilo revista + un marco dibujado con CSS (no son capturas de clientes). */
+  function mock(k) {
+    var en = lang === "en", h = '<span class="pk-ph mock m-' + k + '" aria-hidden="true">';
+    if (k === "web") return h + '<img src="img/est-07.webp" alt="" loading="lazy" decoding="async"><span class="mk-bar"><i></i><i></i><i></i><em>' + (en ? "yourvilla.com" : "tuvilla.com") + '</em></span><span class="mk-cta">' + (en ? "Book" : "Reservar") + "</span></span>";
+    if (k === "guia") return h + '<img src="img/est-01.webp" alt="" loading="lazy" decoding="async"><span class="mk-phone"><span class="mk-scr"><b>' + (en ? "Welcome" : "Bienvenidos") + "</b><i>Wifi</i><i>Check-out 11:00</i><i>" + (en ? "Nearby beaches" : "Playas cerca") + "</i></span></span></span>";
+    if (k === "bot") return h + '<img src="img/est-09.webp" alt="" loading="lazy" decoding="async"><span class="mk-chat"><span class="in">' + (en ? "Is it free in January?" : "¿Hay fechas en enero?") + '</span><span class="out">' + (en ? "Yes, Jan 8 to 15 is open." : "Sí, del 8 al 15 está libre.") + "</span></span></span>";
+    return h + '<img src="img/est-10.webp" alt="" loading="lazy" decoding="async"><span class="mk-card"><b>' + (en ? "Occupancy" : "Ocupación") + '</b><span class="mk-bars"><i style="height:45%"></i><i style="height:62%"></i><i style="height:55%"></i><i style="height:78%"></i><i style="height:88%"></i></span></span></span>';
+  }
   function renderPkgs() {
     var p = PK(), cats = ["foto", "video", "mixto", "none"];
     $("pk-cats").innerHTML = cats.map(function (c) {
@@ -1375,7 +1389,21 @@ var DATA = {
     }
 
     var box = $("pkgs");
-    if (S.cat === "none") { box.className = "pkgs none"; box.innerHTML = '<p class="pk-none">' + p.none + "</p>"; }
+    if (S.cat === "none") {
+      box.className = "pkgs n4 none c-none";
+      box.innerHTML = '<p class="pk-none">' + p.none + "</p>" + DIGI.map(function (k) {
+        var on = !!S.x[k];
+        return '<label class="opt dg' + (on ? " on" : "") + '" data-k="' + k + '"><input type="checkbox" name="pkx" value="' + k + '"' + (on ? " checked" : "") + ">" + mock(k) +
+          '<span class="nm">' + p.x[k][0] + '</span><span class="pr dg-pr">' + xPrice(k) + '</span><span class="small dg-d">' + p.x[k][1] + '</span><span class="dg-pick" aria-hidden="true">' + (on ? p.picked : p.pick) + "</span></label>";
+      }).join("");
+      Array.prototype.forEach.call(box.querySelectorAll('input[name="pkx"]'), function (inp) {
+        inp.addEventListener("change", function () {
+          S.x[inp.value] = inp.checked; var lab = inp.closest(".opt");
+          lab.classList.toggle("on", inp.checked); lab.querySelector(".dg-pick").textContent = inp.checked ? p.picked : p.pick;
+          renderExtras(); renderSum();
+        });
+      });
+    }
     else {
       var c2 = S.cat, s2 = S.sty[c2], T = tiersOf(c2);
       box.className = "pkgs n" + T.length + " c-" + c2;
@@ -1395,6 +1423,7 @@ var DATA = {
         });
       });
     }
+    var dgf = $("extras2") && $("extras2").closest(".field"); if (dgf) dgf.hidden = S.cat === "none";
     var more = $("pk-more");
     more.innerHTML = S.cat === "foto" || S.cat === "mixto" ? p.more : "";
     var q = $("pk-quote"); if (q) bindWa(q, p.quoteMsg);
@@ -1420,9 +1449,9 @@ var DATA = {
       var box = $(g[1]); box.innerHTML = "";
       Object.keys(PRICING.extras).forEach(function (k) {
         if (PRICING.extras[k].group !== g[0]) return;
-        var row = document.createElement("div"); row.className = "xrow" + (S.x[k] ? " on" : ""); row.dataset.k = k;
-        row.innerHTML = '<span class="x-ic">' + XI2[k] + '</span><div class="t"><b>' + p.x[k][0] + "</b><span>" + p.x[k][1] + '</span></div><div class="pz">' + xPrice(k) + '</div><label class="check" style="align-items:center"><input type="checkbox" id="x-' + k + '"' + (S.x[k] ? " checked" : "") + '><span class="small">' + p.add + "</span></label>";
-        row.querySelector("input").addEventListener("change", function (ev) { S.x[k] = ev.target.checked; row.classList.toggle("on", S.x[k]); renderSum(); });
+        var row = document.createElement("label"); row.className = "xrow xopt" + (S.x[k] ? " on" : ""); row.dataset.k = k;
+        row.innerHTML = '<span class="x-ic">' + XI2[k] + '</span><span class="t"><b>' + p.x[k][0] + "</b><span>" + p.x[k][1] + '</span></span><span class="pz">' + xPrice(k) + '</span><span class="x-tick"><input type="checkbox" id="x-' + k + '"' + (S.x[k] ? " checked" : "") + '><span class="x-box" aria-hidden="true"></span><span class="x-lab">' + (S.x[k] ? p.added : p.add) + "</span></span>";
+        row.querySelector("input").addEventListener("change", function (ev) { S.x[k] = ev.target.checked; row.classList.toggle("on", S.x[k]); row.querySelector(".x-lab").textContent = S.x[k] ? p.added : p.add; renderSum(); });
         box.appendChild(row);
       });
     });
@@ -1610,7 +1639,7 @@ var DATA = {
     Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-ph]"), function (el) { el.setAttribute("placeholder", t(el.getAttribute("data-i18n-ph"))); });
     Array.prototype.forEach.call(document.querySelectorAll("[data-lang]"), function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === l)); });
     Array.prototype.forEach.call(document.querySelectorAll("[data-wa]"), function (a) { bindWa(a, t("wa.generic")); });
-    $("ribbon").hidden = !(CONFIG.exampleMode || !waReady() || !CONFIG.endpoint); $("exbanner").hidden = !CONFIG.exampleMode; $("sum-ex").hidden = !CONFIG.exampleMode;
+    $("ribbon").hidden = !CONFIG.exampleMode; $("exbanner").hidden = !CONFIG.exampleMode; $("sum-ex").hidden = !CONFIG.exampleMode;
     renderStatic(); renderPkgs(); renderExtras(); renderZone(); renderSlots(); renderCal(); renderSum();
     if (lastResult) showResult(lastResult.kind, lastResult.p, lastResult.c);
   }

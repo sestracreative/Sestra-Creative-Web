@@ -24,7 +24,7 @@
       bPrev: "Fotos anteriores", bNext: "Más fotos", bandL: "Detalles con estilo revista",
       mfAlt: "Sala con ventanales frente al mar, luz de atardecer",
       opAlt: ["Vista aérea de una casa de tejas entre los árboles", "Vista aérea de una piscina y su jardín"],
-      opSoon: "<b>Próximamente:</b> galerías de stock y bancos de clips listos para tus anuncios y redes.",
+      opSoon: "<b>Próximamente:</b> galerías de stock de Guanacaste listas para tus anuncios y redes.",
       opH3: "¿Prefieres una propuesta a tu medida?",
       mf: "Para un administrador, las fotos venden dos veces: a los huéspedes que reservan y a los dueños que te confían su propiedad. Por eso las hacemos con <em>luz real y cada espacio en orden</em>, con entrega en 1 a 3 días hábiles.",
       proof: "Según Airbnb, los anuncios con fotos profesionales reciben en promedio 19 % más reservas.", proofSrc: "Fuente: Airbnb, 2025",
@@ -35,7 +35,7 @@
              ["Tengo una propiedad", "Elige tu paquete, mira el total y reserva la fecha.", "#paquetes"]],
       abK: "Quiénes somos", abT: "Somos Cris y Domi.",
       abP: "Sestra Creative nace en Tamarindo de dos personas que se complementan: uno detrás de la cámara y la otra al lado del cliente. Trabajamos juntos cada sesión, de la primera conversación a la entrega.",
-      abCris: "Fotografía, drone y edición. Ha fotografiado más de 50 propiedades en Guanacaste.",
+      abCris: "Fotografía, drone y edición. Ha fotografiado más de 100 propiedades en Costa Rica.",
       abDomi: "Clientes, redes y contenido. Tu contacto desde la primera conversación hasta la entrega.",
       abPromise: ["Entrega en 1 a 3 días hábiles", "Fotos propias, tomadas por nosotros", "Precios claros, con IVA incluido"],
       abWa: "Escribirnos por WhatsApp", abMsg: "Hola Cris y Domi, vi la página de Sestra Creative y quiero información.",
@@ -62,7 +62,7 @@
       bPrev: "Previous photos", bNext: "More photos", bandL: "Magazine-style details",
       mfAlt: "Living room with floor-to-ceiling windows facing the ocean, sunset light",
       opAlt: ["Aerial view of a tile-roof house among the trees", "Aerial view of a pool and garden"],
-      opSoon: "<b>Coming soon:</b> stock galleries and clip banks ready for your listings and social media.",
+      opSoon: "<b>Coming soon:</b> Guanacaste stock galleries ready for your ads and social media.",
       opH3: "Prefer a tailored proposal?",
       mf: "For a property manager, photos sell twice: to the guests who book and to the owners who trust you with their homes. That's why we shoot with <em>real light and every space in order</em>, with delivery in 1 to 3 business days.",
       proof: "According to Airbnb, listings with professional photos get 19% more bookings on average.", proofSrc: "Source: Airbnb, 2025",
@@ -73,7 +73,7 @@
              ["I own a property", "Pick your package, see the total and book the date.", "#paquetes"]],
       abK: "About us", abT: "We are Cris and Domi.",
       abP: "Sestra Creative was born in Tamarindo from two people who complement each other: one behind the camera, the other by the client's side. We work every session together, from the first conversation to delivery.",
-      abCris: "Photography, drone and editing. Has photographed more than 50 properties in Guanacaste.",
+      abCris: "Photography, drone and editing. He has photographed more than 100 properties in Costa Rica.",
       abDomi: "Clients, social media and content. Your contact from the first conversation to delivery.",
       abPromise: ["Delivery in 1 to 3 business days", "Our own photos, taken by us", "Clear prices, VAT included"],
       abWa: "Message us on WhatsApp", abMsg: "Hi Cris and Domi, I saw the Sestra Creative website and I'd like more information.",
@@ -100,7 +100,7 @@
     "hero.cta1": { es: "Reservar sesión", en: "Book a session" },
     "ct.book": { es: "Reservar sesión", en: "Book a session" },
     "pl.cta": { es: "Pedir propuesta sin compromiso", en: "Get a free proposal" },
-    "hero.f2s": { es: "propiedades fotografiadas en Guanacaste", en: "properties photographed in Guanacaste" },
+    "hero.f2s": { es: "propiedades fotografiadas en Costa Rica", en: "properties photographed in Costa Rica" },
     "hero.f3b": { es: "Foto + drone + redes", en: "Photo + drone + social" },
     "hero.f3s": { es: "en una sola visita", en: "in a single visit" },
     "op.k": { es: "Planes y volumen", en: "Plans and volume" },
@@ -319,6 +319,10 @@
     f2: [IMG + "pkH.webp", A("Patio de una casa blanca con sala exterior", "Courtyard of a white house with outdoor lounge")],
     f3: [IMG + "pkV.webp", A("Villa frente al mar al atardecer, desde el drone", "Oceanfront villa at sunset, from the drone")]
   };
+  PKG_PH.v1 = [IMG + "est-02.webp", A("Habitación con vista al mar al atardecer", "Bedroom with sunset ocean view")];
+  PKG_PH.v2 = [IMG + "vd0.webp", A("Playa de Guanacaste desde el drone", "Guanacaste beach from the drone")];
+  PKG_PH.v3 = [IMG + "est-06.webp", A("Sala de billar con ventanales frente al mar", "Billiards room with windows facing the ocean")];
+  PKG_PH.v4 = [IMG + "vd3.webp", A("Bahía y bosque seco desde el drone", "Bay and dry forest from the drone")];
   PKG_PH.m1 = PKG_PH.f1; PKG_PH.m2 = PKG_PH.f2; PKG_PH.m3 = PKG_PH.f3;
   function decoratePkgs() {
     var box = $("pkgs"); if (!box) return; var l = L();
@@ -339,12 +343,18 @@
     if (plans && head) { head.parentNode.insertBefore(plans, head.nextSibling); var soon = mk("p", "op-soon"); soon.id = "op-soon"; plans.parentNode.insertBefore(soon, plans.nextSibling); }
     var g = mk("div", "op-grid"), left = mk("div", "op-left"), fig = mk("figure", "op-pics");
     var h3 = mk("h3", "op-h3"); h3.id = "op-h3"; left.appendChild(h3);
-    fig.innerHTML = '<img class="a" src="' + IMG + 'galE.webp" alt="" loading="lazy" decoding="async">';
+    /* video corto del drone (misma toma de la portada, en reversa y con otro encuadre); se reproduce solo cuando se ve */
+    fig.classList.add("op-vid");
+    fig.innerHTML = '<video class="a" muted loop playsinline preload="none" poster="assets/op-dron-poster.webp" aria-hidden="true"><source src="assets/op-dron.mp4" type="video/mp4"></video>';
+    var v = fig.querySelector("video");
+    if ("IntersectionObserver" in W && !(W.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+      new IntersectionObserver(function (en) { if (en[0].isIntersecting) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause(); }, { threshold: 0.25 }).observe(fig);
+    }
     w.insertBefore(g, form); left.appendChild(form); g.appendChild(left); g.appendChild(fig);
     Array.prototype.forEach.call(D.querySelectorAll('a[href="#planes"]'), function (a) { a.setAttribute("href", "#operadores"); });
   }
   function drawOperators() {
-    var t = T[L()], f = D.querySelector(".op-pics"); if (f) f.querySelector(".a").alt = t.opAlt[0];
+    var t = T[L()], f = D.querySelector(".op-pics img.a"); if (f) f.alt = t.opAlt[0];
     if ($("op-soon")) $("op-soon").innerHTML = t.opSoon;
     if ($("op-h3")) $("op-h3").textContent = t.opH3;
   }
@@ -429,9 +439,8 @@
     var t = T[L()];
     zoomable($("ph-hero"), single, t.open);
     zoomable(D.querySelector(".mf-pic"), single, t.open);
-    zoomable(D.querySelector(".op-pics"), single, t.open);
     zoomable(D.querySelector(".ct-pic"), single, t.open);
-    Array.prototype.forEach.call(D.querySelectorAll(".pk-ph"), function (f) {
+    Array.prototype.forEach.call(D.querySelectorAll(".pk-ph:not(.mock)"), function (f) {
       /* dentro de una tarjeta de paquete: botón aparte para no elegir el paquete al abrir la foto */
       if (f.querySelector(".pk-zoom")) return;
       var b = mk("button", "pk-zoom", '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>'); b.type = "button";
@@ -478,7 +487,7 @@
   function drawNeeds() {
     var g = $("need-grid"); if (!g) return; var t = T[L()];
     $("need-k").textContent = t.needK;
-    g.innerHTML = t.need.map(function (n, i) { return '<a class="need" href="' + n[2] + '"><span class="need-ic" aria-hidden="true">' + NEED_IC[i] + '</span><span class="need-t"><b>' + esc(n[0]) + "</b><span>" + esc(n[1]) + '</span></span><span class="need-go" aria-hidden="true">&rarr;</span></a>'; }).join("");
+    g.innerHTML = t.need.map(function (n, i) { return '<a class="need" href="' + n[2] + '"><span class="need-ic" aria-hidden="true">' + NEED_IC[i] + '</span><span class="need-t"><b>' + esc(n[0]) + "</b><span>" + esc(n[1]) + '</span></span></a>'; }).join("");
   }
 
   /* ---------- 14. quiénes somos ---------- */
@@ -505,13 +514,20 @@
   }
 
   /* ---------- 15. qué incluye cada paquete (plegado) y muestra sin compromiso ---------- */
+  var INC_IC = [
+    '<svg viewBox="0 0 24 24"><path d="M4 7.5h6l2 2h8v9.5H4z"/><path d="M12 12.5v4M10 14.5l2 2 2-2"/></svg>',
+    '<svg viewBox="0 0 24 24"><path d="M4 15.5l1.6-5A2 2 0 0 1 7.5 9h9a2 2 0 0 1 1.9 1.5l1.6 5v3H4z"/><path d="M4 15.5h16"/><circle cx="7.5" cy="18.5" r="1.4"/><circle cx="16.5" cy="18.5" r="1.4"/></svg>',
+    '<svg viewBox="0 0 24 24"><path d="M6 3.5h12v17l-3-2-3 2-3-2-3 2z"/><path d="M9 8.5h6M9 12h6"/></svg>',
+    '<svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><path d="M9 3v1.5M3 9h1.5M4.8 4.8l1 1M13.2 4.8l-1 1"/><path d="M10 19.5h8a3 3 0 0 0 0-6 4.5 4.5 0 0 0-8.6 1.4A2.4 2.4 0 0 0 10 19.5z"/></svg>',
+    '<svg viewBox="0 0 24 24"><path d="M12 3l2.3 1.6 2.8-.1.9 2.7 2.2 1.7-.9 2.6.9 2.6-2.2 1.7-.9 2.7-2.8-.1L12 21l-2.3-1.6-2.8.1-.9-2.7-2.2-1.7.9-2.6-.9-2.6 2.2-1.7.9-2.7 2.8.1z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></svg>'
+  ];
   function drawIncludes() {
     var box = $("pkgs"); if (!box) return; var t = T[L()];
     var old = D.querySelector("details#pk-inc"); if (old) old.remove();
     var d = $("pk-inc"); if (!d) { d = mk("div", "pk-inc2"); d.id = "pk-inc"; }
     var after = $("pk-more") || box; if (after.nextSibling !== d) after.parentNode.insertBefore(d, after.nextSibling);
     d.hidden = box.classList.contains("none");
-    d.innerHTML = '<span class="lbl">' + esc(t.incT) + "</span><ul>" + t.incCommon.map(function (c) { return "<li><b>" + esc(c[0]) + "</b> " + esc(c[1]) + "</li>"; }).join("") + "</ul>";
+    d.innerHTML = '<span class="lbl"><span class="inc-seal" aria-hidden="true">' + INC_IC[4] + "</span>" + esc(t.incT) + "</span><ul>" + t.incCommon.map(function (c, i) { return '<li><span class="inc-ic" aria-hidden="true">' + INC_IC[i] + "</span><span><b>" + esc(c[0].replace(/:$/, "")) + "</b>" + esc(c[1]) + "</span></li>"; }).join("") + "</ul>";
     var sum = $("sum"), sm = $("pk-sample");
     if (sum && !sm) { sm = mk("a", "pk-sample"); sm.id = "pk-sample"; sm.target = "_blank"; sm.rel = "noopener"; sum.appendChild(sm); }
     if (sm) { sm.textContent = t.sample; sm.href = waLink(t.sampleMsg); }

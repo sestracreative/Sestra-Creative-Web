@@ -31,7 +31,7 @@
   function collect() {
     if (busy) return;
     busy = true;
-    var els = [].slice.call(D.querySelectorAll("#mf-t, #testimonios .quote p"));
+    var els = [].slice.call(D.querySelectorAll("#mf-t"));
     WH = els.map(function (el) { return el.querySelector(".mo-w") ? { el: el, words: [].slice.call(el.querySelectorAll(".mo-w")) } : splitOne(el); });
     busy = false;
     drawWords();
