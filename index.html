@@ -491,7 +491,7 @@ h2{color:var(--olive-ink)}
 </style>
 <link rel="preload" as="image" href="assets/hero-dron2-poster.webp" media="(min-width: 861px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/hero-dron2-cel-poster.webp" media="(max-width: 860px)" fetchpriority="high">
-<link rel="stylesheet" href="css/site2.css?v=1114k">
+<link rel="stylesheet" href="css/site2.css?v=1118a">
 </head>
 <body>
 
@@ -610,7 +610,10 @@ h2{color:var(--olive-ink)}
       <form class="steps" id="form" novalidate>
         <div class="step" id="s1">
           <header><h3 data-i18n="s1.t"></h3><span class="small" data-i18n="s1.d"></span></header>
+          <div class="pk-cats" id="pk-cats" role="radiogroup" aria-label="Tipo de paquete"></div>
+          <div class="pk-sty" id="pk-sty"></div>
           <div class="pkgs" id="pkgs" role="radiogroup" aria-label="Paquete"></div>
+          <p class="pk-more small" id="pk-more"></p>
         </div>
 
         <div class="step" id="s2">
@@ -625,12 +628,13 @@ h2{color:var(--olive-ink)}
             <span class="small" id="p-note"></span>
           </div>
           <div class="field">
-            <span class="lbl" data-i18n="s2.drone"></span>
-            <div class="seg dcards" id="drone" role="radiogroup"></div>
+            <span class="lbl" id="xv-lbl"></span>
+            <div id="extras" class="xlist"></div>
           </div>
           <div class="field">
-            <span class="lbl" data-i18n="s2.extras"></span>
-            <div id="extras" style="display:flex;flex-direction:column;gap:10px"></div>
+            <span class="lbl" id="xd-lbl"></span>
+            <span class="small" id="xd-note"></span>
+            <div id="extras2" class="xlist"></div>
           </div>
           <div class="field">
             <label for="zone" data-i18n="s2.zone"></label>
@@ -641,6 +645,7 @@ h2{color:var(--olive-ink)}
 
         <div class="step" id="s3">
           <header><h3 data-i18n="s3.t"></h3><span class="small" data-i18n="s3.d"></span></header>
+          <p class="small date-opt" id="date-opt" hidden></p>
           <div class="cal" id="cal"></div>
           <div class="legend"><span><i></i><b style="font-weight:400" data-i18n="s3.free"></b></span><span><i class="x"></i><b style="font-weight:400" data-i18n="s3.busy"></b></span><span><i class="s"></i><b style="font-weight:400" data-i18n="s3.sel"></b></span></div>
           <p class="small" id="avail-note"></p>
@@ -759,17 +764,17 @@ h2{color:var(--olive-ink)}
   <span>WhatsApp</span>
 </a>
 <div class="toast" id="toast" role="status" hidden></div>
-<script src="js/site2.js?v=1114k" defer></script>
-<script src="js/moments.js?v=1114k" defer></script>
+<script src="js/site2.js?v=1118a" defer></script>
+<script src="js/moments.js?v=1118a" defer></script>
 <dialog class="lb" id="lb"><button class="lb-x" id="lb-x" type="button">&times;</button><button class="lb-p" id="lb-p" type="button">&lsaquo;</button><img id="lb-img" alt=""><p id="lb-cap"></p><button class="lb-n" id="lb-n" type="button">&rsaquo;</button></dialog>
 <script>
 /* ============ CONFIGURACIÓN (lo único que hay que tocar para publicar) ============ */
 var CONFIG = {
-  exampleMode: true,          // true = precios, disponibilidad y WhatsApp son de ejemplo (muestra avisos). Cambiar a false al publicar.
+  exampleMode: false,         // true = precios, disponibilidad y WhatsApp son de ejemplo (muestra avisos). Cambiar a false al publicar.
   whatsapp: "50600000000",    // número con código de país, sin + ni espacios. Reemplazar por el real.
   endpoint: "",               // URL del Apps Script (web app) que guarda la reserva en Google Sheets. Vacío = modo demostración.
   availabilityUrl: "",        // normalmente la misma URL del Apps Script (GET devuelve {"blocked":["2026-11-05",...]}).
-  ivaMode: "extra",           // "tbd" (sin definir) | "included" (IVA incluido) | "extra" (+13 %)
+  ivaMode: "included",        // "tbd" (sin definir) | "included" (IVA incluido) | "extra" (+13 %)
   ivaRate: 0.13,
   minLeadDays: 2,             // días mínimos entre hoy y la sesión
   horizonDays: 120,           // hasta cuántos días adelante se puede reservar
@@ -784,20 +789,139 @@ var CONFIG = {
 /* Fotos: pegar aquí la URL (o ruta relativa) de cada foto cuando estén listas. Vacío = espacio marcado. */
 var PHOTOS = { "baRaw": "assets/d6fd72e33a.webp", "baStd": "assets/8fea3dcb11.webp", "baEd": "assets/30abd598e7.webp", "baExStd": "assets/2d10e8b85d.webp", "baExEd": "assets/8d7e5fbd63.webp", "hero": "assets/503f015d5e.webp", "vista": "assets/7773793167.webp", "t360": "assets/5f9a42c23e.webp", "isabella": "assets/bd8fcdbf7d.webp", "luna": "assets/3d1241c827.webp", "paz": "assets/618146236b.webp", "amigos": "assets/561aab37ad.webp", "malinche": "assets/8445163321.webp", "aventura": "assets/3a7fa6210b.webp", "refugio": "assets/52a0e8b304.webp"};
 
-/* Precios en colones. TODOS son de ejemplo hasta que Cris y Domi definan las tarifas (tarea t13). */
+/* Precios en dólares, IVA incluido. Paquetes: hoja "orden de costos" de Sestra (17 nov 2026):
+   horas × $80 + costos fijos + apps + viáticos $100, más IVA 13 %, redondeado.
+   Extras ("desde"): precios de referencia del 17 nov, por confirmar con Domi. Cambiar aquí y nada más. */
 var PRICING = {
-  packages: { base: 140000, pro: 210000, ultra: 410000 },
-  drone: { none: 0, d3: 24500, d6: 49000, d10: 73000 },
-  extras: {
-    editorial: { price: 45000, type: "toggle" },
-    beach:   { price: 25000, type: "toggle" },
-    photos:  { price: 6900,  type: "qty" },
-    staging: { price: 9600,  type: "qty" },
-    retouch: { price: 4600,  type: "qty" }
+  cats: {
+    foto: { styles: ["mag", "hdr"], tiers: [
+      { id: "f1", ph: [15, 20], price: { mag: 365, hdr: 350 } },
+      { id: "f2", ph: [25, 35], price: { mag: 540, hdr: 520 }, rec: true },
+      { id: "f3", ph: [30, 50], price: { mag: 750, hdr: 725 } } ] },
+    video: { styles: ["fly", "hol"], tiers: [
+      { id: "v1", reels: 2, clips: 20, air: 1, price: { fly: 665, hol: 575 } },
+      { id: "v2", reels: 2, clips: 40, air: 2, price: { fly: 755, hol: 665 } },
+      { id: "v3", reels: 4, clips: 40, air: 1, price: { fly: 945, hol: 855 }, rec: true },
+      { id: "v4", reels: 4, clips: 60, air: 2, price: { fly: 1125, hol: 1035 } } ] },
+    mixto: { styles: ["mag", "hdr"], tiers: [
+      { id: "m1", ph: [15, 20], reels: 2, clips: 20, air: 1, price: { mag: 830, hdr: 810 }, parts: ["f1", "v1"] },
+      { id: "m2", ph: [25, 35], reels: 4, clips: 40, air: 1, price: { mag: 1290, hdr: 1265 }, parts: ["f2", "v3"], rec: true },
+      { id: "m3", ph: [30, 50], reels: 4, clips: 60, air: 2, price: { mag: 1685, hdr: 1645 }, parts: ["f3", "v4"] } ] }
   },
-  zones: { tam: 0, gua: 23000, other: null },
-  discounts: [ { min: 10, pct: 15 }, { min: 4, pct: 10 } ],
-  plans: { starter: 250000, growth: 400000, premium: 600000 }
+  extras: {
+    t360:  { group: "visit", once: 120, from: true },
+    plano: { group: "visit", once: 60, from: true },
+    lote:  { group: "visit", once: 150, from: true },
+    web:   { group: "dig", once: 900, mo: 40, from: true },
+    guia:  { group: "dig", once: 350, mo: 20, from: true },
+    bot:   { group: "dig", once: 600, mo: 80, from: true },
+    rep:   { group: "dig", once: 300, mo: 50, moPerProp: true }
+  },
+  zones: { gua: 0, other: null }
+};
+
+/* Textos del selector de paquetes */
+var PK2 = {
+ es: {
+  cats: { foto: ["Fotos", "Interiores y exteriores"], video: ["Video", "Reels y banco de clips"], mixto: ["Fotos + video", "En la misma visita"], none: ["Solo servicios digitales", "Sin sesión"] },
+  from: "desde", saveUpTo: "ahorras hasta {v}",
+  styLbl: { foto: "Estilo de edición", video: "Tomas aéreas", mixto: "Estilo de las fotos" },
+  styles: {
+    mag: ["Estilo revista", "Luz y color trabajados, con acabado editorial. Ideal para alquileres vacacionales."],
+    hdr: ["HDR clásico", "Natural y parejo, como lo piden los portales. Ideal para propiedades en venta."],
+    fly: ["Con dron", "Suma videos aéreos de la propiedad y su entorno."],
+    hol: ["Sin dron", "Todo el recorrido a nivel del suelo."]
+  },
+  diff: "Ver la diferencia",
+  tierName: ["Condo", "Casa", "Villa"],
+  size: ["Condo o casa pequeña", "Casa de 2 a 3 habitaciones", "Casa grande o villa"],
+  vName: "{r} reels · {c} clips",
+  photos: "{a} a {b} fotos editadas",
+  edit: { mag: "Edición estilo revista", hdr: "Edición HDR clásica" },
+  reels: "{n} reels de recorrido (30 a 60 s)", clips: "Banco de {n} clips en bruto",
+  air1: "1 video aéreo", airN: "{n} videos aéreos", noair: "Sin tomas aéreas",
+  dl: "Fotos listas en 1 a 3 días hábiles",
+  perProp: "por propiedad · IVA incluido",
+  saves: "Ahorras {v} frente a pedir fotos y video por separado",
+  more: "¿Más de 50 fotos o una propiedad fuera de lo común? <a href=\"#\" id=\"pk-quote\">Pide una cotización a medida</a>.",
+  quoteMsg: "Hola, quiero una cotización a medida para una propiedad. Es: ",
+  none: "Sin sesión de fotos ni video. Elige en el paso 2 los servicios digitales que te interesan y Domi te escribe para coordinar.",
+  xv: "En la misma visita", xd: "Servicios digitales para tu alquiler",
+  xdNote: "Precios de referencia por propiedad. Domi te confirma el monto final según lo que necesites.",
+  add: "Agregar", mo: "/mes", moProp: "/mes por propiedad",
+  x: {
+    t360: ["Recorrido 360°", "Recorrido virtual para poner en tu web o en tu anuncio. Por propiedad."],
+    plano: ["Plano 2D", "Plano de distribución con el nombre de cada espacio. Medidas aproximadas, no es un plano oficial."],
+    lote: ["Mapa aéreo de lote o terreno", "Foto aérea con los linderos marcados y la ubicación. Es material de venta: no reemplaza la topografía."],
+    web: ["Sitio de reserva directa", "Web propia para tu villa con calendario y solicitudes de reserva, para depender menos de Airbnb y Booking. La mensualidad cubre hosting y cambios."],
+    guia: ["Guía digital del huésped", "Página con código QR: wifi, reglas de la casa, check-out y recomendaciones de la zona. La mensualidad cubre hosting y cambios."],
+    bot: ["Chatbot de WhatsApp e Instagram", "Responde consultas, filtra prospectos, manda los mensajes antes de la llegada y pide la reseña. El costo de Meta por conversación va aparte."],
+    rep: ["Reporte mensual para dueños", "Panel con ocupación, ingresos y reseñas de cada propiedad, listo para enviar al dueño. Montaje una vez, más la mensualidad."]
+  },
+  volume: "¿4 propiedades o más? Domi te prepara un precio por volumen.",
+  moLine: "Mensualidad aparte: {v}.",
+  ivaLine: "IVA incluido.",
+  confirm: "Es una solicitud: Domi te confirma la fecha y el total por WhatsApp, y el pago se coordina después.",
+  noDate: "Sin fecha: Domi te escribe para coordinar",
+  pickOne: "Elige un paquete o un servicio.",
+  dateOpt: "Solo pediste servicios digitales, así que la fecha es opcional.",
+  planP: "Propuesta a medida",
+  msgPkg: "Paquete: {p} × {n}", msgVisit: "Extras en la visita: {e}", msgDig: "Servicios digitales: {e}", msgNoDate: "Fecha: por coordinar", msgMo: "Mensualidad: {v}", msgIva: " (IVA incluido)",
+  incT: "Incluido en todos los paquetes",
+  faq: [["¿Los precios incluyen IVA?", "Sí. Los paquetes están en dólares e incluyen el IVA (13 %) y el traslado dentro de Guanacaste. Fuera de Guanacaste, el traslado se cotiza aparte."],
+        ["¿Qué es el banco de clips?", "Clips cortos de la propiedad, sin editar, para que tu equipo los use en anuncios y redes cuando quiera."],
+        ["¿Puedo pedir solo servicios digitales?", "Sí. En el paso 1 elige \"Solo servicios digitales\" y marca en el paso 2 lo que te interesa: sitio de reserva directa, guía del huésped, chatbot o reportes para dueños."]]
+ },
+ en: {
+  cats: { foto: ["Photos", "Interiors and exteriors"], video: ["Video", "Reels and clip bank"], mixto: ["Photos + video", "In the same visit"], none: ["Digital services only", "No shoot"] },
+  from: "from", saveUpTo: "save up to {v}",
+  styLbl: { foto: "Editing style", video: "Aerial shots", mixto: "Photo style" },
+  styles: {
+    mag: ["Magazine style", "Worked light and color with an editorial finish. Best for vacation rentals."],
+    hdr: ["Classic HDR", "Natural and even, the way listing portals expect. Best for properties for sale."],
+    fly: ["With drone", "Adds aerial videos of the property and its surroundings."],
+    hol: ["No drone", "The whole tour at ground level."]
+  },
+  diff: "See the difference",
+  tierName: ["Condo", "House", "Villa"],
+  size: ["Condo or small house", "2 to 3 bedroom house", "Large house or villa"],
+  vName: "{r} reels · {c} clips",
+  photos: "{a} to {b} edited photos",
+  edit: { mag: "Magazine-style editing", hdr: "Classic HDR editing" },
+  reels: "{n} walkthrough reels (30 to 60 s)", clips: "Bank of {n} raw clips",
+  air1: "1 aerial video", airN: "{n} aerial videos", noair: "No aerial shots",
+  dl: "Photos ready in 1 to 3 business days",
+  perProp: "per property · VAT included",
+  saves: "You save {v} compared with booking photos and video separately",
+  more: "More than 50 photos or an unusual property? <a href=\"#\" id=\"pk-quote\">Ask for a custom quote</a>.",
+  quoteMsg: "Hi, I'd like a custom quote for a property. It is: ",
+  none: "No photo or video shoot. Pick the digital services you want in step 2 and Domi will message you to coordinate.",
+  xv: "In the same visit", xd: "Digital services for your rental",
+  xdNote: "Reference prices per property. Domi confirms the final amount based on what you need.",
+  add: "Add", mo: "/mo", moProp: "/mo per property",
+  x: {
+    t360: ["360° tour", "Virtual tour to embed on your website or listing. Per property."],
+    plano: ["2D floor plan", "Layout plan with the name of each space. Approximate measurements, not an official plan."],
+    lote: ["Aerial lot or land map", "Aerial photo with the boundaries marked and the location. It is sales material: it does not replace a survey."],
+    web: ["Direct booking website", "Your villa's own website with a calendar and booking requests, so you rely less on Airbnb and Booking. The monthly fee covers hosting and changes."],
+    guia: ["Digital guest guide", "QR-code page with wifi, house rules, check-out and local recommendations. The monthly fee covers hosting and changes."],
+    bot: ["WhatsApp and Instagram chatbot", "Answers questions, qualifies leads, sends pre-arrival messages and asks for the review. Meta's per-conversation cost is separate."],
+    rep: ["Monthly owner report", "Dashboard with occupancy, income and reviews for each property, ready to send to the owner. One-time setup plus the monthly fee."]
+  },
+  volume: "4 properties or more? Domi will put together a volume price.",
+  moLine: "Monthly fee separate: {v}.",
+  ivaLine: "VAT included.",
+  confirm: "This is a request: Domi confirms the date and total on WhatsApp, and payment is arranged afterwards.",
+  noDate: "No date: Domi will message you to coordinate",
+  pickOne: "Choose a package or a service.",
+  dateOpt: "You only asked for digital services, so the date is optional.",
+  planP: "Tailored proposal",
+  msgPkg: "Package: {p} × {n}", msgVisit: "Extras during the visit: {e}", msgDig: "Digital services: {e}", msgNoDate: "Date: to be arranged", msgMo: "Monthly fee: {v}", msgIva: " (VAT included)",
+  incT: "Included in every package",
+  faq: [["Do prices include VAT?", "Yes. Packages are in US dollars and include VAT (13%) and travel within Guanacaste. Outside Guanacaste, travel is quoted separately."],
+        ["What is the clip bank?", "Short unedited clips of the property, so your team can use them in ads and social media whenever they want."],
+        ["Can I order digital services only?", "Yes. In step 1 choose \"Digital services only\" and tick what you need in step 2: direct booking website, guest guide, chatbot or owner reports."]]
+ }
 };
 
 /* ============ TEXTOS ============ */
@@ -934,6 +1058,25 @@ var I18N = {
  }
 };
 
+/* Textos del selector de paquetes nuevo (18 nov 2026) */
+(function () {
+  var X = {
+    es: { "pk.title": "Elige tu paquete y mira el total.", "pk.lead": "Precios en dólares, con IVA incluido. Arma tu solicitud y Domi te confirma la fecha y el total por WhatsApp; el pago se coordina después.",
+      "s1.t": "1. Elige tu paquete", "s1.d": "Primero qué necesitas, después el estilo y el tamaño. El precio es por propiedad.",
+      "s2.t": "2. Propiedades y extras", "s2.d": "Suma lo que quieras hacer en la misma visita o para tu alquiler.",
+      "ribbon.tag": "EN PREPARACIÓN", "ribbon.txt": "El número de WhatsApp y las fechas ocupadas todavía son de ejemplo. Lo que envíes aquí todavía no se guarda.",
+      "s4.pay": "El pago no se hace aquí. Domi te confirma la fecha y el total por WhatsApp y te envía los datos para pagar.",
+      "zone.incl": "incluido", "zone.other": "El traslado fuera de Guanacaste se cotiza por WhatsApp y no está en el total.", "sum.total": "Total estimado" },
+    en: { "pk.title": "Choose your package and see the total.", "pk.lead": "Prices in US dollars, VAT included. Build your request and Domi confirms the date and total on WhatsApp; payment is arranged afterwards.",
+      "s1.t": "1. Choose your package", "s1.d": "First what you need, then the style and size. Prices are per property.",
+      "s2.t": "2. Properties and extras", "s2.d": "Add what you want done in the same visit or for your rental.",
+      "ribbon.tag": "IN PROGRESS", "ribbon.txt": "The WhatsApp number and busy dates are still examples. Nothing you submit here is saved yet.",
+      "s4.pay": "Payment is not made here. Domi confirms the date and total on WhatsApp and sends you the payment details.",
+      "zone.incl": "included", "zone.other": "Travel outside Guanacaste is quoted on WhatsApp and is not in the total.", "sum.total": "Estimated total" }
+  };
+  for (var l in X) for (var k in X[l]) I18N[l][k] = X[l][k];
+})();
+
 /* Contenido por idioma (listas) */
 var DATA = {
  es: {
@@ -959,19 +1102,7 @@ var DATA = {
    { q: "Desde nuestro primer contacto fue profesional, atento y apasionado… fotos que superaron mis expectativas.", n: "Joanna Zapata C.", r: "Horizon Pacific" },
    { q: "Un gran profesional. Trabajé con él en fotos de una propiedad en venta, quedaron hermosas y recibí un excelente servicio.", n: "Ana María Ávila", r: "Propiedad en venta" }
   ],
-  pk: {
-   base: { n: "Condo", f: ["Apartamentos y condos de 1 a 2 habitaciones", "15 a 20 fotos editadas", "Entrega en 1 a 3 días hábiles"] },
-   pro: { n: "Casa", f: ["Casas de 2 a 3 habitaciones (hasta 370 m²)", "30 a 50 fotos editadas", "Entrega en 1 a 3 días hábiles"] },
-   ultra: { n: "Villa", f: ["Casas y villas de 4 a 5 habitaciones (hasta 930 m²)", "75 a 100 fotos editadas", "Entrega en 1 a 3 días hábiles"] }
-  },
-  extras: {
-   editorial: { t: "Edición estilo revista", d: "Acabado editorial, estilo arquitectura: luz y color más trabajados. Por propiedad" },
-   beach: { t: "Fotos de playas cercanas", d: "3 fotos, entrega en 1 a 2 días" },
-   photos: { t: "Foto adicional", d: "Con retoque básico, cada una" },
-   staging: { t: "Staging virtual", d: "Por foto. Las imágenes se entregan identificadas como virtuales" },
-   retouch: { t: "Retoque completo", d: "Por foto: cielo, objetos, luz y vistas por ventana" }
-  },
-  zones: { tam: "Tamarindo y alrededores (hasta 30 km)", gua: "Resto de Guanacaste", other: "Otra zona de Costa Rica" },
+  zones: { gua: "Guanacaste", other: "Otra zona de Costa Rica" },
   plans: {
    starter: { n: "Esencial", f: ["12 publicaciones al mes (4 reels)", "1 plataforma principal", "1 sesión de contenido"] },
    growth: { n: "Crecimiento", f: ["20 publicaciones al mes (8 reels)", "2 plataformas", "2 sesiones y reporte mensual"] },
@@ -1018,19 +1149,7 @@ var DATA = {
    { q: "From our first contact, he was professional, attentive, and passionate… photos that exceeded my expectations.", n: "Joanna Zapata C.", r: "Horizon Pacific" },
    { q: "A great professional. I worked with him on photos for a property for sale, they turned out beautiful and I received excellent service.", n: "Ana Maria Avila", r: "Property for sale" }
   ],
-  pk: {
-   base: { n: "Condo", f: ["Apartments and condos, 1 to 2 bedrooms", "15 to 20 edited photos", "Delivery in 1 to 3 business days"] },
-   pro: { n: "House", f: ["Houses, 2 to 3 bedrooms (up to 4,000 sq ft)", "30 to 50 edited photos", "Delivery in 1 to 3 business days"] },
-   ultra: { n: "Villa", f: ["Houses and villas, 4 to 5 bedrooms (up to 10,000 sq ft)", "75 to 100 edited photos", "Delivery in 1 to 3 business days"] }
-  },
-  extras: {
-   editorial: { t: "Magazine-style editing", d: "Editorial finish, architecture look: richer light and color. Per property" },
-   beach: { t: "Nearby beach photos", d: "3 photos, delivered in 1 to 2 days" },
-   photos: { t: "Additional photo", d: "With basic retouching, each" },
-   staging: { t: "Virtual staging", d: "Per photo. Images are delivered labeled as virtual" },
-   retouch: { t: "Full retouching", d: "Per photo: sky, objects, light and window views" }
-  },
-  zones: { tam: "Tamarindo and surroundings (up to 30 km)", gua: "Rest of Guanacaste", other: "Elsewhere in Costa Rica" },
+  zones: { gua: "Guanacaste", other: "Elsewhere in Costa Rica" },
   plans: {
    starter: { n: "Essential", f: ["12 posts a month (4 reels)", "1 main platform", "1 content session"] },
    growth: { n: "Growth", f: ["20 posts a month (8 reels)", "2 platforms", "2 sessions and a monthly report"] },
@@ -1057,6 +1176,7 @@ var DATA = {
 };
 
 (function () {
+  ["es", "en"].forEach(function (l) { DATA[l].faq = DATA[l].faq.concat(PK2[l].faq); });
   var lang = "es";
   try { var sv = localStorage.getItem("sc-lang"); if (sv === "en" || sv === "es") lang = sv; } catch (e) {}
   var $ = function (id) { return document.getElementById(id); };
@@ -1065,11 +1185,11 @@ var DATA = {
     if (v) for (var x in v) s = s.split("{" + x + "}").join(v[x]);
     return s;
   }
-  function fmt(n) { return "₡" + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, lang === "es" ? "." : ","); }
+  function fmt(n) { return "$" + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, lang === "es" ? "." : ","); }
   function D() { return DATA[lang]; }
   var EX = function () { return CONFIG.exampleMode ? ' <span class="badge-ex">' + t("badge.ex") + "</span>" : ""; };
 
-  var S = { pkg: "pro", props: 1, drone: "none", editorial: false, beach: false, photos: 0, staging: 0, retouch: 0, zone: "tam", date: null, slot: "m", month: null };
+  var S = { cat: "foto", sty: { foto: "mag", video: "fly", mixto: "mag" }, tier: { foto: "f2", video: "v3", mixto: "m2" }, props: 1, x: { t360: false, plano: false, lote: false, web: false, guia: false, bot: false, rep: false }, zone: "gua", date: null, slot: "m", month: null };
   var availMode = "demo", blocked = {};
 
   /* ---------- fechas ---------- */
@@ -1097,13 +1217,14 @@ var DATA = {
 
   /* ---------- cálculo ---------- */
   function calc() {
-    var P = PRICING;
-    var per = P.packages[S.pkg] + P.drone[S.drone] + (S.editorial ? P.extras.editorial.price : 0) + (S.beach ? P.extras.beach.price : 0) + S.photos * P.extras.photos.price + S.staging * P.extras.staging.price + S.retouch * P.extras.retouch.price;
-    var sub = per * S.props, pct = 0;
-    P.discounts.forEach(function (d) { if (S.props >= d.min && d.pct > pct) pct = d.pct; });
-    var disc = Math.round(sub * pct / 100);
-    var z = P.zones[S.zone], travel = z === null ? 0 : z;
-    return { per: per, sub: sub, pct: pct, disc: disc, travel: travel, quote: z === null, total: sub - disc + travel };
+    var P = PRICING, base = pkgPrice(), visit = 0, dig = 0, mo = 0, from = false;
+    Object.keys(P.extras).forEach(function (k) {
+      if (!S.x[k]) return; var e = P.extras[k];
+      if (e.group === "visit") visit += e.once; else { dig += e.once; mo += (e.mo || 0) * (e.moPerProp ? S.props : 1); }
+      if (e.from) from = true;
+    });
+    var sub = (base + visit) * S.props, z = P.zones[S.zone], travel = z === null ? 0 : z, need = needsVisit();
+    return { base: base, sub: sub, dig: dig, mo: mo, from: from, travel: travel, quote: need && z === null, total: sub + dig + travel, any: need || dig > 0, needDate: need };
   }
 
   /* ---------- render estático ---------- */
@@ -1173,7 +1294,7 @@ var DATA = {
     $("quotes").innerHTML = d.quotes.map(function (q) { return '<figure class="quote" style="margin:0"><p>“' + q.q + '”</p><cite><b>' + q.n + "</b>" + q.r + "</cite></figure>"; }).join("");
     $("plans").innerHTML = ["starter", "growth", "premium"].map(function (k) {
       var p = d.plans[k];
-      return '<article class="plan"><h3>' + p.n + '</h3><div class="pr"><small>' + t("pl.from") + "</small>" + fmt(PRICING.plans[k]) + "<small>" + t("pl.mo") + "</small>" + EX() + "</div><ul>" +
+      return '<article class="plan"><h3>' + p.n + '</h3><div class="pr"><small>' + PK().planP + "</small></div><ul>" +
         p.f.map(function (x) { return "<li>" + x + "</li>"; }).join("") + '</ul><a class="btn ghost" href="#" data-plan="' + k + '">' + t("pl.cta") + "</a></article>";
     }).join("");
     Array.prototype.forEach.call(document.querySelectorAll("[data-plan]"), function (a) { bindWa(a, t("msg.plan", { p: d.plans[a.dataset.plan].n })); });
@@ -1204,56 +1325,120 @@ var DATA = {
       });
     });
   }
-  function renderPkgs() {
-    var d = D();
-    $("pkgs").innerHTML = ["base", "pro", "ultra"].map(function (k) {
-      var p = d.pk[k], on = S.pkg === k;
-      return '<label class="opt' + (on ? " on" : "") + '"><input type="radio" name="pkg" value="' + k + '"' + (on ? " checked" : "") + ">" + (k === "pro" ? '<span class="rec">' + t("pkg.rec") + "</span>" : "") +
-        '<span class="nm">' + p.n + '</span><span class="pr"><small>' + t("pkg.from") + "</small>" + fmt(PRICING.packages[k]) + EX() + '</span><span class="small">' + t("pkg.prop") + "</span><ul>" +
-        p.f.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul></label>";
-    }).join("");
-    Array.prototype.forEach.call($("pkgs").querySelectorAll("input"), function (inp) {
+  function PK() { return PK2[lang]; }
+  function fill(s, v) { for (var x in v) s = s.split("{" + x + "}").join(v[x]); return s; }
+  function tiersOf(c) { return PRICING.cats[c].tiers; }
+  function findTier(c, id) { return tiersOf(c).filter(function (x) { return x.id === id; })[0]; }
+  function curTier() { return S.cat === "none" ? null : findTier(S.cat, S.tier[S.cat]); }
+  function pkgPrice() { var tr = curTier(); return tr ? tr.price[S.sty[S.cat]] : 0; }
+  function tierName(c, tr) { var i = tiersOf(c).indexOf(tr); return c === "video" ? fill(PK().vName, { r: tr.reels, c: tr.clips }) : PK().tierName[i]; }
+  function tierItems(c, tr, s) {
+    var p = PK(), L = [];
+    if (c !== "video") { L.push(fill(p.photos, { a: tr.ph[0], b: tr.ph[1] })); L.push(p.edit[s]); }
+    if (c !== "foto") {
+      L.push(fill(p.reels, { n: tr.reels })); L.push(fill(p.clips, { n: tr.clips }));
+      var air = (c === "mixto" || s === "fly") ? tr.air : 0;
+      L.push(!air ? p.noair : air === 1 ? p.air1 : fill(p.airN, { n: air }));
+    }
+    if (c !== "video") L.push(p.dl);
+    return L;
+  }
+  function savings(tr, s) { if (!tr.parts) return 0; return findTier("foto", tr.parts[0]).price[s] + findTier("video", tr.parts[1]).price.fly - tr.price[s]; }
+  function maxSave() { var m = 0; tiersOf("mixto").forEach(function (tr) { PRICING.cats.mixto.styles.forEach(function (s) { m = Math.max(m, savings(tr, s)); }); }); return m; }
+  function minPrice(c) { var m = Infinity; tiersOf(c).forEach(function (tr) { for (var k in tr.price) m = Math.min(m, tr.price[k]); }); return m; }
+  function pkgLabel() {
+    if (S.cat === "none") return ""; var p = PK(), c = S.cat;
+    return p.cats[c][0] + " · " + p.styles[S.sty[c]][0] + " · " + tierName(c, curTier());
+  }
+  function needsVisit() { return S.cat !== "none" || ["t360", "plano", "lote"].some(function (k) { return S.x[k]; }); }
+
+  /* ---------- paso 1: tipo, estilo y tamaño ---------- */
+  function radios(box, name, onPick) {
+    Array.prototype.forEach.call(box.querySelectorAll('input[name="' + name + '"]'), function (inp) {
       inp.addEventListener("change", function () {
-        S.pkg = inp.value;
-        Array.prototype.forEach.call($("pkgs").querySelectorAll(".opt"), function (l) { l.classList.toggle("on", l.firstChild.checked); });
-        renderSum();
+        onPick(inp.value);
+        var again = document.querySelector('input[name="' + name + '"]:checked'); if (again) again.focus({ preventScroll: true });
       });
     });
   }
-  function renderDrone() {
-    seg($("drone"), "drone", ["none", "d3", "d6", "d10"].map(function (k) {
-      var lb = t("drone." + k), m = lb.match(/^(\d+)\s*(.*)$/);
-      return { v: k, html: '<span class="dc-ic">' + (k === "none" ? XI.none : ICONS.drone) + '</span>' +
-        (m ? '<span class="dc-n">' + m[1] + '</span><span class="dc-l">' + m[2] + '</span>' : '<span class="dc-n dc-x">&ndash;</span><span class="dc-l">' + lb + '</span>') +
-        '<span class="dc-p">' + (k === "none" ? (lang === "es" ? "Incluido: ₡0" : "Included: ₡0") : fmt(PRICING.drone[k])) + '</span>' + (k === "none" ? "" : EX()) };
-    }), S.drone, function (v) { S.drone = v; renderSum(); });
-  }
-  function qtyRow(key) {
-    var e = D().extras[key], pz = PRICING.extras[key].price;
-    var row = document.createElement("div"); row.className = "xrow"; row.dataset.k = key;
-    var ctl;
-    if (PRICING.extras[key].type === "toggle") {
-      ctl = '<label class="seg" style="gap:0"><span style="display:contents"></span></label>';
-      row.innerHTML = '<span class="x-ic">' + XI[key] + '</span><div class="t"><b>' + e.t + "</b><span>" + e.d + '</span></div><div class="pz">' + fmt(pz) + EX() + '</div><label class="check" style="align-items:center"><input type="checkbox" id="x-' + key + '"' + (S[key] ? " checked" : "") + '><span class="small">' + (lang === "es" ? "Agregar" : "Add") + "</span></label>";
-      row.querySelector("input").addEventListener("change", function (ev) { S[key] = ev.target.checked; renderSum(); });
-    } else {
-      row.innerHTML = '<span class="x-ic">' + XI[key] + '</span><div class="t"><b>' + e.t + "</b><span>" + e.d + '</span></div><div class="pz">' + fmt(pz) + EX() + '</div><div class="stepper" role="group" aria-label="' + e.t + '"><button type="button" data-d="-1" aria-label="-">&minus;</button><input id="q-' + key + '" class="qin" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" aria-label="' + e.t + '" value="' + S[key] + '"><button type="button" data-d="1" aria-label="+">+</button></div>';
-      var qi = row.querySelector("input");
-      function setQ(v) { S[key] = Math.max(0, Math.min(500, v | 0)); qi.value = S[key]; renderSum(); }
-      Array.prototype.forEach.call(row.querySelectorAll("button"), function (b) {
-        b.addEventListener("click", function () { setQ(S[key] + (+b.dataset.d)); });
-      });
-      qi.addEventListener("input", function () { qi.value = qi.value.replace(/\D/g, ""); if (qi.value !== "") { S[key] = Math.min(500, +qi.value); renderSum(); } });
-      qi.addEventListener("focus", function () { qi.select(); });
-      qi.addEventListener("blur", function () { setQ(qi.value === "" ? 0 : +qi.value); });
-      qi.addEventListener("keydown", function (ev) { if (ev.key === "Enter") qi.blur(); });
+  function renderPkgs() {
+    var p = PK(), cats = ["foto", "video", "mixto", "none"];
+    $("pk-cats").innerHTML = cats.map(function (c) {
+      var on = S.cat === c, sub = c === "none" ? p.cats.none[1] : p.from + " " + fmt(minPrice(c));
+      return '<label class="pc' + (on ? " on" : "") + '" data-c="' + c + '"><input type="radio" name="pkcat" value="' + c + '"' + (on ? " checked" : "") + '><span class="pc-dot" aria-hidden="true"></span><b>' + p.cats[c][0] + '</b><span class="pc-sub">' + sub + "</span>" +
+        (c === "mixto" ? '<span class="pc-tag">' + fill(p.saveUpTo, { v: fmt(maxSave()) }) + "</span>" : "") + "</label>";
+    }).join("");
+    radios($("pk-cats"), "pkcat", function (v) { S.cat = v; renderPkgs(); renderSum(); });
+
+    var sb = $("pk-sty");
+    if (S.cat === "none") { sb.hidden = true; sb.innerHTML = ""; }
+    else {
+      var c = S.cat; sb.hidden = false;
+      sb.innerHTML = '<span class="lbl" id="lbl-sty">' + p.styLbl[c] + "</span>" + (c !== "video" ? '<a class="pk-diff" href="#antes-despues">' + p.diff + "</a>" : "") +
+        '<div class="ps-row" role="radiogroup" aria-labelledby="lbl-sty">' + PRICING.cats[c].styles.map(function (s) {
+          var on = S.sty[c] === s;
+          return '<label class="ps' + (on ? " on" : "") + '"><input type="radio" name="pksty" value="' + s + '"' + (on ? " checked" : "") + "><b>" + p.styles[s][0] + "</b><span>" + p.styles[s][1] + "</span></label>";
+        }).join("") + "</div>";
+      radios(sb, "pksty", function (v) { S.sty[S.cat] = v; renderPkgs(); renderSum(); });
     }
-    return row;
+
+    var box = $("pkgs");
+    if (S.cat === "none") { box.className = "pkgs none"; box.innerHTML = '<p class="pk-none">' + p.none + "</p>"; }
+    else {
+      var c2 = S.cat, s2 = S.sty[c2], T = tiersOf(c2);
+      box.className = "pkgs n" + T.length + " c-" + c2;
+      box.innerHTML = T.map(function (tr, i) {
+        var on = S.tier[c2] === tr.id, sv = savings(tr, s2);
+        return '<label class="opt' + (on ? " on" : "") + '"><input type="radio" name="pkg" value="' + tr.id + '"' + (on ? " checked" : "") + ">" + (tr.rec ? '<span class="rec">' + t("pkg.rec") + "</span>" : "") +
+          '<span class="nm">' + tierName(c2, tr) + "</span>" + (c2 !== "video" ? '<span class="small pk-size">' + p.size[i] + "</span>" : "") +
+          '<span class="pr">' + fmt(tr.price[s2]) + '</span><span class="small">' + p.perProp + "</span><ul>" +
+          tierItems(c2, tr, s2).map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>" +
+          (sv > 0 ? '<span class="pk-save">' + fill(p.saves, { v: fmt(sv) }) + "</span>" : "") + "</label>";
+      }).join("");
+      Array.prototype.forEach.call(box.querySelectorAll('input[name="pkg"]'), function (inp) {
+        inp.addEventListener("change", function () {
+          S.tier[S.cat] = inp.value;
+          Array.prototype.forEach.call(box.querySelectorAll(".opt"), function (l) { l.classList.toggle("on", l.querySelector("input").checked); });
+          renderSum();
+        });
+      });
+    }
+    var more = $("pk-more");
+    more.innerHTML = S.cat === "foto" || S.cat === "mixto" ? p.more : "";
+    var q = $("pk-quote"); if (q) bindWa(q, p.quoteMsg);
   }
-  function renderExtras() { var c = $("extras"); c.innerHTML = ""; ["editorial", "beach", "photos", "staging", "retouch"].forEach(function (k) { c.appendChild(qtyRow(k)); }); }
+
+  /* ---------- paso 2: extras ---------- */
+  var XI2 = {
+    t360: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 0 1 13.2-4.9M19.5 12a7.5 7.5 0 0 1-13.2 4.9"/><path d="M18 3.5v4h-4M6 20.5v-4h4"/></svg>',
+    plano: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="1"/><path d="M3.5 11h8V3.5M11.5 15v5.5M11.5 11v1.5M15 11h5.5"/></svg>',
+    lote: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17l4-11 9 3 3 9-9 3z"/><circle cx="12" cy="12" r="1.6"/></svg>',
+    web: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="1.5"/><path d="M3 9h18"/><path d="M8.5 14.2l2.3 2.3 4.7-4.7"/></svg>',
+    guia: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M10 7.5h1.6v1.6H10zM12.4 7.5H14v1.6h-1.6zM10 9.9h1.6v1.6H10z"/><path d="M11 17.5h2"/></svg>',
+    bot: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h16v10H9.5L5.5 19v-3.5H4z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01"/></svg>',
+    rep: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4v16h16"/><path d="M8.5 16v-4M12.5 16V8M16.5 16v-6"/></svg>'
+  };
+  function xPrice(k) {
+    var e = PRICING.extras[k], p = PK();
+    return (e.from ? "<small>" + p.from + "</small> " : "") + fmt(e.once) + (e.mo ? " + " + fmt(e.mo) + (e.moPerProp ? p.moProp : p.mo) : "");
+  }
+  function renderExtras() {
+    var p = PK();
+    [["visit", "extras"], ["dig", "extras2"]].forEach(function (g) {
+      var box = $(g[1]); box.innerHTML = "";
+      Object.keys(PRICING.extras).forEach(function (k) {
+        if (PRICING.extras[k].group !== g[0]) return;
+        var row = document.createElement("div"); row.className = "xrow" + (S.x[k] ? " on" : ""); row.dataset.k = k;
+        row.innerHTML = '<span class="x-ic">' + XI2[k] + '</span><div class="t"><b>' + p.x[k][0] + "</b><span>" + p.x[k][1] + '</span></div><div class="pz">' + xPrice(k) + '</div><label class="check" style="align-items:center"><input type="checkbox" id="x-' + k + '"' + (S.x[k] ? " checked" : "") + '><span class="small">' + p.add + "</span></label>";
+        row.querySelector("input").addEventListener("change", function (ev) { S.x[k] = ev.target.checked; row.classList.toggle("on", S.x[k]); renderSum(); });
+        box.appendChild(row);
+      });
+    });
+    $("xv-lbl").textContent = p.xv; $("xd-lbl").textContent = p.xd; $("xd-note").textContent = p.xdNote;
+  }
   function renderZone() {
     var d = D(), sel = $("zone");
-    sel.innerHTML = ["tam", "gua", "other"].map(function (k) {
+    sel.innerHTML = ["gua", "other"].map(function (k) {
       var z = PRICING.zones[k], suf = z === null ? t("zone.quote") : (z === 0 ? t("zone.incl") : fmt(z));
       return '<option value="' + k + '"' + (S.zone === k ? " selected" : "") + ">" + d.zones[k] + " · " + suf + "</option>";
     }).join("");
@@ -1264,10 +1449,7 @@ var DATA = {
   }
   function renderProps() {
     $("p-val").textContent = S.props;
-    var a = PRICING.discounts[1], b = PRICING.discounts[0];
-    var note = t("props.note", { a: a.pct, an: a.min, b: b.pct, bn: b.min });
-    if (S.props > 20) note += " " + t("props.many");
-    $("p-note").textContent = note;
+    $("p-note").textContent = PK().volume;
   }
 
   /* ---------- calendario ---------- */
@@ -1318,37 +1500,22 @@ var DATA = {
 
   /* ---------- resumen ---------- */
   function renderSum() {
-    var c = calc(), d = D(), P = PRICING, L = [];
-    L.push([t("line.pkg", { n: S.props, p: d.pk[S.pkg].n }), fmt(P.packages[S.pkg] * S.props)]);
-    if (S.drone !== "none") L.push([t("line.drone", { o: t("drone." + S.drone) }), fmt(P.drone[S.drone] * S.props)]);
-    if (S.editorial) L.push([t("line.editorial"), fmt(P.extras.editorial.price * S.props)]);
-    if (S.beach) L.push([t("line.beach"), fmt(P.extras.beach.price * S.props)]);
-    if (S.photos) L.push([t("line.photos", { q: S.photos * S.props }), fmt(P.extras.photos.price * S.photos * S.props)]);
-    if (S.staging) L.push([t("line.staging", { q: S.staging * S.props }), fmt(P.extras.staging.price * S.staging * S.props)]);
-    if (S.retouch) L.push([t("line.retouch", { q: S.retouch * S.props }), fmt(P.extras.retouch.price * S.retouch * S.props)]);
-    if (c.pct) { L.push([t("line.sub"), fmt(c.sub)]); L.push([t("line.disc", { pct: c.pct }), "−" + fmt(c.disc)]); }
-    L.push([t("line.travel"), c.quote ? t("zone.quote") : (c.travel === 0 ? t("zone.incl") : fmt(c.travel))]);
-    $("sum-lines").innerHTML = L.map(function (r, i) {
-      var isDisc = r[0].indexOf(lang === "es" ? "Descuento" : "Discount") === 0;
-      return '<div class="ln"><dt>' + r[0] + "</dt><dd" + (isDisc ? ' class="disc"' : "") + ">" + r[1] + "</dd></div>";
-    }).join("");
-    $("sum-total").textContent = fmt(c.total); $("bar-total").textContent = fmt(c.total);
-    $("sum-iva").textContent = CONFIG.ivaMode === "included" ? t("iva.included") : CONFIG.ivaMode === "extra" ? t("iva.extra", { v: fmt(c.total * CONFIG.ivaRate) }) : t("iva.tbd");
-    $("sum-when").textContent = S.date ? t("sum.when", { d: longDate(S.date), s: t("slot." + S.slot).split(" (")[0] }) : t("sum.empty");
-    renderNights(c);
+    var c = calc(), p = PK(), L = [], fromS = "<small>" + p.from + "</small> ";
+    if (S.cat !== "none") L.push([t("line.pkg", { n: S.props, p: pkgLabel() }), fmt(c.base * S.props)]);
+    Object.keys(PRICING.extras).forEach(function (k) {
+      if (!S.x[k]) return; var e = PRICING.extras[k], mult = e.group === "visit" ? S.props : 1;
+      L.push([p.x[k][0] + (mult > 1 ? " × " + mult : ""), (e.from ? fromS : "") + fmt(e.once * mult)]);
+    });
+    if (c.needDate) L.push([t("line.travel"), c.quote ? t("zone.quote") : t("zone.incl")]);
+    $("sum-lines").innerHTML = L.map(function (r) { return '<div class="ln"><dt>' + r[0] + "</dt><dd>" + r[1] + "</dd></div>"; }).join("");
+    var tot = c.any ? (c.from ? fromS : "") + fmt(c.total) : "&mdash;";
+    $("sum-total").innerHTML = tot; $("bar-total").innerHTML = tot;
+    $("sum-iva").textContent = c.any ? p.ivaLine + (c.mo ? " " + fill(p.moLine, { v: (c.from ? p.from + " " : "") + fmt(c.mo) + p.mo }) : "") + " " + p.confirm : p.pickOne;
+    $("sum-when").textContent = S.date ? t("sum.when", { d: longDate(S.date), s: t("slot." + S.slot).split(" (")[0] }) : (c.needDate ? t("sum.empty") : p.noDate);
+    var dn = $("date-opt"); if (dn) { dn.textContent = p.dateOpt; dn.hidden = c.needDate || !c.any; }
     renderProps();
   }
-  function renderNights(c) {
-    var out = $("nt-out"); if (!out) return;
-    var r = parseInt(($("f-rate").value || "").replace(/\D/g, ""), 10), d = D();
-    $("nt-note").textContent = t("nt.note", { fx: CONFIG.usdCrc });
-    if (!r || !CONFIG.usdCrc) { out.innerHTML = '<li class="hint">' + t("nt.hint") + "</li>"; return; }
-    var iva = CONFIG.ivaMode === "extra" ? 1 + CONFIG.ivaRate : 1;
-    out.innerHTML = ["base", "pro", "ultra"].map(function (k) {
-      var n = PRICING.packages[k] * iva / (r * CONFIG.usdCrc), s = (Math.round(n * 10) / 10).toLocaleString(lang === "es" ? "es-CR" : "en-US");
-      return "<li>" + d.pk[k].n + "<b>" + s + "</b>" + t("nt.unit") + "</li>";
-    }).join("");
-  }
+  function renderNights() {}
 
   /* ---------- validación y envío ---------- */
   function setErr(id, msg) { var e = $(id); if (!e) return; e.textContent = msg || ""; e.hidden = !msg; }
@@ -1363,7 +1530,9 @@ var DATA = {
     chk(!em || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em), "e-email", "e.email", "f-email");
     chk(val("f-property").length >= 3, "e-property", "e.prop", "f-property");
     chk($("f-consent").checked, "e-consent", "e.consent", "f-consent");
-    var dateOk = !!S.date && !isBusy(S.date);
+    var cc = calc();
+    if (!cc.any) { toast(PK().pickOne); return "s1"; }
+    var dateOk = cc.needDate ? (!!S.date && !isBusy(S.date)) : (!S.date || !isBusy(S.date));
     setErr("e-date", dateOk ? "" : t("e.date"));
     if (!dateOk) { toast(t("e.date")); if (!bad) bad = "cal"; }
     return bad;
@@ -1374,22 +1543,23 @@ var DATA = {
     return "SC-" + yy + mm + dd + "-" + r;
   }
   function buildPayload(c) {
+    var on = Object.keys(S.x).filter(function (k) { return S.x[k]; });
     return { id: newId(), createdAt: new Date().toISOString(), lang: lang, name: val("f-name"), company: val("f-company"), phone: val("f-phone"), email: val("f-email"), property: val("f-property"), notes: val("f-notes"),
-      date: S.date, slot: S.slot, pkg: S.pkg, props: S.props, drone: S.drone, editorial: S.editorial, beach: S.beach, photos: S.photos, staging: S.staging, retouch: S.retouch, zone: S.zone,
-      totalCRC: c.total, travelQuote: c.quote, example: CONFIG.exampleMode, iva: CONFIG.ivaMode };
+      date: S.date || "", slot: S.date ? S.slot : "", cat: S.cat, style: S.cat === "none" ? "" : S.sty[S.cat], tier: S.cat === "none" ? "" : S.tier[S.cat], pkg: pkgLabel(), props: S.props,
+      extras: on.join(","), zone: S.zone, totalUSD: c.total, monthlyUSD: c.mo, priceFrom: c.from, travelQuote: c.quote, iva: CONFIG.ivaMode, example: CONFIG.exampleMode };
   }
   function summaryText(p, c) {
-    var d = D(), ex = [];
-    if (p.editorial) ex.push(d.extras.editorial.t);
-    if (p.beach) ex.push(D().extras.beach.t);
-    if (p.photos) ex.push(p.photos + " × " + d.extras.photos.t);
-    if (p.staging) ex.push(p.staging + " × " + d.extras.staging.t);
-    if (p.retouch) ex.push(p.retouch + " × " + d.extras.retouch.t);
-    var L = [t("msg.hi", { n: p.name, id: p.id }), t("msg.prop", { p: p.property }), t("msg.when", { d: longDate(p.date), s: t("slot." + p.slot).split(" (")[0] }), t("msg.pkg", { p: d.pk[p.pkg].n, n: p.props })];
-    if (p.drone !== "none") L.push(t("msg.drone", { o: t("drone." + p.drone) }));
-    if (ex.length) L.push(t("msg.extras", { e: ex.join(", ") + " (" + t("line.perprop") + ")" }));
-    L.push(t("msg.zone", { z: d.zones[p.zone] + (c.quote ? " (" + t("zone.quote") + ")" : "") }));
-    L.push(t("msg.total", { t: fmt(c.total), ex: CONFIG.exampleMode ? t("msg.ex") : "" }));
+    var d = D(), k2 = PK(), from = c.from ? k2.from + " " : "";
+    var names = function (g) { return Object.keys(PRICING.extras).filter(function (k) { return S.x[k] && PRICING.extras[k].group === g; }).map(function (k) { return k2.x[k][0]; }); };
+    var L = [t("msg.hi", { n: p.name, id: p.id }), t("msg.prop", { p: p.property })];
+    L.push(p.date ? t("msg.when", { d: longDate(p.date), s: t("slot." + p.slot).split(" (")[0] }) : k2.msgNoDate);
+    if (S.cat !== "none") L.push(fill(k2.msgPkg, { p: pkgLabel() + " (" + tierItems(S.cat, curTier(), S.sty[S.cat]).join(", ") + ")", n: p.props }));
+    var v = names("visit"), g = names("dig");
+    if (v.length) L.push(fill(k2.msgVisit, { e: v.join(", ") }));
+    if (g.length) L.push(fill(k2.msgDig, { e: g.join(", ") }));
+    if (c.needDate) L.push(t("msg.zone", { z: d.zones[p.zone] + (c.quote ? " (" + t("zone.quote") + ")" : "") }));
+    L.push(t("msg.total", { t: from + fmt(c.total), ex: k2.msgIva }));
+    if (c.mo) L.push(fill(k2.msgMo, { v: from + fmt(c.mo) + k2.mo }));
     return L.join("\n");
   }
   var lastResult = null;
@@ -1416,7 +1586,7 @@ var DATA = {
     e.preventDefault();
     if ($("f-web").value) return; /* trampa para bots */
     var bad = validate();
-    if (bad) { var el = bad === "cal" ? $("s3") : $(bad); if (el) { el.scrollIntoView({ block: "center" }); if (el.focus && bad !== "cal") el.focus(); } return; }
+    if (bad) { var el = bad === "cal" ? $("s3") : $(bad); if (el) { el.scrollIntoView({ block: bad === "s1" ? "start" : "center" }); if (el.focus && bad !== "cal" && bad !== "s1") el.focus(); } return; }
     var c = calc(), p = buildPayload(c);
     if (!CONFIG.endpoint) { showResult("demo", p, c); return; }
     var btn = $("submit"); btn.disabled = true; setErr("e-form", "");
@@ -1432,8 +1602,8 @@ var DATA = {
   $("f-rate").addEventListener("input", function () { renderNights(calc()); });
   $("zone").addEventListener("change", function () { S.zone = this.value; $("zone-note").textContent = S.zone === "other" ? t("zone.other") : ""; renderSum(); });
   $("bar-next").addEventListener("click", function () {
-    var target = S.date ? $("s4") : $("s3"); target.scrollIntoView({ block: "start" });
-    if (S.date) { var f = $("f-name"); if (!val("f-name")) f.focus(); }
+    var target = (S.date || !calc().needDate) ? $("s4") : $("s3"); target.scrollIntoView({ block: "start" });
+    if (S.date || !calc().needDate) { var f = $("f-name"); if (!val("f-name")) f.focus(); }
   });
   Array.prototype.forEach.call(document.querySelectorAll("[data-lang]"), function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
   Array.prototype.forEach.call(document.querySelectorAll("[data-wa]"), function (a) { bindWa(a, t("wa.generic")); });
@@ -1450,8 +1620,8 @@ var DATA = {
     Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-ph]"), function (el) { el.setAttribute("placeholder", t(el.getAttribute("data-i18n-ph"))); });
     Array.prototype.forEach.call(document.querySelectorAll("[data-lang]"), function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === l)); });
     Array.prototype.forEach.call(document.querySelectorAll("[data-wa]"), function (a) { bindWa(a, t("wa.generic")); });
-    $("ribbon").hidden = !CONFIG.exampleMode; $("exbanner").hidden = !CONFIG.exampleMode; $("sum-ex").hidden = !CONFIG.exampleMode;
-    renderStatic(); renderPkgs(); renderDrone(); renderExtras(); renderZone(); renderSlots(); renderCal(); renderSum();
+    $("ribbon").hidden = !(CONFIG.exampleMode || !waReady() || !CONFIG.endpoint); $("exbanner").hidden = !CONFIG.exampleMode; $("sum-ex").hidden = !CONFIG.exampleMode;
+    renderStatic(); renderPkgs(); renderExtras(); renderZone(); renderSlots(); renderCal(); renderSum();
     if (lastResult) showResult(lastResult.kind, lastResult.p, lastResult.c);
   }
 

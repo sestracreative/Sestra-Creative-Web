@@ -37,11 +37,11 @@
       abP: "Sestra Creative nace en Tamarindo de dos personas que se complementan: uno detrás de la cámara y la otra al lado del cliente. Trabajamos juntos cada sesión, de la primera conversación a la entrega.",
       abCris: "Fotografía, drone y edición. Ha fotografiado más de 50 propiedades en Guanacaste.",
       abDomi: "Clientes, redes y contenido. Tu contacto desde la primera conversación hasta la entrega.",
-      abPromise: ["Entrega en 1 a 3 días hábiles", "Fotos propias, tomadas por nosotros", "Precios claros, IVA aparte"],
+      abPromise: ["Entrega en 1 a 3 días hábiles", "Fotos propias, tomadas por nosotros", "Precios claros, con IVA incluido"],
       abWa: "Escribirnos por WhatsApp", abMsg: "Hola Cris y Domi, vi la página de Sestra Creative y quiero información.",
       sample: "¿No sabes qué paquete elegir? Pídenos ejemplos de una propiedad como la tuya", sampleMsg: "Hola, ¿me pueden enviar ejemplos de fotos de una propiedad parecida a la mía? Es: ",
-      incT: "Ver qué incluye cada paquete", incFor: "Para", incPh: "Fotos editadas", incDl: "Entrega",
-      incCommon: [["Edición", "HDR incluida. El estilo revista se agrega como extra."], ["Formato", "Alta resolución y versión liviana para web, en un enlace de Google Drive."], ["Drone", "Opcional: se agrega en el paso 2."], ["Clima", "Si el clima no ayuda, reprogramamos la sesión."]],
+      incT: "Incluido en todos los paquetes", incFor: "Para", incPh: "Fotos editadas", incDl: "Entrega",
+      incCommon: [["Archivos:", "alta resolución y versión liviana para web, en un enlace de Google Drive."], ["Traslado:", "incluido dentro de Guanacaste."], ["IVA:", "incluido en el precio."], ["Clima:", "si no ayuda, reprogramamos la sesión."]],
       priv: "Ver aviso de privacidad", privT: "Aviso de privacidad",
       privB: ["<b>Responsables:</b> Cristofer Segura y Dominique Estrada (Sestra Creative), Tamarindo, Guanacaste, Costa Rica.",
               "<b>Qué datos pedimos:</b> nombre, WhatsApp o teléfono y propiedad o ubicación (obligatorios); empresa, correo y notas (opcionales). Sin los obligatorios no podemos responder tu solicitud.",
@@ -75,11 +75,11 @@
       abP: "Sestra Creative was born in Tamarindo from two people who complement each other: one behind the camera, the other by the client's side. We work every session together, from the first conversation to delivery.",
       abCris: "Photography, drone and editing. Has photographed more than 50 properties in Guanacaste.",
       abDomi: "Clients, social media and content. Your contact from the first conversation to delivery.",
-      abPromise: ["Delivery in 1 to 3 business days", "Our own photos, taken by us", "Clear prices, VAT shown separately"],
+      abPromise: ["Delivery in 1 to 3 business days", "Our own photos, taken by us", "Clear prices, VAT included"],
       abWa: "Message us on WhatsApp", abMsg: "Hi Cris and Domi, I saw the Sestra Creative website and I'd like more information.",
       sample: "Not sure which package? Ask us for examples of a property like yours", sampleMsg: "Hi, could you send me example photos of a property similar to mine? It is: ",
-      incT: "See what each package includes", incFor: "For", incPh: "Edited photos", incDl: "Delivery",
-      incCommon: [["Editing", "HDR included. Magazine style can be added as an extra."], ["Format", "High resolution and a lighter web version, in a Google Drive link."], ["Drone", "Optional: add it in step 2."], ["Weather", "If the weather doesn't help, we reschedule the session."]],
+      incT: "Included in every package", incFor: "For", incPh: "Edited photos", incDl: "Delivery",
+      incCommon: [["Files:", "high resolution and a lighter web version, in a Google Drive link."], ["Travel:", "included within Guanacaste."], ["VAT:", "included in the price."], ["Weather:", "if it doesn't help, we reschedule the session."]],
       priv: "See privacy notice", privT: "Privacy notice",
       privB: ["<b>Responsible:</b> Cristofer Segura and Dominique Estrada (Sestra Creative), Tamarindo, Guanacaste, Costa Rica.",
               "<b>What we ask for:</b> name, WhatsApp or phone and property or location (required); company, email and notes (optional). Without the required details we can't answer your request.",
@@ -315,10 +315,11 @@
 
   /* ---------- 6. fotos en paquetes ---------- */
   var PKG_PH = {
-    base: [IMG + "pkC.webp", A("Sala y cocina abiertas de un espacio moderno", "Open living room and kitchen in a modern space")],
-    pro: [IMG + "pkH.webp", A("Patio de una casa blanca con sala exterior", "Courtyard of a white house with outdoor lounge")],
-    ultra: [IMG + "pkV.webp", A("Villa frente al mar al atardecer, desde el drone", "Oceanfront villa at sunset, from the drone")]
+    f1: [IMG + "pkC.webp", A("Sala y cocina abiertas de un espacio moderno", "Open living room and kitchen in a modern space")],
+    f2: [IMG + "pkH.webp", A("Patio de una casa blanca con sala exterior", "Courtyard of a white house with outdoor lounge")],
+    f3: [IMG + "pkV.webp", A("Villa frente al mar al atardecer, desde el drone", "Oceanfront villa at sunset, from the drone")]
   };
+  PKG_PH.m1 = PKG_PH.f1; PKG_PH.m2 = PKG_PH.f2; PKG_PH.m3 = PKG_PH.f3;
   function decoratePkgs() {
     var box = $("pkgs"); if (!box) return; var l = L();
     Array.prototype.forEach.call(box.querySelectorAll(".opt"), function (lab) {
@@ -506,16 +507,11 @@
   /* ---------- 15. qué incluye cada paquete (plegado) y muestra sin compromiso ---------- */
   function drawIncludes() {
     var box = $("pkgs"); if (!box) return; var t = T[L()];
-    var d = $("pk-inc"); if (!d) { d = mk("details", "pk-inc"); d.id = "pk-inc"; box.parentNode.insertBefore(d, box.nextSibling); }
-    var cards = Array.prototype.slice.call(box.querySelectorAll(".opt"));
-    var names = cards.map(function (c) { var n = c.querySelector(".nm"); return n ? n.textContent : ""; });
-    var lis = cards.map(function (c) { return Array.prototype.map.call(c.querySelectorAll("li"), function (li) { return li.textContent; }); });
-    var row = function (h, vals) { return "<tr><th scope=\"row\">" + esc(h) + "</th>" + vals.map(function (v) { return "<td>" + esc(v || "") + "</td>"; }).join("") + "</tr>"; };
-    var html = "<summary>" + esc(t.incT) + '</summary><div class="inc-wrap"><table class="inc"><thead><tr><th></th>' + names.map(function (n) { return '<th scope="col">' + esc(n) + "</th>"; }).join("") + "</tr></thead><tbody>" +
-      row(t.incFor, lis.map(function (l) { return l[0]; })) + row(t.incPh, lis.map(function (l) { return l[1]; })) +
-      (lis.every(function (l) { return l[2] === lis[0][2]; }) ? '<tr><th scope="row">' + esc(t.incDl) + '</th><td colspan="' + names.length + '">' + esc(lis[0][2] || "") + "</td></tr>" : row(t.incDl, lis.map(function (l) { return l[2]; }))) +
-      t.incCommon.map(function (c) { return '<tr><th scope="row">' + esc(c[0]) + '</th><td colspan="' + names.length + '">' + esc(c[1]) + "</td></tr>"; }).join("") + "</tbody></table></div>";
-    var open = d.open; d.innerHTML = html; d.open = open;
+    var old = D.querySelector("details#pk-inc"); if (old) old.remove();
+    var d = $("pk-inc"); if (!d) { d = mk("div", "pk-inc2"); d.id = "pk-inc"; }
+    var after = $("pk-more") || box; if (after.nextSibling !== d) after.parentNode.insertBefore(d, after.nextSibling);
+    d.hidden = box.classList.contains("none");
+    d.innerHTML = '<span class="lbl">' + esc(t.incT) + "</span><ul>" + t.incCommon.map(function (c) { return "<li><b>" + esc(c[0]) + "</b> " + esc(c[1]) + "</li>"; }).join("") + "</ul>";
     var sum = $("sum"), sm = $("pk-sample");
     if (sum && !sm) { sm = mk("a", "pk-sample"); sm.id = "pk-sample"; sm.target = "_blank"; sm.rel = "noopener"; sum.appendChild(sm); }
     if (sm) { sm.textContent = t.sample; sm.href = waLink(t.sampleMsg); }
