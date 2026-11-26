@@ -485,6 +485,7 @@ h2{color:var(--olive-ink)}
 <link rel="preload" as="image" href="assets/hero-dron2-poster.webp" media="(min-width: 861px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/hero-dron2-cel-poster.webp" media="(max-width: 860px)" fetchpriority="high">
 <link rel="stylesheet" href="css/site2.css?v=1118d">
+<link rel="stylesheet" href="css/depth.css?v=dp49">
 </head>
 <body>
 
@@ -498,8 +499,8 @@ h2{color:var(--olive-ink)}
         <span class="w">Sestra Creative</span>
       </a>
       <nav class="nav" aria-label="Principal">
-        <a href="#portafolio" data-i18n="nav.work"></a>
         <a href="#servicios" data-i18n="nav.services"></a>
+        <a href="#portafolio" data-i18n="nav.work"></a>
         <a href="#paquetes" data-i18n="nav.packages"></a>
         <a href="#planes" data-i18n="nav.plans"></a>
         <a href="#faq" data-i18n="nav.faq"></a>
@@ -515,8 +516,8 @@ h2{color:var(--olive-ink)}
   </div>
   <div class="navstrip"><div class="wrap">
     <div>
-      <a href="#portafolio" data-i18n="nav.work"></a>
       <a href="#servicios" data-i18n="nav.services"></a>
+      <a href="#portafolio" data-i18n="nav.work"></a>
       <a href="#paquetes" data-i18n="nav.packages"></a>
       <a href="#planes" data-i18n="nav.plans"></a>
       <a href="#faq" data-i18n="nav.faq"></a>
@@ -761,8 +762,9 @@ h2{color:var(--olive-ink)}
   <span>WhatsApp</span>
 </a></aside>
 <div class="toast" id="toast" role="status" hidden></div>
-<script src="js/site2.js?v=1118d" defer></script>
+<script src="js/site2.js?v=dp21" defer></script>
 <script src="js/moments.js?v=1118d" defer></script>
+<script src="js/depth.js?v=dp27" defer></script>
 <dialog class="lb" id="lb"><button class="lb-x" id="lb-x" type="button">&times;</button><button class="lb-p" id="lb-p" type="button">&lsaquo;</button><img id="lb-img" alt=""><p id="lb-cap"></p><button class="lb-n" id="lb-n" type="button">&rsaquo;</button></dialog>
 <script>
 /* ============ CONFIGURACIÓN (lo único que hay que tocar para publicar) ============ */
@@ -842,9 +844,9 @@ var PK2 = {
   saves: "Ahorras {v} frente a pedir fotos y video por separado",
   more: "¿Más de 50 fotos o una propiedad fuera de lo común? <a href=\"#\" id=\"pk-quote\">Pide una cotización a medida</a>.",
   quoteMsg: "Hola, quiero una cotización a medida para una propiedad. Es: ",
-  none: "Elige uno o varios servicios. No hace falta sesión: Domi te escribe para coordinar.", pick: "Elegir", picked: "Elegido",
+  none: "Elige uno o varios servicios. No hace falta sesión: te escribimos para coordinar.", pick: "Elegir", picked: "Elegido",
   xv: "En la misma visita", xd: "Servicios digitales para tu alquiler",
-  xdNote: "Precios de referencia por propiedad. Domi te confirma el monto final según lo que necesites.",
+  xdNote: "Precios de referencia por propiedad. Te confirmamos el monto final según lo que necesites.",
   add: "Agregar", added: "Agregado", mo: "/mes", moProp: "/mes por propiedad",
   x: {
     t360: ["Recorrido 360°", "Recorrido virtual para poner en tu web o en tu anuncio. Por propiedad."],
@@ -855,11 +857,11 @@ var PK2 = {
     bot: ["Chatbot de WhatsApp e Instagram", "Responde consultas, filtra prospectos, manda los mensajes antes de la llegada y pide la reseña. El costo de Meta por conversación va aparte."],
     rep: ["Reporte mensual para dueños", "Panel con ocupación, ingresos y reseñas de cada propiedad, listo para enviar al dueño. Montaje una vez, más la mensualidad."]
   },
-  volume: "¿4 propiedades o más? Domi te prepara un precio por volumen.",
+  volume: "¿4 propiedades o más? Te preparamos un precio por volumen.",
   moLine: "Mensualidad aparte: {v}.",
   ivaLine: "IVA incluido.",
-  confirm: "Es una solicitud: Domi te confirma la fecha y el total por WhatsApp, y el pago se coordina después.",
-  noDate: "Sin fecha: Domi te escribe para coordinar",
+  confirm: "Es una solicitud: te confirmamos la fecha y el total por WhatsApp, y el pago se coordina después.",
+  noDate: "Sin fecha: te escribimos para coordinar",
   pickOne: "Elige un paquete o un servicio.",
   dateOpt: "Solo pediste servicios digitales, así que la fecha es opcional.",
   planP: "Propuesta a medida",
@@ -892,9 +894,9 @@ var PK2 = {
   saves: "You save {v} compared with booking photos and video separately",
   more: "More than 50 photos or an unusual property? <a href=\"#\" id=\"pk-quote\">Ask for a custom quote</a>.",
   quoteMsg: "Hi, I'd like a custom quote for a property. It is: ",
-  none: "Pick one or more services. No shoot needed: Domi will message you to coordinate.", pick: "Select", picked: "Selected",
+  none: "Pick one or more services. No shoot needed: we'll message you to coordinate.", pick: "Select", picked: "Selected",
   xv: "In the same visit", xd: "Digital services for your rental",
-  xdNote: "Reference prices per property. Domi confirms the final amount based on what you need.",
+  xdNote: "Reference prices per property. We confirm the final amount based on what you need.",
   add: "Add", added: "Added", mo: "/mo", moProp: "/mo per property",
   x: {
     t360: ["360° tour", "Virtual tour to embed on your website or listing. Per property."],
@@ -905,11 +907,11 @@ var PK2 = {
     bot: ["WhatsApp and Instagram chatbot", "Answers questions, qualifies leads, sends pre-arrival messages and asks for the review. Meta's per-conversation cost is separate."],
     rep: ["Monthly owner report", "Dashboard with occupancy, income and reviews for each property, ready to send to the owner. One-time setup plus the monthly fee."]
   },
-  volume: "4 properties or more? Domi will put together a volume price.",
+  volume: "4 properties or more? We'll put together a volume price.",
   moLine: "Monthly fee separate: {v}.",
   ivaLine: "VAT included.",
-  confirm: "This is a request: Domi confirms the date and total on WhatsApp, and payment is arranged afterwards.",
-  noDate: "No date: Domi will message you to coordinate",
+  confirm: "This is a request: we confirm the date and total on WhatsApp, and payment is arranged afterwards.",
+  noDate: "No date: we'll message you to coordinate",
   pickOne: "Choose a package or a service.",
   dateOpt: "You only asked for digital services, so the date is optional.",
   planP: "Tailored proposal",
@@ -933,7 +935,7 @@ var I18N = {
   "hero.h1": "Fotografía y contenido para alquileres vacacionales que quieren más reservas.",
   "hero.lead": "Agencia de marketing en Tamarindo y Guanacaste: fotos, drone y contenido para alquileres vacacionales, hoteles y bienes raíces.",
   "hero.cta1": "Reservar una propiedad", "hero.cta2": "Manejo varias propiedades",
-  "hero.f1b": "1 a 3 días", "hero.f1s": "hábiles de entrega",
+  "hero.f1b": "Fotos propias", "hero.f1s": "tomadas y editadas por nosotros",
   "hero.f2b": "100+", "hero.f2s": "propiedades fotografiadas",
   "hero.f3b": "Tamarindo", "hero.f3s": "Guanacaste y todo Costa Rica",
   "mf.k": "Cómo trabajamos", "mf.t": "Las fotos son lo primero que ve un huésped. Las hacemos para que tu propiedad <em>se vea como se siente estar ahí</em>: luz real, cada espacio en orden y los detalles que hacen que alguien reserve.", "sv.k": "Servicios", "sv.title": "Fotos, drone y contenido en un solo equipo.", "sv.lead": "Lo que necesita un hotel o un operador con varias propiedades para publicar con constancia.",
@@ -978,7 +980,7 @@ var I18N = {
   "sum.empty": "Aún sin fecha", "sum.when": "Fecha: {d}, {s}",
   "iva.tbd": "Falta definir si el precio incluye IVA (13 %).", "iva.included": "IVA incluido.", "iva.extra": "Más IVA (13 %): {v}.",
   "e.name": "Escribe tu nombre.", "e.phone": "Escribe un WhatsApp o teléfono válido.", "e.email": "El correo no parece válido.", "e.prop": "Indica la propiedad o ubicación.", "e.consent": "Necesitamos tu aceptación.", "e.date": "Elige una fecha disponible en el calendario.", "e.send": "No se pudo guardar la solicitud. Envíala por WhatsApp para que no se pierda.",
-  "res.title": "Solicitud lista", "res.demo": "Tu solicitud está lista. Envíala por WhatsApp con el botón de abajo y Domi te confirma la fecha y el total.", "res.ok": "Recibimos tu solicitud. Te confirmamos la fecha por WhatsApp.", "res.id": "Código", "res.wa": "Enviar resumen por WhatsApp", "res.again": "Hacer otra solicitud", "res.fail": "No se guardó. Envía el resumen por WhatsApp.",
+  "res.title": "Solicitud lista", "res.demo": "Tu solicitud está lista. Envíala por WhatsApp con el botón de abajo y te confirmamos la fecha y el total.", "res.ok": "Recibimos tu solicitud. Te confirmamos la fecha por WhatsApp.", "res.id": "Código", "res.wa": "Enviar resumen por WhatsApp", "res.again": "Hacer otra solicitud", "res.fail": "No se guardó. Envía el resumen por WhatsApp.",
   "msg.hi": "Hola, soy {n}. Quiero solicitar una reserva (código {id}).",
   "msg.prop": "Propiedad: {p}", "msg.when": "Fecha: {d} ({s})", "msg.pkg": "Paquete: {p} × {n}", "msg.drone": "Drone: {o}", "msg.extras": "Extras: {e}", "msg.zone": "Zona: {z}", "msg.total": "Total estimado: {t}{ex}", "msg.ex": " (precio de ejemplo)", "msg.plan": "Hola, me interesa el plan mensual {p}. Manejo ___ propiedades en ___.",
   "op.k": "Varias propiedades", "op.title": "¿Administras varias propiedades?", "op.lead": "Cuéntanos cuántas propiedades manejas y qué necesitas. Te respondemos con una propuesta por volumen, no con un precio genérico.", "op.n": "Número de propiedades", "op.z": "Zonas", "op.z.ph": "Ej.: Tamarindo, Flamingo, Potrero", "op.need": "Qué necesitas", "op.need.photo": "Fotos de todas mis propiedades", "op.need.drone": "Video, reels y drone", "op.need.social": "Gestión mensual de redes", "op.need.digital": "Servicios digitales (web, guía, chatbot, reportes)", "op.need.all": "Un poco de todo", "op.go": "Pedir propuesta por WhatsApp", "op.note": "Se abre WhatsApp con el mensaje listo; no se guarda nada en esta página.", "op.msg": "Hola, administro {n} propiedades en {z}. Necesito: {w}. ¿Me comparten una propuesta por volumen?", "op.bad": "Indica cuántas propiedades manejas.", "ba.title": "Casa Luna, interior: la misma foto, tres acabados", "ba.pending": "Pendiente: la misma foto sin editar, estándar y estilo revista", "ba2.title": "Casa Refugio, exterior: estándar y estilo revista", "ba2.pending": "Pendiente: la misma foto en estándar y en estilo revista", "ba.l0": "Sin editar", "ba.t1": "Sin editar → Estándar", "ba.t2": "Estándar → Estilo revista", "ba.t3": "Exterior: Estándar → Estilo revista", "ba.l1": "Estándar", "ba.l2": "Estilo revista", "ba.alt": "Deslizador para comparar edición estándar y estilo revista",
@@ -998,7 +1000,7 @@ var I18N = {
   "hero.h1": "Photography and content for vacation rentals that want more bookings.",
   "hero.lead": "Marketing agency in Tamarindo and Guanacaste: photos, drone and content for vacation rentals, hotels and real estate.",
   "hero.cta1": "Book one property", "hero.cta2": "I manage several properties",
-  "hero.f1b": "1 to 3 days", "hero.f1s": "business-day delivery",
+  "hero.f1b": "Our own photos", "hero.f1s": "shot and edited by us",
   "hero.f2b": "100+", "hero.f2s": "properties photographed",
   "hero.f3b": "Tamarindo", "hero.f3s": "Guanacaste and all of Costa Rica",
   "mf.k": "How we work", "mf.t": "Photos are the first thing a guest sees. We make them so your property <em>looks the way it feels to be there</em>: real light, every space in order and the details that make someone book.", "sv.k": "Services", "sv.title": "Photos, drone and content from one team.", "sv.lead": "What a hotel or a multi-property operator needs to publish consistently.",
@@ -1043,7 +1045,7 @@ var I18N = {
   "sum.empty": "No date yet", "sum.when": "Date: {d}, {s}",
   "iva.tbd": "Still to define whether prices include VAT (13%).", "iva.included": "VAT included.", "iva.extra": "Plus VAT (13%): {v}.",
   "e.name": "Enter your name.", "e.phone": "Enter a valid WhatsApp or phone number.", "e.email": "That email does not look valid.", "e.prop": "Enter the property or location.", "e.consent": "We need your consent.", "e.date": "Pick an available date on the calendar.", "e.send": "The request could not be saved. Send it on WhatsApp so it is not lost.",
-  "res.title": "Request ready", "res.demo": "Your request is ready. Send it on WhatsApp with the button below and Domi will confirm the date and total.", "res.ok": "We received your request. We will confirm the date on WhatsApp.", "res.id": "Code", "res.wa": "Send summary on WhatsApp", "res.again": "Make another request", "res.fail": "Not saved. Send the summary on WhatsApp.",
+  "res.title": "Request ready", "res.demo": "Your request is ready. Send it on WhatsApp with the button below and we'll confirm the date and total.", "res.ok": "We received your request. We will confirm the date on WhatsApp.", "res.id": "Code", "res.wa": "Send summary on WhatsApp", "res.again": "Make another request", "res.fail": "Not saved. Send the summary on WhatsApp.",
   "msg.hi": "Hi, I'm {n}. I'd like to request a booking (code {id}).",
   "msg.prop": "Property: {p}", "msg.when": "Date: {d} ({s})", "msg.pkg": "Package: {p} × {n}", "msg.drone": "Drone: {o}", "msg.extras": "Extras: {e}", "msg.zone": "Area: {z}", "msg.total": "Estimated total: {t}{ex}", "msg.ex": " (example price)", "msg.plan": "Hi, I'm interested in the {p} monthly plan. I manage ___ properties in ___.",
   "op.k": "Multiple properties", "op.title": "Do you manage several properties?", "op.lead": "Tell us how many properties you manage and what you need. We reply with a volume proposal, not a generic price.", "op.n": "Number of properties", "op.z": "Areas", "op.z.ph": "E.g. Tamarindo, Flamingo, Potrero", "op.need": "What you need", "op.need.photo": "Photos of all my properties", "op.need.drone": "Video, reels and drone", "op.need.social": "Monthly social media management", "op.need.digital": "Digital services (website, guide, chatbot, reports)", "op.need.all": "A bit of everything", "op.go": "Ask for a proposal on WhatsApp", "op.note": "WhatsApp opens with the message ready; nothing is stored on this page.", "op.msg": "Hi, I manage {n} properties in {z}. I need: {w}. Could you share a volume proposal?", "op.bad": "Enter how many properties you manage.", "ba.title": "Casa Luna, interior: the same photo, three finishes", "ba.pending": "Pending: the same photo unedited, standard and magazine style", "ba2.title": "Casa Refugio, exterior: standard and magazine style", "ba2.pending": "Pending: the same photo in standard and magazine style", "ba.l0": "Unedited", "ba.t1": "Unedited → Standard", "ba.t2": "Standard → Magazine style", "ba.t3": "Exterior: Standard → Magazine style", "ba.l1": "Standard", "ba.l2": "Magazine style", "ba.alt": "Slider to compare standard and magazine-style editing",
@@ -1058,17 +1060,17 @@ var I18N = {
 /* Textos del selector de paquetes nuevo (18 nov 2026) */
 (function () {
   var X = {
-    es: { "pk.title": "Elige tu paquete y mira el total.", "pk.lead": "Precios en dólares, con IVA incluido. Arma tu solicitud y Domi te confirma la fecha y el total por WhatsApp; el pago se coordina después.",
+    es: { "pk.title": "Elige tu paquete y mira el total.", "pk.lead": "Precios en dólares, con IVA incluido. Arma tu solicitud y te confirmamos la fecha y el total por WhatsApp; el pago se coordina después.",
       "s1.t": "1. Elige tu paquete", "s1.d": "Primero qué necesitas, después el estilo y el tamaño. El precio es por propiedad.",
       "s2.t": "2. Propiedades y extras", "s2.d": "Suma lo que quieras hacer en la misma visita o para tu alquiler.",
       "ribbon.tag": "EN PREPARACIÓN", "ribbon.txt": "El número de WhatsApp y las fechas ocupadas todavía son de ejemplo. Lo que envíes aquí todavía no se guarda.",
-      "s4.pay": "El pago no se hace aquí. Domi te confirma la fecha y el total por WhatsApp y te envía los datos para pagar.",
+      "s4.pay": "El pago no se hace aquí. Te confirmamos la fecha y el total por WhatsApp y te enviamos los datos para pagar.",
       "zone.incl": "incluido", "zone.other": "El traslado fuera de Guanacaste se cotiza por WhatsApp y no está en el total.", "sum.total": "Total estimado" },
-    en: { "pk.title": "Choose your package and see the total.", "pk.lead": "Prices in US dollars, VAT included. Build your request and Domi confirms the date and total on WhatsApp; payment is arranged afterwards.",
+    en: { "pk.title": "Choose your package and see the total.", "pk.lead": "Prices in US dollars, VAT included. Build your request and we confirm the date and total on WhatsApp; payment is arranged afterwards.",
       "s1.t": "1. Choose your package", "s1.d": "First what you need, then the style and size. Prices are per property.",
       "s2.t": "2. Properties and extras", "s2.d": "Add what you want done in the same visit or for your rental.",
       "ribbon.tag": "IN PROGRESS", "ribbon.txt": "The WhatsApp number and busy dates are still examples. Nothing you submit here is saved yet.",
-      "s4.pay": "Payment is not made here. Domi confirms the date and total on WhatsApp and sends you the payment details.",
+      "s4.pay": "Payment is not made here. We confirm the date and total on WhatsApp and send you the payment details.",
       "zone.incl": "included", "zone.other": "Travel outside Guanacaste is quoted on WhatsApp and is not in the total.", "sum.total": "Estimated total" }
   };
   for (var l in X) for (var k in X[l]) I18N[l][k] = X[l][k];
@@ -1337,7 +1339,6 @@ var DATA = {
       var air = (c === "mixto" || s === "fly") ? tr.air : 0;
       L.push(!air ? p.noair : air === 1 ? p.air1 : fill(p.airN, { n: air }));
     }
-    if (c !== "video") L.push(p.dl);
     return L;
   }
   function savings(tr, s) { if (!tr.parts) return 0; return findTier("foto", tr.parts[0]).price[s] + findTier("video", tr.parts[1]).price.fly - tr.price[s]; }

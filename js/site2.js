@@ -31,17 +31,17 @@
       needK: "¿Qué necesitas?",
       need: [["Administro alquileres vacacionales", "Contenido constante para todas tus unidades, con precio por volumen.", "#operadores"],
              ["Tengo un hotel", "Fotos, drone y contenido para temporada y promociones.", "#operadores"],
-             ["Soy agente inmobiliario", "Fotos y drone para tu listado, con entrega en 1 a 3 días hábiles.", "#paquetes"],
+             ["Soy agente inmobiliario", "Fotos y drone para tu listado, listas para publicar.", "#paquetes"],
              ["Tengo una propiedad", "Elige tu paquete, mira el total y reserva la fecha.", "#paquetes"]],
       abK: "Quiénes somos", abT: "Somos Cris y Domi.",
       abP: "Sestra Creative nace en Tamarindo de dos personas que se complementan: uno detrás de la cámara y la otra al lado del cliente. Trabajamos juntos cada sesión, de la primera conversación a la entrega.",
       abCris: "Fotografía, drone y edición. Ha fotografiado más de 100 propiedades en Costa Rica.",
       abDomi: "Clientes, redes y contenido. Tu contacto desde la primera conversación hasta la entrega.",
-      abPromise: ["Entrega en 1 a 3 días hábiles", "Fotos propias, tomadas por nosotros", "Precios claros, con IVA incluido"],
+      abPromise: ["Más de 100 propiedades fotografiadas", "Fotos propias, tomadas por nosotros", "Precios claros, con IVA incluido"],
       abWa: "Escribirnos por WhatsApp", abMsg: "Hola Cris y Domi, vi la página de Sestra Creative y quiero información.",
       sample: "¿No sabes qué paquete elegir? Pídenos ejemplos de una propiedad como la tuya", sampleMsg: "Hola, ¿me pueden enviar ejemplos de fotos de una propiedad parecida a la mía? Es: ",
       incT: "Incluido en todos los paquetes", incFor: "Para", incPh: "Fotos editadas", incDl: "Entrega",
-      incCommon: [["Archivos:", "alta resolución y versión liviana para web, en un enlace de Google Drive."], ["Traslado:", "incluido dentro de Guanacaste."], ["IVA:", "incluido en el precio."], ["Clima:", "si no ayuda, reprogramamos la sesión."]],
+      incCommon: [["Entrega:", "en 1 a 3 días hábiles después de la sesión."], ["Archivos:", "alta resolución y versión liviana para web, en un enlace de Google Drive."], ["Traslado:", "incluido dentro de Guanacaste."], ["IVA:", "incluido en el precio."], ["Clima:", "si no ayuda, reprogramamos la sesión."]],
       priv: "Ver aviso de privacidad", privT: "Aviso de privacidad",
       privB: ["<b>Responsables:</b> Cristofer Segura y Dominique Estrada (Sestra Creative), Tamarindo, Guanacaste, Costa Rica.",
               "<b>Qué datos pedimos:</b> nombre, WhatsApp o teléfono y propiedad o ubicación (obligatorios); empresa, correo y notas (opcionales). Sin los obligatorios no podemos responder tu solicitud.",
@@ -69,17 +69,17 @@
       needK: "What do you need?",
       need: [["I manage vacation rentals", "Steady content for all your units, with volume pricing.", "#operadores"],
              ["I run a hotel", "Photos, drone and content for the season and promotions.", "#operadores"],
-             ["I'm a real estate agent", "Photos and drone for your listing, delivered in 1 to 3 business days.", "#paquetes"],
+             ["I'm a real estate agent", "Photos and drone for your listing, ready to publish.", "#paquetes"],
              ["I own a property", "Pick your package, see the total and book the date.", "#paquetes"]],
       abK: "About us", abT: "We are Cris and Domi.",
       abP: "Sestra Creative was born in Tamarindo from two people who complement each other: one behind the camera, the other by the client's side. We work every session together, from the first conversation to delivery.",
       abCris: "Photography, drone and editing. He has photographed more than 100 properties in Costa Rica.",
       abDomi: "Clients, social media and content. Your contact from the first conversation to delivery.",
-      abPromise: ["Delivery in 1 to 3 business days", "Our own photos, taken by us", "Clear prices, VAT included"],
+      abPromise: ["100+ properties photographed", "Our own photos, taken by us", "Clear prices, VAT included"],
       abWa: "Message us on WhatsApp", abMsg: "Hi Cris and Domi, I saw the Sestra Creative website and I'd like more information.",
       sample: "Not sure which package? Ask us for examples of a property like yours", sampleMsg: "Hi, could you send me example photos of a property similar to mine? It is: ",
       incT: "Included in every package", incFor: "For", incPh: "Edited photos", incDl: "Delivery",
-      incCommon: [["Files:", "high resolution and a lighter web version, in a Google Drive link."], ["Travel:", "included within Guanacaste."], ["VAT:", "included in the price."], ["Weather:", "if it doesn't help, we reschedule the session."]],
+      incCommon: [["Delivery:", "in 1 to 3 business days after the shoot."], ["Files:", "high resolution and a lighter web version, in a Google Drive link."], ["Travel:", "included within Guanacaste."], ["VAT:", "included in the price."], ["Weather:", "if it doesn't help, we reschedule the session."]],
       priv: "See privacy notice", privT: "Privacy notice",
       privB: ["<b>Responsible:</b> Cristofer Segura and Dominique Estrada (Sestra Creative), Tamarindo, Guanacaste, Costa Rica.",
               "<b>What we ask for:</b> name, WhatsApp or phone and property or location (required); company, email and notes (optional). Without the required details we can't answer your request.",
@@ -144,31 +144,33 @@
   /* ---------- 1. portafolio: una sola galería ---------- */
   function A(es, en) { return { es: es, en: en }; }
   var GAL = [
-    ["galA", A("Terraza techada con piscina infinita y vista al mar", "Covered terrace with infinity pool and ocean view")],
-    ["@vista", A("La villa y la bahía desde el drone", "The villa and the bay from the drone")],
     ["@isabella", A("Piscina y patio al anochecer, desde el drone", "Pool and patio at dusk, from the drone")],
-    ["@t360", A("Piscina infinita con vista a la playa", "Infinity pool overlooking the beach")],
-    ["galB", A("Vista aérea de una piscina y su jardín", "Aerial view of a pool and garden")],
+    ["@vista", A("La villa y la bahía desde el drone", "The villa and the bay from the drone")],
     ["@luna", A("Cocina abierta con la piscina iluminada al anochecer", "Open kitchen with the pool lit at dusk")],
-    ["@malinche", A("Piscina larga entre árboles en una casa de estilo colonial", "Long pool among trees at a colonial-style house")],
-    ["galD", A("Patio con piscina de azulejo turquesa y sala exterior", "Courtyard with turquoise-tile pool and outdoor lounge")],
-    ["galH", A("Sala luminosa con sofás y mesa de madera", "Bright living room with sofas and a wooden coffee table")],
+    ["@t360", A("Piscina infinita con vista a la playa", "Infinity pool overlooking the beach")],
     ["@paz", A("Terraza techada con sala exterior junto a la piscina", "Covered terrace with outdoor lounge by the pool")],
-    ["galR", A("Piscina en un jardín con árboles grandes", "Pool in a garden with large trees")],
-    ["@amigos", A("Cocina con isla y techo de madera, abierta al jardín", "Kitchen with island and wood ceiling, open to the garden")],
-    ["galF", A("Terraza con muebles junto a una piscina infinita al atardecer", "Terrace with loungers beside an infinity pool at sunset")],
-    ["@aventura", A("Patio interior con piscina y sala exterior", "Inner courtyard with pool and outdoor lounge")],
-    ["galG", A("Piscina frente a una casa blanca con pérgola", "Pool in front of a white house with a pergola")],
-    ["galI", A("Cocina con techo de madera e isla", "Kitchen with wood ceiling and island")],
-    ["@refugio", A("Comedor y sala con techo de madera y ventanales en arco", "Dining and living room with wood ceiling and arched windows")],
-    ["galJ", A("Terraza con persianas de madera y vista al mar", "Terrace with wood slats and ocean view")],
+    ["@malinche", A("Piscina larga entre árboles en una casa de estilo colonial", "Long pool among trees at a colonial-style house")],
     ["galK", A("Patio con pérgola, piscina y camas de sol", "Patio with pergola, pool and sun loungers")],
-    ["galL", A("Piscina angosta con sala exterior techada", "Narrow pool with covered outdoor lounge")],
+    ["@aventura", A("Patio interior con piscina y sala exterior", "Inner courtyard with pool and outdoor lounge")],
     ["galM", A("Vista de la bahía desde la propiedad", "Bay view from the property")],
+    ["galC", A("Patio colonial con fuente larga entre dos alas de la casa", "Colonial courtyard with a long fountain between two wings of the house")],
+    ["galD", A("Patio con piscina de azulejo turquesa y sala exterior", "Courtyard with turquoise-tile pool and outdoor lounge")],
+    ["@amigos", A("Cocina con isla y techo de madera, abierta al jardín", "Kitchen with island and wood ceiling, open to the garden")],
+    ["galA", A("Terraza techada con piscina infinita y vista al mar", "Covered terrace with infinity pool and ocean view")],
+    ["galG", A("Piscina frente a una casa blanca con pérgola", "Pool in front of a white house with a pergola")],
+    ["galR", A("Piscina en un jardín con árboles grandes", "Pool in a garden with large trees")],
+    ["galE", A("Vista aérea de techos de teja entre jardines", "Aerial view of tile roofs among gardens")],
+    ["galH", A("Sala luminosa con sofás y mesa de madera", "Bright living room with sofas and a wooden coffee table")],
+    ["galF", A("Terraza con muebles junto a una piscina infinita al atardecer", "Terrace with loungers beside an infinity pool at sunset")],
+    ["@refugio", A("Comedor y sala con techo de madera y ventanales en arco", "Dining and living room with wood ceiling and arched windows")],
+    ["galB", A("Vista aérea de una piscina y su jardín", "Aerial view of a pool and garden")],
+    ["galL", A("Piscina angosta con sala exterior techada", "Narrow pool with covered outdoor lounge")],
+    ["galI", A("Cocina con techo de madera e isla", "Kitchen with wood ceiling and island")],
     ["galN", A("Habitación con cama blanca y puerta al jardín", "Bedroom with white bed and garden door")],
-    ["galO", A("Baño con doble lavamanos y mueble de madera", "Bathroom with double sink and wood cabinet")],
     ["galP", A("Habitación con espejo de piso y ropa de cama blanca", "Bedroom with floor mirror and white bedding")],
-    ["galS", A("Baño con tina frente a la ventana", "Bathroom with a tub by the window")]
+    ["galO", A("Baño con doble lavamanos y mueble de madera", "Bathroom with double sink and wood cabinet")],
+    ["galS", A("Baño con tina frente a la ventana", "Bathroom with a tub by the window")],
+    ["galJ", A("Terraza con persianas de madera y vista al mar", "Terrace with wood slats and ocean view")]
   ].map(function (g) {
     var src = g[0].charAt(0) === "@" ? PH[g[0].slice(1)] : IMG + g[0] + ".webp";
     return src ? { src: src, alt: g[1] } : null;
@@ -515,6 +517,7 @@
 
   /* ---------- 15. qué incluye cada paquete (plegado) y muestra sin compromiso ---------- */
   var INC_IC = [
+    '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
     '<svg viewBox="0 0 24 24"><path d="M4 7.5h6l2 2h8v9.5H4z"/><path d="M12 12.5v4M10 14.5l2 2 2-2"/></svg>',
     '<svg viewBox="0 0 24 24"><path d="M4 15.5l1.6-5A2 2 0 0 1 7.5 9h9a2 2 0 0 1 1.9 1.5l1.6 5v3H4z"/><path d="M4 15.5h16"/><circle cx="7.5" cy="18.5" r="1.4"/><circle cx="16.5" cy="18.5" r="1.4"/></svg>',
     '<svg viewBox="0 0 24 24"><path d="M6 3.5h12v17l-3-2-3 2-3-2-3 2z"/><path d="M9 8.5h6M9 12h6"/></svg>',
@@ -527,7 +530,7 @@
     var d = $("pk-inc"); if (!d) { d = mk("div", "pk-inc2"); d.id = "pk-inc"; }
     var after = $("pk-more") || box; if (after.nextSibling !== d) after.parentNode.insertBefore(d, after.nextSibling);
     d.hidden = box.classList.contains("none");
-    d.innerHTML = '<span class="lbl"><span class="inc-seal" aria-hidden="true">' + INC_IC[4] + "</span>" + esc(t.incT) + "</span><ul>" + t.incCommon.map(function (c, i) { return '<li><span class="inc-ic" aria-hidden="true">' + INC_IC[i] + "</span><span><b>" + esc(c[0].replace(/:$/, "")) + "</b>" + esc(c[1]) + "</span></li>"; }).join("") + "</ul>";
+    d.innerHTML = '<span class="lbl"><span class="inc-seal" aria-hidden="true">' + INC_IC[5] + "</span>" + esc(t.incT) + "</span><ul>" + t.incCommon.map(function (c, i) { return '<li><span class="inc-ic" aria-hidden="true">' + INC_IC[i] + "</span><span><b>" + esc(c[0].replace(/:$/, "")) + "</b>" + esc(c[1]) + "</span></li>"; }).join("") + "</ul>";
     var sum = $("sum"), sm = $("pk-sample");
     if (sum && !sm) { sm = mk("a", "pk-sample"); sm.id = "pk-sample"; sm.target = "_blank"; sm.rel = "noopener"; sum.appendChild(sm); }
     if (sm) { sm.textContent = t.sample; sm.href = waLink(t.sampleMsg); }
