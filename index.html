@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-page-lang="es">
 <head>
 <meta charset="utf-8">
 <style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
@@ -12,6 +12,9 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fotografía inmobiliaria y drone en Guanacaste | Sestra Creative">
 <meta property="og:description" content="Fotos, video con drone y contenido para alquileres vacacionales, hoteles y bienes raíces en Tamarindo y Guanacaste, Costa Rica. Precios en línea, IVA incluido.">
+<link rel="alternate" hreflang="es" href="https://sestracreative.github.io/Sestra-Creative-Web/">
+<link rel="alternate" hreflang="en" href="https://sestracreative.github.io/Sestra-Creative-Web/en">
+<link rel="alternate" hreflang="x-default" href="https://sestracreative.github.io/Sestra-Creative-Web/">
 <link rel="canonical" href="https://sestracreative.github.io/Sestra-Creative-Web/">
 <meta property="og:url" content="https://sestracreative.github.io/Sestra-Creative-Web/">
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
@@ -1178,7 +1181,9 @@ var DATA = {
 
 (function () {
   ["es", "en"].forEach(function (l) { DATA[l].faq = DATA[l].faq.concat(PK2[l].faq); });
-  var lang = "es";
+  /* el idioma lo decide la dirección: / es español y /en es inglés (cada una con su propio HTML para Google) */
+  var lang = document.documentElement.getAttribute("data-page-lang") === "en" ? "en" : "es";
+  /* si la persona ya eligió idioma antes, se respeta (Google no guarda preferencias, siempre ve el idioma de la dirección) */
   try { var sv = localStorage.getItem("sc-lang"); if (sv === "en" || sv === "es") lang = sv; } catch (e) {}
   var $ = function (id) { return document.getElementById(id); };
   function t(k, v) {
@@ -1633,6 +1638,8 @@ var DATA = {
   /* ---------- idioma ---------- */
   function setLang(l) {
     lang = l; try { localStorage.setItem("sc-lang", l); } catch (e) {}
+    /* el botón cambia el idioma al instante y deja la dirección correcta para compartir o recargar */
+    try { var dir = location.pathname.replace(/(en|en\.html|index\.html)$/, ""); var want = l === "en" ? dir + "en" : dir; if (location.pathname !== want) history.replaceState(null, "", want + location.search + location.hash); } catch (e) {}
     document.documentElement.lang = l;
     document.title = t("meta.title");
     var md = document.querySelector('meta[name="description"]'); if (md) md.setAttribute("content", t("meta.desc"));
