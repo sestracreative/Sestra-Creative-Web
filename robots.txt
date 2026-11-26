@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sestracreative.github.io/Sestra-Creative-Web/sitemap.xml

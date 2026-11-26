@@ -249,7 +249,8 @@
     function draw() {
       var it = items(); if (it.length < 2) { dots.innerHTML = ""; return; }
       it.forEach(function (c) { c.classList.add("dp-in"); });
-      dots.innerHTML = it.map(function (_, i) { return '<button type="button" aria-label="' + (i + 1) + '"></button>'; }).join("") + '<span class="n"></span>';
+      dots.innerHTML = it.map(function (_, i) { return '<button type="button" aria-label="' + (i + 1) + ' / ' + it.length + '"></button>'; }).join("") + '<span class="n" aria-hidden="true"></span>';
+      keys();
       $$("button", dots).forEach(function (b, i) { b.addEventListener("click", function () { var c = items()[i]; box.scrollTo({ left: c.offsetLeft - (box.clientWidth - c.clientWidth) / 2, behavior: "smooth" }); }); });
       upd();
     }
@@ -259,6 +260,25 @@
       $$("button", dots).forEach(function (b, i) { b.classList.toggle("on", i === k); });
       var n = $(".n", dots); if (n) n.textContent = (k + 1) + " / " + it.length;
     }
+    // teclado: el carrusel recibe foco en celular y se recorre con las flechas
+    function keys() {
+      if (small()) {
+        box.tabIndex = 0;
+        var list = /^(UL|OL)$/.test(box.tagName);
+        if (!list && !box.hasAttribute("role")) box.setAttribute("role", "group");
+        if (!box.hasAttribute("aria-label")) { var h = box.closest("section") && box.closest("section").querySelector("h2"); box.setAttribute("aria-label", (h ? h.textContent.trim() + " · " : "") + (H.lang === "en" ? "carousel" : "carrusel")); }
+      } else if (box.getAttribute("tabindex") === "0") box.removeAttribute("tabindex");
+    }
+    function goTo(k) { var it = items(); k = Math.max(0, Math.min(it.length - 1, k)); var c = it[k]; if (c) box.scrollTo({ left: c.offsetLeft - (box.clientWidth - c.clientWidth) / 2, behavior: reduced() ? "auto" : "smooth" }); }
+    box.addEventListener("keydown", function (e) {
+      if (!small() || e.target !== box) return;
+      var on1 = $(".on", dots), k = on1 ? $$("button", dots).indexOf(on1) : 0;
+      if (e.key === "ArrowRight") { e.preventDefault(); goTo(k + 1); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); goTo(k - 1); }
+      else if (e.key === "Home") { e.preventDefault(); goTo(0); }
+      else if (e.key === "End") { e.preventDefault(); goTo(items().length - 1); }
+    });
+    W.addEventListener("resize", keys);
     box.addEventListener("scroll", function () { W.requestAnimationFrame(upd); }, { passive: true });
     if ("MutationObserver" in W) new MutationObserver(function (m) {
       if (!box.classList.contains("dp-car")) box.classList.add("dp-car");
@@ -435,7 +455,9 @@
     if (pr) {
       var r2 = pr.getBoundingClientRect(), p = Math.min(1, Math.max(0, (vh * 0.85 - r2.top) / (vh * 0.5)));
       pr.style.setProperty("--p", p.toFixed(3));
-      $$("li", pr).forEach(function (li, i, a) { li.classList.toggle("dp-on", p >= (i / a.length) + 0.02 || p === 1); });
+      // en celular el proceso es un carrusel de lado: sin animación de los números
+      var still = small();
+      $$("li", pr).forEach(function (li, i, a) { li.classList.toggle("dp-on", still || p >= (i / a.length) + 0.02 || p === 1); });
     }
   }
   function clearPar() {

@@ -376,7 +376,7 @@
       var ic = mk("span", "soc-ic", ICO[k]); var sr = mk("span", "sr-only"); sr.textContent = label + ": ";
       row.insertBefore(sr, row.firstChild); row.insertBefore(ic, row.firstChild);
       row.classList.add("soc");
-      if (k === "web" && row.tagName !== "A") {   /* la web también es un enlace */
+      if (k === "web" && row.tagName !== "A" && !/(^|\.)sestracreative\.com$/.test(location.hostname) && false) {   /* sin enlace: el dominio aún no está conectado y en el dominio sería un enlace a la misma página */
         var a = mk("a", row.className); a.href = "https://sestracreative.com"; a.target = "_blank"; a.rel = "noopener";
         while (row.firstChild) a.appendChild(row.firstChild); a.removeAttribute("style"); row.parentNode.replaceChild(a, row);
       }

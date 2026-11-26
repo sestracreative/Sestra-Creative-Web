@@ -368,7 +368,7 @@ html.dp .nav a.dp-act::after{transform:scaleX(1)}
   html.dp .dp-dots{display:flex;justify-content:center;align-items:center;gap:8px;margin:2px 0 6px}
   html.dp .dp-dots button{width:8px;height:8px;border-radius:999px;border:0;padding:0;background:currentColor;opacity:.28;transition:width .35s var(--dp-ease),opacity .35s;cursor:pointer}
   html.dp .dp-dots button.on{width:24px;opacity:.9}
-  html.dp .dp-dots .n{font:500 .7rem var(--display);letter-spacing:.08em;opacity:.7;margin-left:6px;font-variant-numeric:tabular-nums}
+  html.dp .dp-dots .n{font:500 .7rem var(--display);letter-spacing:.08em;opacity:1;margin-left:6px;font-variant-numeric:tabular-nums}
   html.dp .dp-car.dp-hint{animation:dpCarHint 1.6s var(--dp-ease) .4s 1}
   @keyframes dpCarHint{35%{transform:translateX(-34px)}100%{transform:none}}
 
@@ -393,8 +393,10 @@ html.dp .nav a.dp-act::after{transform:scaleX(1)}
   html.dp .hero .facts{display:none}
   html.dp .hero .lead{font-size:1rem}
   /* ¿qué necesitas?: 2 x 2, solo títulos */
-  html.dp #need-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}
-  html.dp a.need{grid-template-columns:1fr!important;padding:14px!important;gap:10px!important;align-content:start;min-height:118px}
+  html.dp #need-grid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important}
+  html.dp a.need{flex-direction:column!important;align-items:flex-start!important;min-width:0;padding:14px!important;gap:10px!important;min-height:118px}
+  html.dp a.need .need-ic{flex-shrink:0}
+  html.dp a.need .need-t b{overflow-wrap:break-word}
   html.dp a.need .need-t>span{display:none}
   html.dp a.need .need-t b{font-size:.9rem}
   html.dp #necesitas>.wrap{padding:20px 16px 22px}
@@ -432,7 +434,7 @@ html.dp .opt:not(.on) .nm,html.dp .opt:not(.on) .pr{color:var(--fg)!important}
 @media (max-width:640px){
   html.dp .dp-dots{gap:0}
   html.dp .dp-dots button{position:relative;width:28px;height:32px;background:none;opacity:1}
-  html.dp .dp-dots button::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:999px;background:currentColor;opacity:.28;transition:width .35s var(--dp-ease),margin .35s var(--dp-ease),opacity .35s}
+  html.dp .dp-dots button::after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:999px;background:currentColor;opacity:.5;transition:width .35s var(--dp-ease),margin .35s var(--dp-ease),opacity .35s}
   html.dp .dp-dots button.on{width:40px}
   html.dp .dp-dots button.on::after{width:24px;margin-left:-12px;opacity:.9}
   html.dp .dp-morebtn{min-height:42px;padding:10px 16px}
@@ -672,3 +674,6 @@ html.dp #paquetes #s4 label,html.dp #paquetes .field>label,html.dp #paquetes .fl
 html.dp #paquetes label:has(input[type=checkbox]){font-weight:400!important;font-size:.9rem}
 html.dp #paquetes aside#sum *{letter-spacing:normal}
 html.dp #paquetes aside#sum .sh,html.dp #paquetes aside#sum h3,html.dp #paquetes aside#sum [class*=tt] small,html.dp #paquetes aside#sum .tot small,html.dp #paquetes aside#sum summary span{text-transform:none!important;letter-spacing:0!important;font-size:.95rem!important;font-weight:600}
+
+/* celular: números del proceso quietos, foco visible en carruseles */
+@media (max-width:640px){html.dp #process li::before{transition:none!important}html.dp .dp-car:focus-visible{outline:2px solid currentColor;outline-offset:4px}}
