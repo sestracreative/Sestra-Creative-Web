@@ -213,7 +213,7 @@
         var gal = $$("#galx .gi img");
         if (total > 1 && total === gal.length) {
           if (railFor !== total) {
-            rail.innerHTML = gal.map(function (g, k) { return '<button type="button" data-k="' + k + '" aria-label="' + (k + 1) + '"><img src="' + g.getAttribute("src") + '" alt="" loading="lazy"></button>'; }).join("");
+            rail.innerHTML = gal.map(function (g, k) { return '<button type="button" data-k="' + k + '" aria-label="' + (k + 1) + '"><img src="' + g.getAttribute("src").replace(/^img\/(gal[A-S])\.webp$/, "img/sm/$1.webp") + '" alt="" loading="lazy"></button>'; }).join("");
             railFor = total;
             $$("button", rail).forEach(function (b) { b.addEventListener("click", function (e) { e.stopPropagation(); go(+b.dataset.k); }); });
           }
