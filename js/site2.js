@@ -124,7 +124,7 @@
   var lbList = [], lbI = 0;
   function lbShow() {
     var l = L(), it = lbList[lbI], im = lb.querySelector("img"), cap = lb.querySelector("p");
-    im.src = it.src; im.alt = it.alt[l];
+    im.srcset = SSV(it.src); im.sizes = "100vw"; im.src = it.src; im.alt = it.alt[l];
     cap.textContent = it.alt[l];
     if (lbList.length > 1) { var n = mk("span", "lb-cap-n"); n.textContent = (lbI + 1) + " / " + lbList.length; cap.appendChild(n); }
     lb.querySelector(".lb-p").hidden = lb.querySelector(".lb-n").hidden = lbList.length < 2;
@@ -209,7 +209,7 @@
     var g = $("galx"); if (!g) return;
     var l = L(), t = T[l];
     g.innerHTML = GAL.map(function (x, i) {
-      return '<button type="button" class="gi' + (i === 0 ? " big" : "") + '" data-i="' + i + '" aria-label="' + esc(t.open + ": " + x.alt[l]) + '"><img src="' + x.src + '" alt="' + esc(x.alt[l]) + '"' + (i < 5 ? "" : ' loading="lazy"') + ' decoding="async"></button>';
+      return '<button type="button" class="gi' + (i === 0 ? " big" : "") + '" data-i="' + i + '" aria-label="' + esc(t.open + ": " + x.alt[l]) + '"><img src="' + x.src + '"' + SS(x.src) + ' alt="' + esc(x.alt[l]) + '"' + (i < 5 ? "" : ' loading="lazy"') + ' decoding="async"></button>';
     }).join("");
     Array.prototype.forEach.call(g.children, function (b) { b.onclick = function () { lbOpen(GAL, +b.dataset.i); }; });
     galApply();
@@ -251,10 +251,10 @@
     $("ad-g").innerHTML = '<button type="button" data-g="in" aria-pressed="' + (cg === "in") + '">' + t.gIn + '</button><button type="button" data-g="ex" aria-pressed="' + (cg === "ex") + '">' + t.gEx + "</button>";
     Array.prototype.forEach.call($("ad-g").children, function (b) { b.onclick = function () { if (cg !== b.dataset.g) { cg = b.dataset.g; ci = 0; mode = null; drawCompare(); } }; });
     var th = $("ad-th"); th.setAttribute("aria-label", t.pick);
-    th.innerHTML = list.map(function (q, i) { return '<button type="button" data-i="' + i + '" aria-pressed="' + (i === ci) + '" aria-label="' + esc(q.name[l]) + '"><img src="' + q.th + '" alt="" decoding="async"></button>'; }).join("");
+    th.innerHTML = list.map(function (q, i) { return '<button type="button" data-i="' + i + '" aria-pressed="' + (i === ci) + '" aria-label="' + esc(q.name[l]) + '"><img src="' + q.th + '"' + SS(q.th) + ' alt="" decoding="async"></button>'; }).join("");
     Array.prototype.forEach.call(th.children, function (b) { b.onclick = function () { ci = +b.dataset.i; mode = null; drawCompare(); }; });
     var a = mode[0], b = mode[1], ba = $("ad-ba");
-    ba.innerHTML = '<img alt="' + esc(c.name[l] + ": " + t[a]) + '" src="' + c[a] + '" decoding="async"><div class="ba-top"><img alt="' + esc(c.name[l] + ": " + t[b]) + '" src="' + c[b] + '" decoding="async"></div><div class="ba-bar"></div>' +
+    ba.innerHTML = '<img alt="' + esc(c.name[l] + ": " + t[a]) + '" src="' + c[a] + '"' + SS(c[a]) + ' decoding="async"><div class="ba-top"><img alt="' + esc(c.name[l] + ": " + t[b]) + '" src="' + c[b] + '"' + SS(c[b]) + ' decoding="async"></div><div class="ba-bar"></div>' +
       (c.raw ? '<div class="l l1 ad-left" role="group" aria-label="' + esc(t.cmpTo) + '"><button type="button" data-a="raw" aria-pressed="' + (a === "raw") + '">' + t.raw + '</button><button type="button" data-a="hdr" aria-pressed="' + (a === "hdr") + '">' + t.hdr + "</button></div>" : '<span class="l l1">' + t[a] + "</span>") +
       '<span class="l l2">' + t[b] + '</span><input type="range" min="0" max="100" value="' + pos + '" aria-label="' + esc(t.slider + ": " + t[a] + " / " + t[b]) + '">';
     ba.querySelector("input").addEventListener("input", function (e) { setPos(e.target.value); });
@@ -277,7 +277,7 @@
   function buildManifesto() {
     var mf = D.querySelector(".manifesto .wrap"); if (!mf || mf.querySelector(".mf-grid")) return;
     var g1 = mk("div", "mf-grid"), txt = mk("div"); while (mf.firstChild) txt.appendChild(mf.firstChild);
-    g1.appendChild(txt); g1.appendChild(mk("figure", "mf-pic", '<img src="' + IMG + 'est-07.webp" alt="" loading="lazy" decoding="async">')); mf.appendChild(g1);
+    g1.appendChild(txt); g1.appendChild(mk("figure", "mf-pic", '<img src="' + IMG + 'est-07.webp"' + SS(IMG + "est-07.webp") + ' alt="" loading="lazy" decoding="async">')); mf.appendChild(g1);
   }
 
   /* ---------- 5. carrusel bajo servicios ---------- */
@@ -307,7 +307,7 @@
   function drawBand() {
     var g = $("band"); if (!g) return; var l = L(), t = T[l];
     g.setAttribute("role", "group"); g.setAttribute("aria-label", t.bandL);
-    g.innerHTML = BAND.map(function (b, i) { return '<button type="button" class="bi" data-i="' + i + '" aria-label="' + esc(t.open + ": " + b.alt[l]) + '"><img src="' + b.src + '" alt="' + esc(b.alt[l]) + '" loading="lazy" decoding="async"></button>'; }).join("");
+    g.innerHTML = BAND.map(function (b, i) { return '<button type="button" class="bi" data-i="' + i + '" aria-label="' + esc(t.open + ": " + b.alt[l]) + '"><img src="' + b.src + '"' + SS(b.src) + ' alt="' + esc(b.alt[l]) + '" loading="lazy" decoding="async"></button>'; }).join("");
     Array.prototype.forEach.call(g.children, function (b) { b.onclick = function () { lbOpen(BAND, +b.dataset.i); }; });
     $("band-p").setAttribute("aria-label", t.bPrev); $("band-n").setAttribute("aria-label", t.bNext);
     bandEdges();
@@ -329,7 +329,7 @@
     Array.prototype.forEach.call(box.querySelectorAll(".opt"), function (lab) {
       var inp = lab.querySelector("input"); if (!inp || lab.querySelector(".pk-ph")) return;
       var p = PKG_PH[inp.value]; if (!p) return;
-      var f = mk("span", "pk-ph", '<img src="' + p[0] + '" alt="' + esc(p[1][l]) + '" loading="lazy" decoding="async">');
+      var f = mk("span", "pk-ph", '<img src="' + p[0] + '"' + SS(p[0]) + ' alt="' + esc(p[1][l]) + '" loading="lazy" decoding="async">');
       lab.insertBefore(f, inp.nextSibling);
     });
   }
@@ -383,7 +383,7 @@
     var grid = D.querySelector(".contact .grid"), left = grid && grid.firstElementChild;
     if (grid && left && left !== box) {
       left.classList.add("ct-left"); box.classList.add("soc-row"); left.appendChild(box);
-      grid.appendChild(mk("figure", "ct-pic", '<img src="' + IMG + 'est-01.webp" alt="" loading="lazy" decoding="async">'));
+      grid.appendChild(mk("figure", "ct-pic", '<img src="' + IMG + 'est-01.webp"' + SS(IMG + "est-01.webp") + ' alt="" loading="lazy" decoding="async">'));
     }
   }
 
@@ -509,7 +509,7 @@
     $("ab-prom").innerHTML = t.abPromise.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("");
     var a = $("ab-wa"); a.textContent = t.abWa; a.href = waLink(t.abMsg);
     Array.prototype.forEach.call(D.querySelectorAll(".ph-person"), function (el) {
-      var src = PEOPLE[el.dataset.person]; if (src && !el.querySelector("img")) el.innerHTML = '<img src="' + src + '" alt="" loading="lazy" decoding="async">';
+      var src = PEOPLE[el.dataset.person]; if (src && !el.querySelector("img")) el.innerHTML = '<img src="' + src + '"' + SS(src) + ' alt="" loading="lazy" decoding="async">';
     });
   }
 

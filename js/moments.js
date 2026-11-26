@@ -96,7 +96,7 @@
     pc.appendChild(stage);
     svcs.parentNode.insertBefore(pc, svcs.nextSibling);
     sec.classList.add("pc-ready");
-    var load = function () { pics.forEach(function (f) { var im = f.firstChild; if (im && !im.src) im.src = im.getAttribute("data-src"); }); };
+    var load = function () { pics.forEach(function (f) { var im = f.firstChild; if (im && !im.src) { var ds = im.getAttribute("data-src"); if (W.SSV && W.SSV(ds)) { im.srcset = W.SSV(ds); im.sizes = "100vw"; } im.src = ds; } }); };
     if ("IntersectionObserver" in W) {
       var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { load(); io.disconnect(); } }, { rootMargin: "1500px 0px" });
       io.observe(sec);

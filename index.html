@@ -23,6 +23,7 @@
 <link rel="preload" href="fonts/montserrat-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>@font-face{font-family:"Montserrat";src:url(fonts/montserrat-var.woff2) format("woff2");font-weight:300 600;font-style:normal;font-display:swap}@font-face{font-family:"Poppins";src:url(fonts/poppins-400.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:"Poppins";src:url(fonts/poppins-500.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap}</style>
+<script>/* Fotos en dos tamaños: el celular descarga la de 1200 px, la computadora la original. Calidad 100 en ambas. */window.SSET={"img/est-00.webp":2000,"img/est-01.webp":2528,"img/est-02.webp":2528,"img/est-03.webp":2000,"img/est-04.webp":2000,"img/est-05.webp":2000,"img/est-06.webp":2000,"img/est-07.webp":2528,"img/est-08.webp":2000,"img/est-09.webp":2000,"img/est-10.webp":2000,"img/est-11.webp":2000,"img/galB.webp":2400,"img/galJ.webp":2400};window.SSV=function(s){var w=window.SSET[s];return w?s.replace(/\.webp$/,"-1200.webp")+" 1200w, "+s+" "+w+"w":""};window.SS=function(s){var v=window.SSV(s);return v?' srcset="'+v+'" sizes="100vw"':""};</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Sestra Creative","description":"Marketing agency for vacation rentals and real estate: photography, drone and content.","url":"https://sestracreative.github.io/Sestra-Creative-Web/","areaServed":["Tamarindo","Guanacaste","Costa Rica"],"knowsLanguage":["es","en"],"logo":"https://sestracreative.github.io/Sestra-Creative-Web/img/favicon-512.png","image":"https://sestracreative.github.io/Sestra-Creative-Web/img/og.jpg","founder":[{"@type":"Person","name":"Cristofer Segura"},{"@type":"Person","name":"Dominique Estrada"}],"address":{"@type":"PostalAddress","addressLocality":"Tamarindo","addressRegion":"Guanacaste","addressCountry":"CR"},"sameAs":["https://www.instagram.com/sestracreative","https://www.tiktok.com/@sestra_creative"]}</script>
 <style>
 /* Layout: editorial one-column rhythm with a two-column hero and a two-column configurator (steps left, live summary right). Quiet palette, mauve and sand only as accents, olive marks availability and selection. */
@@ -1243,7 +1244,7 @@ var DATA = {
   function fillSlot(el, slot, label, alt) {
     var url = PHOTOS[slot];
     el.classList.toggle("has-img", !!url);
-    if (url) { el.innerHTML = '<img ' + (slot === "hero" ? 'fetchpriority="high"' : 'loading="lazy"') + ' decoding="async" alt="' + alt + '" src="' + url + '">'; if (slot === "hero") heroVideo(el, url); }
+    if (url) { el.innerHTML = '<img ' + (slot === "hero" ? 'fetchpriority="high"' : 'loading="lazy"') + ' decoding="async" alt="' + alt + '" src="' + url + '"' + SS(url) + '>'; if (slot === "hero") heroVideo(el, url); }
     else { el.innerHTML = MARK + '<span class="tag">' + label + "</span>"; }
   }
   function heroVideo(el, poster) {
@@ -1277,7 +1278,7 @@ var DATA = {
       function draw(i) {
         var p = pairs[i];
         el.dataset.pair = i; el.classList.add("has-img"); el.style.setProperty("--p", "50%");
-        el.innerHTML = '<img alt="' + t(nameKey) + ": " + t(p[2]) + '" src="' + p[0] + '"><div class="ba-top"><img alt="' + t(nameKey) + ": " + t(p[3]) + '" src="' + p[1] + '"></div><div class="ba-bar"></div><span class="l l1">' + t(p[2]) + '</span><span class="l l2">' + t(p[3]) + '</span><input type="range" min="0" max="100" value="50" aria-label="' + t("ba.alt") + '">';
+        el.innerHTML = '<img alt="' + t(nameKey) + ": " + t(p[2]) + '" src="' + p[0] + '"' + SS(p[0]) + '><div class="ba-top"><img alt="' + t(nameKey) + ": " + t(p[3]) + '" src="' + p[1] + '"' + SS(p[1]) + '></div><div class="ba-bar"></div><span class="l l1">' + t(p[2]) + '</span><span class="l l2">' + t(p[3]) + '</span><input type="range" min="0" max="100" value="50" aria-label="' + t("ba.alt") + '">';
         el.querySelector("input").addEventListener("input", function (e) { el.style.setProperty("--p", e.target.value + "%"); });
         Array.prototype.forEach.call(tabs.children, function (b, j) { b.setAttribute("aria-pressed", j === i ? "true" : "false"); });
       }
@@ -1361,10 +1362,10 @@ var DATA = {
   /* Ilustraciones de los servicios digitales: foto estilo revista + un marco dibujado con CSS (no son capturas de clientes). */
   function mock(k) {
     var en = lang === "en", h = '<span class="pk-ph mock m-' + k + '" aria-hidden="true">';
-    if (k === "web") return h + '<img src="img/est-07.webp" alt="" loading="lazy" decoding="async"><span class="mk-bar"><i></i><i></i><i></i><em>' + (en ? "yourvilla.com" : "tuvilla.com") + '</em></span><span class="mk-cta">' + (en ? "Book" : "Reservar") + "</span></span>";
-    if (k === "guia") return h + '<img src="img/est-01.webp" alt="" loading="lazy" decoding="async"><span class="mk-phone"><span class="mk-scr"><b>' + (en ? "Welcome" : "Bienvenidos") + "</b><i>Wifi</i><i>Check-out 11:00</i><i>" + (en ? "Nearby beaches" : "Playas cerca") + "</i></span></span></span>";
-    if (k === "bot") return h + '<img src="img/est-09.webp" alt="" loading="lazy" decoding="async"><span class="mk-chat"><span class="in">' + (en ? "Is it free in January?" : "¿Hay fechas en enero?") + '</span><span class="out">' + (en ? "Yes, Jan 8 to 15 is open." : "Sí, del 8 al 15 está libre.") + "</span></span></span>";
-    return h + '<img src="img/est-10.webp" alt="" loading="lazy" decoding="async"><span class="mk-card"><b>' + (en ? "Occupancy" : "Ocupación") + '</b><span class="mk-bars"><i style="height:45%"></i><i style="height:62%"></i><i style="height:55%"></i><i style="height:78%"></i><i style="height:88%"></i></span></span></span>';
+    if (k === "web") return h + '<img src="img/est-07.webp"' + SS("img/est-07.webp") + ' alt="" loading="lazy" decoding="async"><span class="mk-bar"><i></i><i></i><i></i><em>' + (en ? "yourvilla.com" : "tuvilla.com") + '</em></span><span class="mk-cta">' + (en ? "Book" : "Reservar") + "</span></span>";
+    if (k === "guia") return h + '<img src="img/est-01.webp"' + SS("img/est-01.webp") + ' alt="" loading="lazy" decoding="async"><span class="mk-phone"><span class="mk-scr"><b>' + (en ? "Welcome" : "Bienvenidos") + "</b><i>Wifi</i><i>Check-out 11:00</i><i>" + (en ? "Nearby beaches" : "Playas cerca") + "</i></span></span></span>";
+    if (k === "bot") return h + '<img src="img/est-09.webp"' + SS("img/est-09.webp") + ' alt="" loading="lazy" decoding="async"><span class="mk-chat"><span class="in">' + (en ? "Is it free in January?" : "¿Hay fechas en enero?") + '</span><span class="out">' + (en ? "Yes, Jan 8 to 15 is open." : "Sí, del 8 al 15 está libre.") + "</span></span></span>";
+    return h + '<img src="img/est-10.webp"' + SS("img/est-10.webp") + ' alt="" loading="lazy" decoding="async"><span class="mk-card"><b>' + (en ? "Occupancy" : "Ocupación") + '</b><span class="mk-bars"><i style="height:45%"></i><i style="height:62%"></i><i style="height:55%"></i><i style="height:78%"></i><i style="height:88%"></i></span></span></span>';
   }
   function renderPkgs() {
     var p = PK(), cats = ["foto", "video", "mixto", "none"];
@@ -1683,7 +1684,7 @@ var DATA = {
   var lbItems = [], lbI = 0;
   function showLb() {
     var el = lbItems[lbI], img = el.querySelector("img");
-    $("lb-img").src = img.src; $("lb-img").alt = el.dataset.alt; var multi = lbItems.length > 1;
+    $("lb-img").srcset = SSV(img.getAttribute("src")); $("lb-img").sizes = "100vw"; $("lb-img").src = img.getAttribute("src"); $("lb-img").alt = el.dataset.alt; var multi = lbItems.length > 1;
     $("lb-cap").innerHTML = ""; $("lb-cap").appendChild(document.createTextNode(el.dataset.alt));
     if (multi) { var n = document.createElement("span"); n.className = "lb-cap-n"; n.textContent = (lbI + 1) + " / " + lbItems.length; $("lb-cap").appendChild(n); } $("lb-p").hidden = !multi; $("lb-n").hidden = !multi;
   }
