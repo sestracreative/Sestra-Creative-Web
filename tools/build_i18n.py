@@ -71,6 +71,7 @@ def build(text, k):
     text = re.sub(r'<meta property="og:description" content="[^"]*">', '<meta property="og:description" content="%s">' % a(d["desc"]), text, count=1)
     text = re.sub(r'<link rel="canonical" href="[^"]*">', '<link rel="canonical" href="%s">' % url, text, count=1)
     text = re.sub(r'<meta property="og:url" content="[^"]*">', '<meta property="og:url" content="%s">' % url, text, count=1)
+    text = re.sub(r'<meta property="og:image:alt" content="[^"]*">', '<meta property="og:image:alt" content="%s">' % ("Logo de Sestra Creative" if k == "es" else "Sestra Creative logo"), text, count=1)
     loc, alt = ("es_CR", "en_US") if k == "es" else ("en_US", "es_CR")
     text = re.sub(r'<meta property="og:locale" content="[^"]*">', '<meta property="og:locale" content="%s">' % loc, text, count=1)
     text = re.sub(r'<meta property="og:locale:alternate" content="[^"]*">', '<meta property="og:locale:alternate" content="%s">' % alt, text, count=1)
