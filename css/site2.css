@@ -736,7 +736,7 @@ body>footer{border-top:0!important;padding-top:clamp(8px,2vw,24px)!important}
 }
 /* entrada de la portada (una sola vez al cargar) */
 @media (prefers-reduced-motion:no-preference){
-  .hero.hx #ph-hero{animation:hx-img 1.5s var(--ease-out) both}
+  .hero.hx #ph-hero{animation:none}
   .hero.hx .copy>*{animation:hx-rise .9s var(--ease-out) both}
   .hero.hx .copy>*:nth-child(1){animation-delay:.25s}
   .hero.hx .copy>*:nth-child(2){animation-delay:.35s}
