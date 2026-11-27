@@ -13,5 +13,5 @@
 
 ## Páginas
 
-- [Sitio en español](https://sestracreative.github.io/Sestra-Creative-Web/): servicios, portafolio, antes y después, paquetes con precio, preguntas frecuentes y contacto.
-- [Website in English](https://sestracreative.github.io/Sestra-Creative-Web/en): the same content in English.
+- [Sitio en español](https://sestracreative.com/): servicios, portafolio, antes y después, paquetes con precio, preguntas frecuentes y contacto.
+- [Website in English](https://sestracreative.com/en): the same content in English.

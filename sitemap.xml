@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://sestracreative.github.io/Sestra-Creative-Web/</loc>
+    <loc>https://sestracreative.com/</loc>
     <lastmod>2026-11-26</lastmod>
-    <xhtml:link rel="alternate" hreflang="es" href="https://sestracreative.github.io/Sestra-Creative-Web/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://sestracreative.github.io/Sestra-Creative-Web/en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://sestracreative.github.io/Sestra-Creative-Web/"/>
-    <image:image><image:loc>https://sestracreative.github.io/Sestra-Creative-Web/img/est-07.webp</image:loc></image:image>
-    <image:image><image:loc>https://sestracreative.github.io/Sestra-Creative-Web/img/est-02.webp</image:loc></image:image>
-    <image:image><image:loc>https://sestracreative.github.io/Sestra-Creative-Web/img/est-01.webp</image:loc></image:image>
-    <image:image><image:loc>https://sestracreative.github.io/Sestra-Creative-Web/img/galB.webp</image:loc></image:image>
-    <image:image><image:loc>https://sestracreative.github.io/Sestra-Creative-Web/img/galJ.webp</image:loc></image:image>
-    <image:image><image:loc>https://sestracreative.github.io/Sestra-Creative-Web/img/est-03.webp</image:loc></image:image>
-    <image:image><image:loc>https://sestracreative.github.io/Sestra-Creative-Web/img/est-05.webp</image:loc></image:image>
-    <image:image><image:loc>https://sestracreative.github.io/Sestra-Creative-Web/img/est-09.webp</image:loc></image:image>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sestracreative.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sestracreative.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sestracreative.com/"/>
+    <image:image><image:loc>https://sestracreative.com/img/est-07.webp</image:loc></image:image>
+    <image:image><image:loc>https://sestracreative.com/img/est-02.webp</image:loc></image:image>
+    <image:image><image:loc>https://sestracreative.com/img/est-01.webp</image:loc></image:image>
+    <image:image><image:loc>https://sestracreative.com/img/galB.webp</image:loc></image:image>
+    <image:image><image:loc>https://sestracreative.com/img/galJ.webp</image:loc></image:image>
+    <image:image><image:loc>https://sestracreative.com/img/est-03.webp</image:loc></image:image>
+    <image:image><image:loc>https://sestracreative.com/img/est-05.webp</image:loc></image:image>
+    <image:image><image:loc>https://sestracreative.com/img/est-09.webp</image:loc></image:image>
   </url>
   <url>
-    <loc>https://sestracreative.github.io/Sestra-Creative-Web/en</loc>
+    <loc>https://sestracreative.com/en</loc>
     <lastmod>2026-11-26</lastmod>
-    <xhtml:link rel="alternate" hreflang="es" href="https://sestracreative.github.io/Sestra-Creative-Web/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://sestracreative.github.io/Sestra-Creative-Web/en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://sestracreative.github.io/Sestra-Creative-Web/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sestracreative.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sestracreative.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sestracreative.com/"/>
   </url>
 </urlset>
