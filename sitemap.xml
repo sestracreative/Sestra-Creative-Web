@@ -22,4 +22,34 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://sestracreative.com/en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://sestracreative.com/"/>
   </url>
+  <!-- páginas de búsqueda -->
+  <url>
+    <loc>https://sestracreative.com/real-estate-photographer-costa-rica</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sestracreative.com/fotografo-inmobiliario-costa-rica"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sestracreative.com/real-estate-photographer-costa-rica"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sestracreative.com/fotografo-inmobiliario-costa-rica"/>
+  </url>
+  <url>
+    <loc>https://sestracreative.com/fotografo-inmobiliario-costa-rica</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sestracreative.com/fotografo-inmobiliario-costa-rica"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sestracreative.com/real-estate-photographer-costa-rica"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sestracreative.com/fotografo-inmobiliario-costa-rica"/>
+  </url>
+  <url>
+    <loc>https://sestracreative.com/vacation-rental-marketing-costa-rica</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sestracreative.com/marketing-alquileres-vacacionales-costa-rica"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sestracreative.com/vacation-rental-marketing-costa-rica"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sestracreative.com/marketing-alquileres-vacacionales-costa-rica"/>
+  </url>
+  <url>
+    <loc>https://sestracreative.com/marketing-alquileres-vacacionales-costa-rica</loc>
+    <lastmod>2026-11-26</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://sestracreative.com/marketing-alquileres-vacacionales-costa-rica"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sestracreative.com/vacation-rental-marketing-costa-rica"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sestracreative.com/marketing-alquileres-vacacionales-costa-rica"/>
+  </url>
+  <!-- /páginas de búsqueda -->
 </urlset>

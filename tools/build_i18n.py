@@ -77,6 +77,8 @@ def build(text, k):
     text = re.sub(r'<meta property="og:locale:alternate" content="[^"]*">', '<meta property="og:locale:alternate" content="%s">' % alt, text, count=1)
     text = re.sub(r'(?:<link rel="alternate" hreflang="[^"]*" href="[^"]*">\n?)+', "", text)
     text = text.replace('<link rel="canonical"', HREFLANG + '\n<link rel="canonical"', 1)
+    if k == "en":  # enlaces del pie que apuntan a la página en inglés
+        text = re.sub(r'<a href="[^"]*"( data-href-en="([^"]*)")', lambda mm: '<a href="%s"%s' % (mm.group(2), mm.group(1)), text)
     m = re.search(r'<script type="application/ld\+json">(.*?)</script>', text, re.S)
     g = json.loads(m.group(1))
     for n in g["@graph"]:

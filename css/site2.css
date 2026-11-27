@@ -1012,3 +1012,5 @@ a.need .need-ic{width:44px;height:44px}
 
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) #servicios.pc-live .pc-count{color:#CDB8AE}}
 :root[data-theme="dark"] #servicios.pc-live .pc-count{color:#CDB8AE}
+
+.ft-links{display:flex;gap:6px 22px;flex-wrap:wrap;margin:18px 0 4px}.ft-links a{color:#EAE4DE;font-size:.85rem;text-underline-offset:3px}.ft-links a:hover{color:#fff}
