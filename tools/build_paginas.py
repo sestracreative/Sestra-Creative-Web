@@ -22,6 +22,8 @@ SLUG = {
     "re_es": "fotografo-inmobiliario-costa-rica",
     "vr_en": "vacation-rental-marketing-costa-rica",
     "vr_es": "marketing-alquileres-vacacionales-costa-rica",
+    "ab_en": "airbnb-photographer-costa-rica",
+    "ab_es": "fotografo-airbnb-costa-rica",
 }
 
 UI = {
@@ -52,12 +54,12 @@ PAGES = {}
 
 # ------------------------------------------------------------------ Fotógrafo inmobiliario / Airbnb
 PAGES["re_en"] = dict(
-    lang="en", pair="re_es", other="vr_en", kind="foto",
-    title="Real Estate & Airbnb Photographer in Costa Rica | Sestra Creative",
-    desc="Real estate, Airbnb and drone photography in Tamarindo, Guanacaste and across Costa Rica. Photos from $350, delivered in 1 to 3 business days. VAT included.",
-    eyebrow="Real estate and Airbnb photography",
-    h1="Real estate and Airbnb photographer in Costa Rica",
-    lead="Sestra Creative photographs villas, condos, hotels and homes for sale from Tamarindo, Guanacaste. Photos, drone video and content ready to post, with clear prices and delivery in 1 to 3 business days.",
+    lang="en", nav="Real estate photography", pair="re_es", other="vr_en", kind="foto",
+    title="Real Estate Photographer in Costa Rica | Sestra Creative",
+    desc="Real estate photography and drone video for homes, condos and villas for sale in Tamarindo, Guanacaste and across Costa Rica. From $350, delivered in 1 to 3 business days.",
+    eyebrow="Real estate photography",
+    h1="Real estate photographer in Costa Rica",
+    lead="Sestra Creative photographs homes, condos, villas and hotels for sale from Tamarindo, Guanacaste. Photos, drone video and content ready to post, with clear prices and delivery in 1 to 3 business days.",
     service="Real estate and vacation rental photography",
     blocks=[
         ("What you get", "ul", [
@@ -96,12 +98,12 @@ PAGES["re_en"] = dict(
 )
 
 PAGES["re_es"] = dict(
-    lang="es", pair="re_en", other="vr_es", kind="foto",
-    title="Fotógrafo inmobiliario y de Airbnb en Costa Rica | Sestra Creative",
-    desc="Fotografía inmobiliaria, de Airbnb y con drone en Tamarindo, Guanacaste y todo Costa Rica. Fotos desde $350, entrega en 1 a 3 días hábiles. IVA incluido.",
-    eyebrow="Fotografía inmobiliaria y de Airbnb",
-    h1="Fotógrafo inmobiliario y de Airbnb en Costa Rica",
-    lead="Sestra Creative fotografía villas, condominios, hoteles y casas en venta desde Tamarindo, Guanacaste. Fotos, video con drone y contenido listo para publicar, con precios claros y entrega en 1 a 3 días hábiles.",
+    lang="es", nav="Fotografía inmobiliaria", pair="re_en", other="vr_es", kind="foto",
+    title="Fotógrafo inmobiliario en Costa Rica | Sestra Creative",
+    desc="Fotografía inmobiliaria y video con drone para casas, condominios y villas en venta en Tamarindo, Guanacaste y todo Costa Rica. Desde $350, entrega en 1 a 3 días hábiles.",
+    eyebrow="Fotografía inmobiliaria",
+    h1="Fotógrafo inmobiliario en Costa Rica",
+    lead="Sestra Creative fotografía casas, condominios, villas y hoteles en venta desde Tamarindo, Guanacaste. Fotos, video con drone y contenido listo para publicar, con precios claros y entrega en 1 a 3 días hábiles.",
     service="Fotografía inmobiliaria y de alquileres vacacionales",
     blocks=[
         ("Qué incluye", "ul", [
@@ -141,7 +143,7 @@ PAGES["re_es"] = dict(
 
 # ------------------------------------------------------------------ Marketing para alquileres vacacionales
 PAGES["vr_en"] = dict(
-    lang="en", pair="vr_es", other="re_en", kind="mkt",
+    lang="en", nav="Vacation rental marketing", pair="vr_es", other="re_en", kind="mkt",
     title="Vacation Rental Marketing Agency in Costa Rica | Sestra Creative",
     desc="Marketing agency for vacation rentals in Guanacaste, Costa Rica: professional photos, drone video, social content and direct-booking tools for villas and small hotels.",
     eyebrow="Marketing for vacation rentals",
@@ -192,7 +194,7 @@ PAGES["vr_en"] = dict(
 )
 
 PAGES["vr_es"] = dict(
-    lang="es", pair="vr_en", other="re_es", kind="mkt",
+    lang="es", nav="Marketing para alquileres vacacionales", pair="vr_en", other="re_es", kind="mkt",
     title="Agencia de marketing para alquileres vacacionales | Sestra Creative",
     desc="Agencia de marketing para alquileres vacacionales en Guanacaste, Costa Rica: fotos profesionales, video con drone, contenido en redes y herramientas de reserva directa.",
     eyebrow="Marketing para alquileres vacacionales",
@@ -240,6 +242,102 @@ PAGES["vr_es"] = dict(
           "Principalmente en Tamarindo y alrededores y en la Gran Área Metropolitana, sin costo de traslado. En cualquier otra zona de Costa Rica, con el traslado cotizado."),
          ("¿Pueden hacer un sitio de reserva directa para mi villa?",
           "Sí. Los sitios de reserva directa son parte de nuestros servicios digitales. Escríbenos con los datos de tu propiedad y te cotizamos.")],
+)
+
+
+# ------------------------------------------------------------------ Fotógrafo de Airbnb
+PAGES["ab_en"] = dict(
+    lang="en", nav="Airbnb photographer", pair="ab_es", other="re_en", kind="foto",
+    title="Airbnb Photographer in Costa Rica | Sestra Creative",
+    desc="Professional Airbnb listing photography in Costa Rica: photos and drone video for villas, condos and vacation rentals. From $350, delivered in 1 to 3 business days.",
+    eyebrow="Photography for Airbnb listings",
+    h1="Airbnb photographer in Costa Rica",
+    lead="We photograph vacation rentals for Airbnb and Booking from Tamarindo, Guanacaste: bright interiors, terraces, pool and views, with drone shots when the property has something worth showing from above.",
+    service="Airbnb listing photography",
+    blocks=[
+        ("What your photo set includes", "ul", [
+            "Every key space: living areas, bedrooms, bathrooms, kitchen and terraces.",
+            "Exterior, pool and views of the property.",
+            "Drone photos of the property and its surroundings, if you want them.",
+            "Files sized for Airbnb, Booking and social media, plus high-resolution originals.",
+            "Editing in magazine style or classic HDR.",
+        ]),
+        ("Why photos matter for your listing", "p", [
+            ("According to Airbnb, listings with professional photos receive on average 19% more bookings. ", "Source: Airbnb, 2025", AIRBNB),
+            "Photos are the first thing a guest sees when scrolling through search results, before the title or the reviews.",
+        ]),
+        ("One listing or a whole portfolio", "p", [
+            "We work with owners of a single villa or condo and with managers of several properties. If you manage a portfolio, message us and we will quote it as a whole.",
+        ]),
+    ],
+    prices=[("Photos", 350, "Interior and exterior photos of one property."),
+            ("Drone video", 575, "Aerial video and photos."),
+            ("Photos + video", 810, "The full package for one property.")],
+    steps=[("Tell us about your listing", "Message us on WhatsApp with the location, type of property and the date you prefer."),
+           ("We photograph the property", "We visit, shoot the photos and, if you chose it, the drone video."),
+           ("You upload them to your listing", "You receive the edited files, with versions ready for Airbnb and Booking, in 1 to 3 business days.")],
+    where=["We work mainly in Tamarindo and surroundings and in the Greater Metropolitan Area (San José), with no travel fee.",
+           "We also go anywhere else in Costa Rica: travel is quoted before booking.",
+           "We work in English and Spanish."],
+    faq=[("How much does an Airbnb photographer cost in Costa Rica?",
+          "At Sestra Creative, photos start at $350 per property, drone video at $575 and photos plus video at $810. Prices are in US dollars and include VAT."),
+         ("Will the photos work for my Airbnb listing?",
+          "Yes. Every delivery includes versions sized for Airbnb and Booking, plus the high-resolution originals."),
+         ("Can you add drone photos to my listing?",
+          "Yes. Drone video and aerial photos can be added to the photo session or booked on their own."),
+         ("How long until I get the photos?",
+          "Between 1 and 3 business days, through a Google Drive link."),
+         ("Do you travel outside Tamarindo?",
+          "Yes. There is no travel fee in Tamarindo and surroundings or in the Greater Metropolitan Area. Anywhere else in Costa Rica we quote travel before booking."),
+         ("Do you speak English?",
+          "Yes. We work in English and Spanish.")],
+)
+
+PAGES["ab_es"] = dict(
+    lang="es", nav="Fotógrafo de Airbnb", pair="ab_en", other="re_es", kind="foto",
+    title="Fotógrafo de Airbnb en Costa Rica | Sestra Creative",
+    desc="Fotografía profesional para anuncios de Airbnb en Costa Rica: fotos y video con drone para villas, condominios y alquileres vacacionales. Desde $350, entrega en 1 a 3 días hábiles.",
+    eyebrow="Fotografía para anuncios de Airbnb",
+    h1="Fotógrafo de Airbnb en Costa Rica",
+    lead="Fotografiamos alquileres vacacionales para Airbnb y Booking desde Tamarindo, Guanacaste: interiores luminosos, terrazas, piscina y vistas, con tomas de drone cuando la propiedad tiene algo que vale la pena mostrar desde arriba.",
+    service="Fotografía para anuncios de Airbnb",
+    blocks=[
+        ("Qué incluye tu set de fotos", "ul", [
+            "Cada espacio importante: salas, habitaciones, baños, cocina y terrazas.",
+            "Exterior, piscina y vistas de la propiedad.",
+            "Fotos con drone de la propiedad y sus alrededores, si las quieres.",
+            "Archivos con las medidas para Airbnb, Booking y redes, y los originales en alta resolución.",
+            "Edición en estilo revista o HDR clásico.",
+        ]),
+        ("Por qué importan las fotos en tu anuncio", "p", [
+            ("Según Airbnb, los anuncios con fotos profesionales reciben en promedio 19 % más reservas. ", "Fuente: Airbnb, 2025", AIRBNB),
+            "Las fotos son lo primero que ve un huésped al recorrer los resultados de búsqueda, antes que el título o las reseñas.",
+        ]),
+        ("Un anuncio o todo un portafolio", "p", [
+            "Trabajamos con dueños de una sola villa o condominio y con administradores de varias propiedades. Si administras un portafolio, escríbenos y lo cotizamos completo.",
+        ]),
+    ],
+    prices=[("Fotos", 350, "Fotos de interiores y exteriores de una propiedad."),
+            ("Video con drone", 575, "Video aéreo y fotos."),
+            ("Fotos + video", 810, "El paquete completo para una propiedad.")],
+    steps=[("Cuéntanos de tu anuncio", "Escríbenos por WhatsApp con la ubicación, el tipo de propiedad y la fecha que prefieres."),
+           ("Fotografiamos la propiedad", "Visitamos la propiedad, tomamos las fotos y, si lo elegiste, el video con drone."),
+           ("Las subes a tu anuncio", "Recibes los archivos editados, con versiones listas para Airbnb y Booking, en 1 a 3 días hábiles.")],
+    where=["Trabajamos principalmente en Tamarindo y alrededores y en la Gran Área Metropolitana (San José), sin costo de traslado.",
+           "También vamos a cualquier otra zona de Costa Rica: el traslado se cotiza antes de reservar.",
+           "Trabajamos en español e inglés."],
+    faq=[("¿Cuánto cuesta un fotógrafo de Airbnb en Costa Rica?",
+          "En Sestra Creative, las fotos cuestan desde $350 por propiedad, el video con drone desde $575 y fotos más video desde $810. Los precios son en dólares e incluyen IVA."),
+         ("¿Las fotos sirven para mi anuncio de Airbnb?",
+          "Sí. Cada entrega incluye versiones con las medidas para Airbnb y Booking, además de los originales en alta resolución."),
+         ("¿Pueden agregar fotos con drone a mi anuncio?",
+          "Sí. El video con drone y las fotos aéreas se pueden sumar a la sesión de fotos o contratar solos."),
+         ("¿En cuánto tiempo recibo las fotos?",
+          "Entre 1 y 3 días hábiles, por un enlace de Google Drive."),
+         ("¿Van fuera de Tamarindo?",
+          "Sí. En Tamarindo y alrededores y en la Gran Área Metropolitana no se cobra traslado. A cualquier otra zona de Costa Rica el traslado se cotiza antes de reservar."),
+         ("¿Hablan inglés?",
+          "Sí. Trabajamos en español e inglés.")],
 )
 
 
@@ -301,19 +399,19 @@ def render(key, p):
                 % (E(u["where_h"]), "".join("<p>%s</p>" % E(x) for x in p["where"])))
     faq = "".join("<details><summary>%s</summary><p>%s</p></details>" % (E(q), E(a)) for q, a in p["faq"])
     body.append('<section class="blk" id="preguntas"><div class="wrap"><h2>%s</h2>%s</div></section>' % (E(u["faq_h"]), faq))
-    rel = [("<a href=\"%s\">%s</a>" % (url_of(p["other"]), E(PAGES[p["other"]]["h1"]))),
-           ("<a href=\"%s\">%s</a>" % (u["home"], E({"en": "Sestra Creative: packages, portfolio and booking", "es": "Sestra Creative: paquetes, portafolio y reservas"}[lang])))]
+    others = [k for k, q in PAGES.items() if q["lang"] == lang and k != key]
+    rel = ["<a href=\"%s\">%s</a>" % (url_of(k), E(PAGES[k]["h1"])) for k in others]
+    rel.append("<a href=\"%s\">%s</a>" % (u["home"], E({"en": "Sestra Creative: packages, portfolio and booking", "es": "Sestra Creative: paquetes, portafolio y reservas"}[lang])))
     body.append('<section class="blk"><div class="wrap"><h2>%s</h2><ul class="related">%s</ul></div></section>'
                 % (E(u["related_h"]), "".join("<li>%s</li>" % r for r in rel)))
     cta = ('<section class="band"><div class="wrap"><h2>%s</h2><p>%s</p><a class="btn" href="%s" target="_blank" rel="noopener">%s</a></div></section>'
            % (E(u["contact_h"]), E({"en": "Tell us where the property is and what you need. We reply on WhatsApp with a clear quote.",
                                     "es": "Cuéntanos dónde está la propiedad y qué necesitas. Te respondemos por WhatsApp con una cotización clara."}[lang]),
               wa, E(u["cta_btn"])))
-    menu = ('<nav class="menu" aria-label="%s"><a href="%s">%s</a><a href="%s">%s</a><a href="%s" hreflang="%s" lang="%s">%s</a>'
+    links = "".join('<a href="%s">%s</a>' % (url_of(k), E(PAGES[k]["nav"])) for k in others)
+    menu = ('<nav class="menu" aria-label="%s"><a href="%s">%s</a>%s<a href="%s" hreflang="%s" lang="%s">%s</a>'
             '<a class="btn" href="%s" target="_blank" rel="noopener">WhatsApp</a></nav>'
-            % (E(u["sel"]), u["home"], E(u["home_l"]), url_of(p["other"]), E({"en": "Vacation rentals" if p["kind"] == "foto" else "Photography",
-                                                                               "es": "Alquileres vacacionales" if p["kind"] == "foto" else "Fotografía"}[lang]),
-               pair, "es" if lang == "en" else "en", "es" if lang == "en" else "en", u["nav_other"], wa))
+            % (E(u["sel"]), u["home"], E(u["home_l"]), links, pair, "es" if lang == "en" else "en", "es" if lang == "en" else "en", u["nav_other"], wa))
     return f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -337,7 +435,7 @@ def render(key, p):
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="preload" href="/fonts/montserrat-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/pagina.css?v=1126f">
+<link rel="stylesheet" href="/css/pagina.css?v=1126g">
 <script type="application/ld+json">{ld}</script>
 </head>
 <body>
