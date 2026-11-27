@@ -435,7 +435,7 @@ def render(key, p):
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="preload" href="/fonts/montserrat-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/pagina.css?v=1126i">
+<link rel="stylesheet" href="/css/pagina.css?v=1126j">
 <script type="application/ld+json">{ld}</script>
 </head>
 <body>

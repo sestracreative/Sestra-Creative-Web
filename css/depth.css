@@ -679,3 +679,5 @@ html.dp #paquetes aside#sum .sh,html.dp #paquetes aside#sum h3,html.dp #paquetes
 
 /* celular: números del proceso quietos, foco visible en carruseles */
 @media (max-width:640px){html.dp #process li::before{transition:none!important}html.dp .dp-car:focus-visible{outline:2px solid currentColor;outline-offset:4px}}
+/* proceso en tarjetas: sin líneas que cruzan las tarjetas (quedaban desalineadas de los números) */
+html.dp #process::before,html.dp #proceso .steps4 li::after{display:none!important;content:none!important}
