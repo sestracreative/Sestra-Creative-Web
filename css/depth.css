@@ -41,6 +41,8 @@ html.dp .navstrip.dp-nudge>.wrap{animation:dpNudge 1.4s var(--dp-ease) .8s 1}
 /* ---------- 2. Portada con parallax y viñeta ---------- */
 
 html.dp .hero.hx>.wrap{padding-bottom:clamp(150px,22vh,230px)}
+/* pantallas de más de 1880 px: el video ocupaba solo el ancho del contenido y dejaba bordes a los lados; ahora llega de lado a lado */
+@media (min-width:1881px){html.dp .hero.hx #ph-hero{left:calc(50% - 50vw);width:100vw!important}}
 html.dp .dp-cue{position:absolute;left:50%;bottom:150px;z-index:2;transform:translateX(-50%);width:26px;height:42px;border:1.5px solid rgba(255,255,255,.7);border-radius:14px}
 html.dp .dp-cue::after{content:"";position:absolute;left:50%;top:8px;width:3px;height:8px;margin-left:-1.5px;border-radius:2px;background:#fff;animation:dpCue 1.8s var(--dp-ease) infinite}
 @keyframes dpCue{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(12px)}}
