@@ -20,8 +20,8 @@ if not BASE.endswith("/"):
     sys.exit("El canonical de index.html debe terminar en /")
 
 # 1. en.html: misma página, idioma de la página en inglés
-en = src.replace('<html lang="es" data-page-lang="es">', '<html lang="en" data-page-lang="en">', 1)
-assert en != src, 'index.html debe empezar con <html lang="es" data-page-lang="es">'
+en = src.replace('<html lang="es" data-page-lang="es" class="dp dp-pill">', '<html lang="en" data-page-lang="en" class="dp dp-pill">', 1)
+assert en != src, 'index.html debe empezar con <html lang="es" data-page-lang="es" class="dp dp-pill">'
 open("en.html", "w", encoding="utf-8").write(en)
 
 # 2. leer los textos que pone el JavaScript en cada idioma

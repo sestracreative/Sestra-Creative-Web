@@ -431,16 +431,16 @@ def render(key, p):
 <meta property="og:url" content="{me}">
 <meta property="og:image" content="{BASE}img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/img/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/favicon.ico" sizes="48x48">\n<link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="preload" href="/fonts/montserrat-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/pagina.css?v=1126g">
+<link rel="stylesheet" href="/css/pagina.css?v=1126h">
 <script type="application/ld+json">{ld}</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
-<a class="brand" href="{u['home']}" aria-label="Sestra Creative"><img src="/img/favicon-192.png" alt="" width="28" height="28"><span>Sestra Creative</span></a>
+<a class="brand" href="{u['home']}" aria-label="Sestra Creative"><img src="/img/logo-mark.png" alt="" width="28" height="28"><span>Sestra Creative</span></a>
 {menu}
 </div></header>
 <main>
