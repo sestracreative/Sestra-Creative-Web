@@ -688,3 +688,5 @@ html.dp #process::before,html.dp #proceso .steps4 li::after{display:none!importa
   html.dp .hero.hx .acts{margin-bottom:22px!important}
   html.dp .hero.hx .hero-proof{font-size:.76rem!important;line-height:1.45;max-width:36ch;opacity:.85}
 }
+/* portada: titular un punto más grueso (400) para leerse mejor sobre la arena clara del video */
+html.dp .hero.hx h1{font-weight:400!important}
