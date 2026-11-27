@@ -681,14 +681,10 @@ html.dp #paquetes aside#sum .sh,html.dp #paquetes aside#sum h3,html.dp #paquetes
 @media (max-width:640px){html.dp #process li::before{transition:none!important}html.dp .dp-car:focus-visible{outline:2px solid currentColor;outline-offset:4px}}
 /* proceso en tarjetas: sin líneas que cruzan las tarjetas (quedaban desalineadas de los números) */
 html.dp #process::before,html.dp #proceso .steps4 li::after{display:none!important;content:none!important}
-/* portada en celular: menos texto a la vista, jerarquía más clara */
+/* portada en celular: titular grande como antes; sin la bajada (repetía el titular) */
 @media (max-width:600px){
-  html.dp .hero.hx .copy{gap:0}
-  html.dp .hero.hx h1{font-size:clamp(1.85rem,8.2vw,2.15rem)!important;line-height:1.1!important;letter-spacing:-.01em;margin:0 0 16px!important;max-width:none!important;text-wrap:wrap!important;text-shadow:0 1px 18px rgba(0,0,0,.25)}
-  html.dp .hero.hx .lead{font-size:.9rem!important;line-height:1.5!important;margin:0 0 24px!important;opacity:.92;max-width:34ch;text-shadow:0 1px 10px rgba(0,0,0,.35)}
-  html.dp .hero.hx .acts{display:flex;flex-direction:column;align-items:stretch;gap:6px!important;margin:0 0 18px!important}
-  html.dp .hero.hx .acts .btn{min-height:50px;font-size:.78rem}
-  html.dp .hero.hx .acts .btn.ghost{background:none!important;border:0!important;box-shadow:none!important;min-height:40px;text-decoration:underline;text-underline-offset:4px;letter-spacing:.12em}
-  html.dp .hero.hx .hero-proof{font-size:.74rem!important;line-height:1.45;max-width:36ch;opacity:.8}
-  html.dp .hero.hx::after{content:"";position:absolute;inset:auto 0 0 0;height:75%;background:linear-gradient(to top,rgba(20,18,17,.55),transparent);z-index:-1;pointer-events:none}
+  html.dp .hero.hx .lead{display:none!important}
+  html.dp .hero.hx h1{margin-bottom:28px!important;text-shadow:0 1px 18px rgba(0,0,0,.22)}
+  html.dp .hero.hx .acts{margin-bottom:22px!important}
+  html.dp .hero.hx .hero-proof{font-size:.76rem!important;line-height:1.45;max-width:36ch;opacity:.85}
 }
